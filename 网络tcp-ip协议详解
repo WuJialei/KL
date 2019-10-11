@@ -4,5 +4,5 @@
 3.tcp交互数据流Nagle算法：https://blog.csdn.net/wdscq1234/article/details/52432095
 4.tcp吞吐量计算：https://my.oschina.net/astute/blog/93132
 5.tcp超时重传：https://www.zhuxiaodong.net/2018/tcp-timeout-retransmission-instruction/
-6.tcp拥塞控制：https://www.zhuxiaodong.net/2018/tcp-flow-congestion-control-instruction/
+6.tcp流量控制和拥塞控制：https://www.zhuxiaodong.net/2018/tcp-flow-congestion-control-instruction/
            -：https://blog.csdn.net/yechaodechuntian/article/details/25429143
