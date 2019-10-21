@@ -1,0 +1,29 @@
+（滴滴）
+10. 多种计算模型的优缺点（Hadoop、Spark、Flink）
+11. Flink里的watermark和exactly-once语义如何实现
+
+（阿里）
+spark streaming和storm，flink的区别
+
+（bat）
+kafka有用过什么高级功能吗（没。。。）
+flink滑动窗口
+
+（PayPal）
+另一个是在华泰证券实习期间学习的flink框架，对flink框架中的时间窗口做的一些定制
+flink和spark对比等
+
+（猿辅导）
+项目里有流处理，就问了Flink的checkpoint机制和Kafka的架构和一些概念
+
+（网易严选）
+上来问了一下项目  我项目是写一个基于hive的flink sink
+spark和flink对比  为什么spark streaming做不到毫秒级响应
+计算框架了解吗  flink的checkpoint机制
+
+（星环科技）
+3、讲一讲Flink相比其他流式处理框架的优点（当时答了eventTime+watermark机制和窗口），讲一讲你对Flink窗口机制及其触发的了解
+4、Flink backPressure反压机制，指标监控你是怎么做的
+
+（招银网络）
+1、对比一下Flink与Spark Streaming，优势点在哪？
