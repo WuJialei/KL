@@ -1,4 +1,7 @@
 1.参考：https://www.cnblogs.com/nxf-rabbit75/p/10008297.html#auto_id_0
+  注意点：
+  a.引入头结点对链表最后的表示很有帮助；
+  b.链表结点访问next之前要判空，复杂代码里需要多加留意注意；
   1.1.链表的翻转(leetcode 206. Reverse Linked List)
       头插法(非递归)：
       class Solution {
@@ -76,6 +79,27 @@
             l2.next = mergeTwoLists(l1, l2.next);
             return l2;
           }
+          }
+      }
+      1.3.链表的去重(leetcode 83. Remove Duplicates from Sorted List)
+      class Solution {
+          public ListNode deleteDuplicates(ListNode head) {
+              if (head == null || head.next == null) {
+                  return head;
+              }
+              ListNode p = new ListNode(0);
+              p.next = head;
+              ListNode pre = head;
+              ListNode cur = head.next;
+              while (cur != null) {
+                  while(cur != null && cur.val == pre.val) {
+                      cur = cur.next;
+                  }
+                  pre.next = cur;
+                  pre = pre.next;
+                  cur = cur != null ? cur.next : null;
+              }
+              return p.next;
           }
       }
       
