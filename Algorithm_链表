@@ -1,1 +1,32 @@
 1.参考：https://www.cnblogs.com/nxf-rabbit75/p/10008297.html#auto_id_0
+  1.1.链表的翻转(leetcode 206. Reverse Linked List)
+      头插法(非递归)：
+      class Solution {
+          public ListNode reverseList(ListNode head) {
+              if (head == null || head.next == null) {
+                  return head;
+              }
+              ListNode newHead = null;
+              ListNode temp = null;
+              while (head != null) {
+                  temp = head.next;
+                  head.next = newHead;
+                  newHead = head;
+                  head = temp;
+              }
+              return newHead;
+          }
+      }
+      递归：
+      class Solution {
+          public ListNode reverseList(ListNode head) {
+              if (head == null || head.next == null) {
+                  return head;
+              }
+              ListNode newHead = reverseList(head.next);
+              head.next.next = head;
+              head.next = null;
+              return newHead;
+          }
+      }
+      
