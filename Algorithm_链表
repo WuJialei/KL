@@ -1,4 +1,4 @@
-1.参考：https://www.cnblogs.com/nxf-rabbit75/p/10008297.html#auto_id_0
+1.基本用法[参考：https://www.cnblogs.com/nxf-rabbit75/p/10008297.html#auto_id_0]
   注意点：
   a.引入头结点对链表最后的表示很有帮助；
   b.链表结点访问next之前要判空，复杂代码里需要多加留意注意；
@@ -32,7 +32,7 @@
               return newHead;
           }
       }
-  1.2.有序链表的合并(leetcode 21. Merge Two Sorted Lists)
+    1.2.有序链表的合并(leetcode 21. Merge Two Sorted Lists)
       非递归：
       class Solution {
           public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
@@ -159,5 +159,49 @@
 
           }
       }
-      
-      
+   
+2.综合使用
+  2.1.利用头插法判断是否是回文链表(leetcode 234. Palindrome Linked List)
+  class Solution {
+      public boolean isPalindrome(ListNode head) {
+          if (head == null || head.next == null) {
+              return true;
+          }
+      int cnt = 0;
+      ListNode p = head;
+      ListNode pp = head;
+      while (p != null) {
+        ++cnt;
+        p = p.next;
+      }
+      int num = cnt/2;
+      cnt = cnt%2 == 0 ? cnt/2: cnt/2 + 1;
+      ListNode pre = head;
+      ListNode cur = head.next;
+      while (cnt > 1) {
+        pre = pre.next;
+        cur = cur.next;
+        --cnt;
+      }
+      ListNode l2 = cur;
+      pre.next = null;
+
+      ListNode l1 = null;
+      ListNode temp = null;
+      while (num > 0) {
+        temp = pp.next;
+        pp.next = l1;
+        l1 = pp;
+        pp = temp; 
+        --num;
+      }
+      while (l1 != null && l2 != null) {
+        if (l1.val != l2.val) {
+          return false;
+        }
+              l1 = l1.next;
+              l2 = l2.next;
+      }
+      return true;
+      }
+  }
