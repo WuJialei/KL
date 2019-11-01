@@ -159,6 +159,32 @@
 
           }
       }
+      1.5.判断两条链表相交，有则返回第一个公共交点(leetcode 160. Intersection of Two Linked Lists)
+      public class Solution {
+          public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+              if (headA == null || headB == null) {
+            return null;
+          }
+          ListNode a = headA, b = headB;
+              int cnt = 0;
+          while (a != b && cnt <= 2) {
+                  if (a.next != null) {
+                      a =a.next;
+                  } else {
+                      a = headB;
+                      ++cnt;
+                  }
+            if (b.next != null) {
+                      b = b.next;
+                  } else {
+                      b = headA;
+                      ++cnt;
+                  }
+
+          }
+          return cnt > 2 ? null : a;
+          }
+      }
    
 2.综合使用
   2.1.利用头插法判断是否是回文链表(leetcode 234. Palindrome Linked List)
