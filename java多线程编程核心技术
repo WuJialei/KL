@@ -1,1 +1,4 @@
 第三章-线程间通信：https://www.cnblogs.com/xzwblog/p/7220776.html
+第六章-单例模式与多线程：
+      -单例模式之序列化与反序列化实现：https://www.cnblogs.com/owenma/p/8600376.html
+      -Java serialVersionUID 作用：https://www.jianshu.com/p/91fa3d2ac892
