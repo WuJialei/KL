@@ -257,3 +257,21 @@
           return ans;
       }
   }
+  2.3.链表的线性遍历应用(leetcode 817.linked-list-components.java)
+  class Solution {
+      public int numComponents(ListNode head, int[] G) {
+          HashSet<Integer> set = new HashSet<Integer>();
+          for(int t: G) {
+              set.add(t);
+          }
+          int ans = 0;
+          while(head != null) {
+              // 找连通图结束的地方
+              if (set.contains(head.val) && (head.next == null || !set.contains(head.next.val))) {
+                  ++ans;
+              }
+              head = head.next;
+          }
+          return ans;
+      }
+  }
