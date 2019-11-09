@@ -319,3 +319,39 @@
           return ans;
       }
   }
+  2.5.双向链表改为单向链表(leetcode 430. Flatten a Multilevel Doubly Linked List)
+  (不难，就是细节多，比较烦)
+  class Solution {
+      public Node flatten(Node head) {
+          if (head == null) {
+              return head;
+          }
+          Node ret = head;
+          Node nextNode = head.next;
+          Node childNode = head.child;
+          Node temp = null;
+          if (childNode != null) {
+              temp = flatten(childNode);
+              head.next = temp;
+              temp.prev = head;
+              head.child = null;
+          }
+          while (temp != null) {
+              if (temp.next == null) {
+                  break;
+              }
+              temp = temp.next;
+          }
+          Node temp1 = flatten(nextNode);
+          if (temp1 != null) {
+              if (temp != null) {
+                  temp.next = temp1;
+                  temp1.prev = temp;
+              } else {
+                  head.next = temp1;
+                  temp1.prev = head;
+              }
+          }      
+          return ret;
+      }
+  }
