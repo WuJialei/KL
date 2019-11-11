@@ -355,3 +355,34 @@
           return ret;
       }
   }
+  2.6.链表与二叉树结合
+  2.6.1.有序链表转化为平衡二叉树(leetcode [109] Convert Sorted List to Binary Search Tree)
+  (平衡二叉树参考:https://blog.csdn.net/javazejian/article/details/53892797#commentBox)
+  class Solution {
+      private ArrayList<Integer> list;
+      public TreeNode sortedListToBST(ListNode head) {
+          list = new ArrayList<Integer>();
+          // 升序数组映射为平衡二叉树，分数组长度为奇数和偶数情况考虑，奇数情况肯定是平衡二叉树，偶数情况是少一个元素的
+          // 奇数情况，可推理得知也是平衡二叉树
+          while (head != null) {
+              list.add(head.val);
+              head = head.next;
+          }
+          return dfs(0, list.size()-1);
+      }
+
+      public TreeNode dfs (int left, int right) {
+          if (left > right) {
+              return null;
+          }
+          if (left == right) {
+              return new TreeNode(list.get(left));
+          }
+          int mid = (right - left)/2 + left;
+          TreeNode root = new TreeNode(list.get(mid));
+          root.left = dfs(left, mid - 1);
+          root.right = dfs(mid+1, right);
+          return root;
+      }
+  }
+
