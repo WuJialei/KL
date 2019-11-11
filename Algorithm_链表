@@ -385,4 +385,33 @@
           return root;
       }
   }
+  2.7.链表中前缀和的使用(leetcode [1171] Remove Zero Sum Consecutive Nodes from Linked List)
+  class Solution {
+      public ListNode removeZeroSumSublists(ListNode head) {
+          HashMap<Integer, ListNode> map = new HashMap<Integer, ListNode>();
+          ListNode ans = new ListNode(0);
+          ans.next = head;
+          int prefixSum = 0;
+          map.put(0, ans);
+          while (head != null) {
+              prefixSum += head.val;
+              if (map.containsKey(prefixSum)) {
+                  ListNode p = map.get(prefixSum);
+                  int sum = prefixSum;
+                  ListNode temp = p.next;
+                  while(temp != head) {
+                      sum += temp.val;
+                      map.remove(sum);
+                      temp = temp.next;
+                  }
+                  p.next = head.next;
+              } else {
+                  map.put(prefixSum, head);
+              }
+              head = head.next;
+
+          }
+          return ans.next;
+      }
+  }
 
