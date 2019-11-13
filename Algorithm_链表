@@ -185,6 +185,36 @@
           return cnt > 2 ? null : a;
           }
       }
+      1.6.链表的排序(时间：nlog(n), 空间:常数级别, leetcode [148] Sort List)
+      class Solution {
+          public ListNode sortList(ListNode head) {
+              ListNode ans = new ListNode(0);
+              ListNode ret = ans;
+              List<ListNode> temp = new ArrayList<ListNode>();
+              while (head != null) {
+                  temp.add(new ListNode(head.val));
+                  head = head.next;
+              }
+              Collections.sort(temp, new Comparator<ListNode>() {
+                  @Override
+                  public int compare(ListNode o1, ListNode o2) {
+                      // return o1.val < o2.val ? -1 : 1;
+                      if (o1.val < o2.val) {
+                          return -1;
+                      } else if (o1.val == o2.val) {
+                          return 0;
+                      } else {
+                          return 1;
+                      }
+                  }
+              });
+              for (ListNode node : temp) {
+                  ans.next = node;
+                  ans = ans.next;
+              }
+              return ret.next;
+          }
+      }
    
 2.综合使用
   2.1.利用头插法判断是否是回文链表(leetcode 234. Palindrome Linked List)
