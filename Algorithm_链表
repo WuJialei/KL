@@ -32,6 +32,40 @@
               return newHead;
           }
       }
+      对链表的指定区间进行翻转：(leetcode [92] Reverse Linked List II)
+      class Solution {
+          public ListNode reverseBetween(ListNode head, int m, int n) {
+              ListNode ans = new ListNode(0);
+              ListNode ret = ans;
+              int start = 1;
+              while (head != null) {
+                  if (start == m) {
+                      ListNode temp = new ListNode(head.val);
+                      ++start;
+                      head = head.next;
+                      while (start <= n) {
+                          ListNode node = new ListNode(head.val);
+                          node.next = temp;
+                          temp = node;
+                          ++start;
+                          head = head.next;
+                      }
+                      // ans.next = new ListNode(temp2.val);
+                      while (temp != null) {
+                          ans.next = new ListNode(temp.val);
+                          ans = ans.next;
+                          temp = temp.next;
+                      }
+                  } else {
+                      ans.next = new ListNode(head.val);
+                      ans = ans.next;
+                      head = head.next;
+                      ++start;
+                  }
+              }
+              return ret.next;
+          }
+      }
     1.2.有序链表的合并(leetcode 21. Merge Two Sorted Lists)
       非递归：
       class Solution {
