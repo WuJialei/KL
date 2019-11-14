@@ -2,6 +2,7 @@
   注意点：
   a.引入头结点对链表最后的表示很有帮助；
   b.链表结点访问next之前要判空，复杂代码里需要多加留意注意；
+  c.返回新链表最好通过new ListNode()的方法构建，返回链表作为最后结果不算空间；
   1.1.链表的翻转(leetcode 206. Reverse Linked List)
       头插法(非递归)：
       class Solution {
@@ -476,6 +477,36 @@
 
           }
           return ans.next;
+      }
+  }
+  2.8.去除链表的第n个节点(leetcode [19] Remove Nth Node From End of List)
+  class Solution {
+      public ListNode removeNthFromEnd(ListNode head, int n) {
+          ListNode ans = new ListNode(0);
+          ListNode ret = ans;
+
+          ListNode temp = head;
+          int cnt = 0;
+          while (temp != null) {
+              ++cnt;
+              temp = temp.next;
+          }
+
+          int start = 1;
+          int end = cnt - n + 1;
+
+          while (start <= end && head != null) {
+              if (start == end) {
+                  ans.next = head.next;
+                  break;
+              } else {
+                  ans.next = new ListNode(head.val);
+                  head = head.next;
+                  ans = ans.next;
+              }   
+              ++start;         
+          }
+          return ret.next;
       }
   }
 
