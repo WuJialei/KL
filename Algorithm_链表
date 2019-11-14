@@ -194,6 +194,30 @@
 
           }
       }
+      1.4.3.快慢指针去除链表重复的元素(leetcode [82] Remove Duplicates from Sorted List II)
+      class Solution {
+          public ListNode deleteDuplicates(ListNode head) {
+              if (head == null || head.next == null) {
+                  return head;
+              }
+              ListNode slow = new ListNode(0);
+              slow.next = head;
+              ListNode ans = slow;
+              ListNode fast = head;
+              while (fast != null) {
+                  while (fast.next != null && fast.val == fast.next.val) {
+                      fast = fast.next;
+                  }
+                  if (slow.next == fast) {
+                      slow = slow.next;
+                  } else {
+                      slow.next = fast.next;
+                  }
+                  fast = fast.next;
+              }
+              return ans.next;
+          }
+      }
       1.5.判断两条链表相交，有则返回第一个公共交点(leetcode 160. Intersection of Two Linked Lists)
       public class Solution {
           public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
