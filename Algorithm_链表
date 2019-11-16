@@ -3,6 +3,8 @@
   a.引入头结点对链表最后的表示很有帮助；
   b.链表结点访问next之前要判空，复杂代码里需要多加留意注意；
   c.返回新链表最好通过new ListNode()的方法构建，返回链表作为最后结果不算空间；
+  d.对于空结点的判断要十分注意；
+  e.各种边界条件的考虑以及测试用例的限制条件考虑是区分和筛选的重要标准，更上一层楼；
   1.1.链表的翻转(leetcode 206. Reverse Linked List)
       头插法(非递归)：
       class Solution {
@@ -605,6 +607,41 @@
               ++start;         
           }
           return ret.next;
+      }
+  }
+  2.9.旋转链表(leetcode 61. Rotate List)
+  class Solution {
+      public ListNode rotateRight(ListNode head, int k) {
+          if (head == null || head.next == null || k == 0) {
+              return head;
+          }
+          int cnt = 0;
+          ListNode p = head;
+          while (p != null) {
+              ++cnt;
+              p = p.next;
+          }
+          if (k % cnt == 0) {
+              return head;
+          }
+          int index = cnt - k % cnt;
+          ListNode q = head;
+          int start = 1;
+          while (start < index && q != null) {
+              q = q.next;
+              ++start;
+          }
+          ListNode ret = q.next;
+          ListNode ans = ret;
+          while (ret != null) {
+              if (ret.next == null) {
+                  ret.next = head;
+                  break;
+              }
+              ret = ret.next;
+          }
+          q.next = null;
+          return ans;
       }
   }
 
