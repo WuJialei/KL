@@ -61,7 +61,7 @@
           return ans;
       }
   }
-  2.2.2.循环寻找一个数组每个元素在它右边出现的第一个大于它的数（leetcode 503. Next Greater Element II）
+ 2.2.2.循环寻找一个数组每个元素在它右边出现的第一个大于它的数（leetcode 503. Next Greater Element II）
     代码：
     class Solution {
         public int[] nextGreaterElements(int[] nums) {
