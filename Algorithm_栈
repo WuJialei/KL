@@ -61,3 +61,45 @@
           return ans;
       }
   }
+  2.2.2.循环寻找一个数组每个元素在它右边出现的第一个大于它的数（leetcode 503. Next Greater Element II）
+    代码：
+    class Solution {
+        public int[] nextGreaterElements(int[] nums) {
+            int[] ans = new int[nums.length];
+            boolean[] flag = new boolean[nums.length];
+            Stack<Integer> stack = new Stack<Integer>();
+            for (int i = 0; i < nums.length; ++i) {
+                if (i == 0) {
+                    stack.push(0);
+                } else {
+                    while(!stack.isEmpty() && nums[stack.peek()] < nums[i]) {
+                        int t = stack.pop();
+                        ans[t] = nums[i];
+                        flag[t] = true;
+                    }
+                    stack.push(i);
+                }
+            }
+            for (int i = 0; i < nums.length; ++i) {
+                if (stack.isEmpty()) {
+                    break;
+                } else {
+                    while(!stack.isEmpty() && nums[stack.peek()] < nums[i]) {
+                        int t = stack.pop();
+                        ans[t] = nums[i];
+                        flag[t] = true;
+                    }
+                    if (!flag[i]) {
+                        stack.push(i);
+                    }                
+                }
+            }
+            for (int i = 0; i < nums.length; ++i) {
+                if (!flag[i]) {
+                    ans[i] = -1;
+                }
+            }
+            return ans;
+        }
+    }
+
