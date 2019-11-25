@@ -146,4 +146,52 @@
             return stack1.isEmpty() && stack2.isEmpty();
         }
     }
+    2.3.2.双队列实现栈（leetcode [225] Implement Stack using Queues）
+      思路：留住最后一个元素
+      代码：
+      class MyStack {
+
+          Queue<Integer> queue1 = new LinkedList<Integer>();
+          Queue<Integer> queue2 = new LinkedList<Integer>();
+
+          /** Initialize your data structure here. */
+          public MyStack() {
+
+          }
+
+          /** Push element x onto stack. */
+          public void push(int x) {
+              queue1.offer(x);
+          }
+
+          /** Removes the element on top of the stack and returns that element. */
+          public int pop() {
+              while (queue1.size() > 1) {
+                  queue2.offer(queue1.poll());
+              }
+              int ans = queue1.poll();
+              Queue<Integer> temp = queue1;
+              queue1 = queue2;
+              queue2 = temp;
+              return ans;
+          }
+
+          /** Get the top element. */
+          public int top() {
+              while (queue1.size() > 1) {
+                  queue2.offer(queue1.poll());
+              }
+              int ans = queue1.poll();
+              queue2.offer(ans);
+              Queue<Integer> temp = queue1;
+              queue1 = queue2;
+              queue2 = temp;
+              return ans;
+          }
+
+          /** Returns whether the stack is empty. */
+          public boolean empty() {
+              return queue1.isEmpty();
+          }
+      }
 
