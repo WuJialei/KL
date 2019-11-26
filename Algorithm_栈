@@ -194,4 +194,48 @@
               return queue1.isEmpty();
           }
       }
+      
+2.4.最小栈
+2.4.1.实现最小栈（leetcode [155] Min Stack）
+  思路：使用辅助栈（非严格单调，如果数据栈和辅助栈同步空间会大一些）
+  代码：
+  class MinStack {
+
+      Stack<Integer> stack = new Stack<Integer>();
+      Stack<Integer> minStack = new Stack<Integer>();
+
+      /** initialize your data structure here. */
+      public MinStack() {
+
+      }
+
+      public void push(int x) {
+          stack.push(x);
+          if (minStack.isEmpty()) {
+              minStack.push(x);
+          } else {
+              if (minStack.peek() >= x) {
+                  minStack.push(x);
+              }
+          }
+      }
+
+      public void pop() {
+          if (stack.isEmpty()) {
+              return;
+          }
+          int top = stack.pop();
+          if (!minStack.isEmpty() && minStack.peek() == top) {
+              minStack.pop();
+          }
+      }
+
+      public int top() {
+          return stack.peek();
+      }
+
+      public int getMin() {
+          return minStack.peek();
+      }
+  }
 
