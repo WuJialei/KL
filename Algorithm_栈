@@ -34,7 +34,9 @@
   }
   
 2.2.单调栈
+参考：https://blog.csdn.net/qq_17550379/article/details/86519771
 2.2.1.寻找一个数组每个元素在它右边出现的第一个大于它的数(leetcode [496] Next Greater Element I)
+  变型：leetcode:[739] Daily Temperatures;
   代码：
   class Solution {
       public int[] nextGreaterElement(int[] nums1, int[] nums2) {
@@ -260,4 +262,42 @@
           return minStack.peek();
       }
   }
+  
+  2.5.二叉树的遍历
+  2.5.1.使用辅助栈实现二叉树非递归中序遍历（leetcode [94] Binary Tree Inorder Traversal）
+    代码：
+    class Solution {
+
+        List<Integer> ans = new ArrayList<Integer>();
+        public List<Integer> inorderTraversal(TreeNode root) {
+            /*
+            dfs(root);
+            return ans;
+            */
+            Stack<TreeNode> stack = new Stack<TreeNode>();
+            List<Integer> ret = new ArrayList<Integer>();
+            TreeNode node = root;
+            while (node != null || !stack.isEmpty()) {
+                while (node != null) {
+                    stack.push(node);
+                    node = node.left;
+                }
+                TreeNode n = stack.pop();
+                ret.add(n.val);
+                node = n.right;
+            }
+            return ret;
+        }
+
+        public void dfs(TreeNode node) {
+            if (node == null) {
+                return;
+            }
+            dfs(node.left);
+            ans.add(node.val);
+            dfs(node.right);
+        }
+
+    }
+
 
