@@ -1,1 +1,7 @@
 1.数据库的范式：https://blog.csdn.net/dream_angel_z/article/details/45175621
+2.数据库的索引和锁：https://juejin.im/post/5b55b842f265da0f9e589e79#heading-14
+  相关：
+  B树和B+树：https://www.cnblogs.com/nullzx/p/8729425.html
+  MySQL存储引擎中MyISAM和InnoDB的介绍和区别：https://www.linuxdaxue.com/mysql-myisam-innodb.html
+  
+  
