@@ -3,3 +3,105 @@
 3.文件管理参考1：https://www.cnblogs.com/leesf456/p/5626339.html
          参考2：https://liuyehcf.github.io/2017/09/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F1/
 4.IO多路复用：https://cloud.tencent.com/developer/article/1328508
+
+5.linux命令
+5.1.ps命令(Process Status的缩写,ps命令用来列出系统中当前运行的那些进程,ps命令列出的是当前那些进程的快照，就是执行ps命令的那个时刻的那些进程，
+如果想要动态的显示进程信息，就可以使用top命令)
+5.1.1.ps -ef
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 Nov02 ?        00:00:00 init [3]  
+说明：
+UID 程序被该 UID 所拥有
+PID 就是这个程序的 ID ！
+PPID 则是其上级父程序的ID
+C CPU 使用的资源百分比
+TTY 登入者的终端机位置
+TIME 使用掉的 CPU 时间。
+CMD 所下达的指令
+5.1.2.ps -aux
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0  10368   676 ?        Ss   Nov02   0:00 init [3]
+说明：
+USER：该 process 属于那个使用者账号的
+PID ：该 process 的号码
+%CPU：该 process 使用掉的 CPU 资源百分比
+%MEM：该 process 所占用的物理内存百分比
+VSZ ：该 process 使用掉的虚拟内存量 (Kbytes)
+RSS ：该 process 占用的固定的内存量 (Kbytes)
+TTY ：该 process 是在那个终端机上面运作，若与终端机无关，则显示 ?，另外， tty1-tty6 是本机上面的登入者程序，若为 pts/0 等等的，则表示为由网络连接进主机的程序。
+STAT：该程序目前的状态，主要的状态有
+R ：该程序目前正在运作，或者是可被运作
+S ：该程序目前正在睡眠当中 (可说是 idle 状态)，但可被某些讯号 (signal) 唤醒。
+T ：该程序目前正在侦测或者是停止了
+Z ：该程序应该已经终止，但是其父程序却无法正常的终止他，造成 zombie (疆尸) 程序的状态
+START：该 process 被触发启动的时间
+TIME ：该 process 实际使用 CPU 运作的时间
+COMMAND：该程序的实际指令
+
+5.2.top命令(Linux下常用的性能分析工具，能够实时显示系统中各个进程的资源占用状况，类似于Windows的任务管理器)
+命令：top -p 28894（-p<进程号> 指定进程）
+执行结果：
+top - 14:06:23 up 70 days, 16:44,  2 users,  load average: 1.25, 1.32, 1.35
+Tasks: 206 total,   1 running, 205 sleeping,   0 stopped,   0 zombie
+Cpu(s):  5.9%us,  3.4%sy,  0.0%ni, 90.4%id,  0.0%wa,  0.0%hi,  0.2%si,  0.0%st
+Mem:  32949016k total, 14411180k used, 18537836k free,   169884k buffers
+Swap: 32764556k total,        0k used, 32764556k free,  3612636k cached
+
+  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND                                                                
+28894 root      22   0 1501m 405m  10m S 52.2  1.3   2534:16 java   
+前五行是当前系统情况整体的统计信息区
+5.2.1.第一行，任务队列信息，同 uptime 命令的执行结果，具体参数说明情况如下：
+14:06:23 — 当前系统时间
+up 70 days, 16:44 — 系统已经运行了70天16小时44分钟（在这期间系统没有重启过的吆！）
+2 users — 当前有2个用户登录系统
+load average: 1.15, 1.42, 1.44 — load average后面的三个数分别是1分钟、5分钟、15分钟的负载情况
+load average数据是每隔5秒钟检查一次活跃的进程数，然后按特定算法计算出的数值。如果这个数除以逻辑CPU的数量，结果高于5的时候就表明系统在超负荷运转了
+5.2.2.第二行，Tasks — 任务（进程），具体信息说明如下：
+系统现在共有206个进程，其中处于运行中的有1个，205个在休眠（sleep），stoped状态的有0个，zombie状态（僵尸）的有0个
+5.2.3.第三行，cpu状态信息，具体属性说明如下：
+5.9%us — 用户空间占用CPU的百分比。
+3.4% sy — 内核空间占用CPU的百分比。
+0.0% ni — 改变过优先级的进程占用CPU的百分比
+90.4% id — 空闲CPU百分比
+0.0% wa — IO等待占用CPU的百分比
+0.0% hi — 硬中断（Hardware IRQ）占用CPU的百分比
+0.2% si — 软中断（Software Interrupts）占用CPU的百分比
+5.2.4.第四行,内存状态，具体信息如下：
+32949016k total — 物理内存总量（32GB）
+14411180k used — 使用中的内存总量（14GB）
+18537836k free — 空闲内存总量（18GB）
+169884k buffers — 缓存的内存量 （169M）
+5.2.5.第五行，swap交换分区信息，具体信息说明如下：
+32764556k total — 交换区总量（32GB）
+0k used — 使用的交换区总量（0K）
+32764556k free — 空闲交换区总量（32GB）
+3612636k cached — 缓冲的交换区总量（3.6GB）
+5.2.6.第六行，空行
+5.2.7.第七行以下：各进程（任务）的状态监控，项目列信息说明如下：
+PID — 进程id
+USER — 进程所有者
+PR — 进程优先级
+NI — nice值。负值表示高优先级，正值表示低优先级
+VIRT — 进程使用的虚拟内存总量，单位kb。VIRT=SWAP+RES
+RES — 进程使用的、未被换出的物理内存大小，单位kb。RES=CODE+DATA
+SHR — 共享内存大小，单位kb
+S — 进程状态。D=不可中断的睡眠状态 R=运行 S=睡眠 T=跟踪/停止 Z=僵尸进程
+%CPU — 上次更新到现在的CPU时间占用百分比
+%MEM — 进程使用的物理内存百分比
+TIME+ — 进程使用的CPU时间总计，单位1/100秒
+COMMAND — 进程名称（命令名/命令行）
+
+5.3.free命令(free 命令显示系统内存的使用情况，包括物理内存、交换内存(swap)和内核缓冲区内存)
+free -m（-g是以gb为单位，-m是以mb为单位）
+              total        used        free      shared  buff/cache   available
+Mem:           3951        2599         219          54        1132         985
+Swap:             0           0           0
+说明：
+Mem 行(第二行)是内存的使用情况
+Swap 行(第三行)是交换空间的使用情况
+total 列显示系统总的可用物理内存和交换空间大小
+used 列显示已经被使用的物理内存和交换空间
+free 列显示还有多少物理内存和交换空间可用使用
+shared 列显示被共享使用的物理内存大小
+buff/cache 列显示被 buffer 和 cache 使用的物理内存大小
+available 列显示还可以被应用程序使用的物理内存大小
