@@ -102,9 +102,31 @@
             return ans;
         }
     }
-    
-  2.3.栈和队列的相互转换
-  2.3.1.双栈实现队列(leetcode [232] Implement Queue using Stacks)
+2.2.3.叶值的最小代价生成树(leetcode [1130] Minimum Cost Tree From Leaf Values)
+  代码：
+  class Solution {
+      public int mctFromLeafValues(int[] arr) {
+          Stack<Integer> stack = new Stack<Integer>();
+          stack.push(Integer.MAX_VALUE);
+          int res = 0;
+          for (int num : arr) {
+              // 对于出现在小于它的数，都要将该数去除，即为寻找该数左右最小的数
+              while (num >= stack.peek()) {
+                  int little = stack.pop();
+                  res += little * Math.min(num, stack.peek());
+              }
+              stack.push(num);
+          }
+          while (stack.size() > 2) {
+              int top = stack.pop();
+              res += top * stack.peek();
+          }
+          return res;
+      }
+  }
+  
+2.3.栈和队列的相互转换
+2.3.1.双栈实现队列(leetcode [232] Implement Queue using Stacks)
     代码：
     class MyQueue {
 
@@ -146,7 +168,7 @@
             return stack1.isEmpty() && stack2.isEmpty();
         }
     }
-    2.3.2.双队列实现栈（leetcode [225] Implement Stack using Queues）
+2.3.2.双队列实现栈（leetcode [225] Implement Stack using Queues）
       思路：留住最后一个元素
       代码：
       class MyStack {
