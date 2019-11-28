@@ -32,6 +32,33 @@
           return ans.toString();
       }
   }
+2.1.2.括号匹配（leetcode [1249] Minimum Remove to Make Valid Parentheses）
+  代码：
+  class Solution {
+      public String minRemoveToMakeValid(String s) {
+          Stack<Integer> stack = new Stack<Integer>();
+          for (int i = 0; i < s.length(); ++i) {
+              if (s.charAt(i) == '(') {
+                  stack.push(i);
+              } else if (s.charAt(i) == ')'){
+                  if (!stack.isEmpty() && s.charAt(stack.peek()) == '(') {
+                      stack.pop();
+                  } else {
+                      stack.push(i);
+                  }
+              }
+          }
+          String ans = new String("");
+          int end = s.length();
+          while (!stack.isEmpty()) {
+              int start = stack.pop();
+              ans = s.substring(start+1, end) + ans;
+              end = start;
+          }
+          ans = s.substring(0, end) + ans;
+          return ans;
+      }
+  }
   
 2.2.单调栈
 参考：https://blog.csdn.net/qq_17550379/article/details/86519771
