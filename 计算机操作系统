@@ -6,7 +6,7 @@
 
 5.linux命令
 5.1.ps命令(Process Status的缩写,ps命令用来列出系统中当前运行的那些进程,ps命令列出的是当前那些进程的快照，就是执行ps命令的那个时刻的那些进程，
-如果想要动态的显示进程信息，就可以使用top命令)
+如果想要动态的显示进程信息，就可以使用top命令，与grep结合可以查看指定进程信息)
 5.1.1.ps -ef
 UID        PID  PPID  C STIME TTY          TIME CMD
 root         1     0  0 Nov02 ?        00:00:00 init [3]  
@@ -37,6 +37,9 @@ Z ：该程序应该已经终止，但是其父程序却无法正常的终止他
 START：该 process 被触发启动的时间
 TIME ：该 process 实际使用 CPU 运作的时间
 COMMAND：该程序的实际指令
+5.1.3.ps -aux | grep 4729
+root      4729  3.4  6.6 5465620 268792 ?      Sl   Jul19 6462:29 geth --datadir data --networkid 20 --rpc --rpcapi db,eth,net,web3,personal,miner,txpool,admin --rpccorsdomain * --port 16333 --rpcaddr 0.0.0.0 --rpcport 8546
+root     12988  0.0  0.0  12944   980 pts/0    S+   00:59   0:00 grep --color=auto 4729
 
 5.2.top命令(Linux下常用的性能分析工具，能够实时显示系统中各个进程的资源占用状况，类似于Windows的任务管理器)
 命令：top -p 28894（-p<进程号> 指定进程）
