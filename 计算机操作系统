@@ -200,8 +200,126 @@ tmpfs           396M     0  396M   0% /run/user/0
 说明：
 文件系统               容量   已用  可用 已用% 挂载点
 
+5.6.netstat命令（显示与IP、TCP、UDP和ICMP协议相关的统计数据，一般用于检验本机各端口的网络连接情况）
+-a或–all 显示所有连线中的Socket
+-l或–listening 显示监控中的服务器的Socket
+-n或–numeric 直接使用IP地址，而不通过域名服务器
+-p或–programs 显示正在使用Socket的程序识别码和程序名称
+-t或–tcp 显示TCP传输协议的连线状况
+-u或–udp 显示UDP传输协议的连线状况
+5.6.1.列出所有tcp和udp连接
+netstat -tlnpu
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 127.0.0.1:27017         0.0.0.0:*               LISTEN      28336/mongod    
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      20176/sshd      
+tcp6       0      0 10.10.26.26:9001        :::*                    LISTEN      26760/java      
+tcp6       0      0 :::3306                 :::*                    LISTEN      29032/mysqld    
+tcp6       0      0 :::16333                :::*                    LISTEN      4729/geth       
+tcp6       0      0 10.10.26.26:9200        :::*                    LISTEN      1126/java       
+tcp6       0      0 :::5140                 :::*                    LISTEN      26760/java      
+tcp6       0      0 10.10.26.26:9300        :::*                    LISTEN      1126/java       
+tcp6       0      0 :::22                   :::*                    LISTEN      20176/sshd      
+tcp6       0      0 :::8546                 :::*                    LISTEN      4729/geth       
+tcp6       0      0 10.10.26.26:9000        :::*                    LISTEN      26760/java      
+udp        0      0 0.0.0.0:514             0.0.0.0:*                           31805/rsyslogd  
+udp        0      0 0.0.0.0:68              0.0.0.0:*                           867/dhclient    
+udp6       0      0 :::514                  :::*                                31805/rsyslogd  
+udp6       0      0 :::16333                :::*                                4729/geth
+5.6.2.查看端口占用
+netstat -anp | grep 9200
+tcp6       0      0 10.10.26.26:9200        :::*                    LISTEN      1126/java       
+tcp6       0      0 10.10.26.26:9200        10.10.26.26:55714       ESTABLISHED 1126/java       
+tcp6       0      0 10.10.26.26:55716       10.10.26.26:9200        ESTABLISHED 26760/java      
+tcp6       0      0 10.10.26.26:9200        10.10.26.26:55716       ESTABLISHED 1126/java       
+tcp6       0      0 10.10.26.26:55714       10.10.26.26:9200        ESTABLISHED 26760/java 
+5.6.3.统计端口的连接数
+netstat -nat | grep 9200 | wc -l
+5
+说明：
+wc(Word Count)命令的功能为统计指定文件中的字节数、字数、行数，并将统计结果显示输出
 
+6.grep
+6.1.grep -n key filename(查看某关键词出现在文件的哪一行)
+grep -n mongo docker-compose.yml 
+3:  mongo:
+5:    image: mongo
+6:    container_name: mongo
+10:      - ../data/mongodb:/data/db
 
+7.cat（常用来显示文件内容）
+7.1.cat words.txt | sort | uniq -c | sort -k1,1nr | head -10
+sort:  对单词进行排序
+uniq -c:  显示唯一的行，并在每行行首加上本行在文件中出现的次数
+sort -k1,1nr:  按照第一个字段，数值排序，且为逆序
+head -10:  取前10行数据
+cat docker-compose.yml | sort | uniq -c | sort -k1,1nr | head -10
+      1       - "27017"
+      1     container_name: mongo
+      1       - ../data/mongodb:/data/db
+      1     expose:
+      1     image: mongo
+      1   mongo:
+      1     restart: always
+      1 services:
+      1 version: '2'
+      1     volumes:
 
+8.tail（显示指定文件末尾内容）
 
+9.lsof（list open files）是一个列出当前系统打开文件的工具
+查找某个文件相关的进程
+lsof /root/dockerSH/services/mongo
+COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF    NODE NAME
+bash    12916 root  cwd    DIR  253,1     4096 1032413 /root/dockerSH/services/mongo
+lsof    13548 root  cwd    DIR  253,1     4096 1032413 /root/dockerSH/services/mongo
+lsof    13549 root  cwd    DIR  253,1     4096 1032413 /root/dockerSH/services/mongo
 
+10.awk（awk就是把文件逐行的读入，以空格为默认分隔符将每行切片，切开的部分再进行各种分析处理）
+df
+Filesystem     1K-blocks     Used Available Use% Mounted on
+udev             2016040        0   2016040   0% /dev
+tmpfs             404628    31024    373604   8% /run
+/dev/vda1       40593708 11049928  29527396  28% /
+tmpfs            2023140        0   2023140   0% /dev/shm
+tmpfs               5120        0      5120   0% /run/lock
+tmpfs            2023140        0   2023140   0% /sys/fs/cgroup
+tmpfs             404628        0    404628   0% /run/user/0
+df | awk '{print $6}'
+Mounted
+/dev
+/run
+/
+/dev/shm
+/run/lock
+/sys/fs/cgroup
+/run/user/0
+
+11.chmod（chmod命令用于改变linux系统文件或目录的访问权限）
+-rwxr-xr-x
+第一个字母表示文件类型, ”-”,普通文件，”d”目录,字母”d”,是dirtectory(目录)的缩写，“l”符号链接。请注意,一个目录或者说一个文件夹是一个特殊文件,
+这个特殊文件存放的是其他文件和文件夹的相关信息，“b”块设备文件， “c”字符设备文件。
+Linux下文件的权限类型一般包括读，写，执行；对应字母为 r、w、x。
+Linux下权限的粒度有 拥有者 、群组 、其它组 三种
+
+12.sed(编辑文本文件)
+查看指定某行或者某几行的内容
+cat docker-compose.yml 
+version: '2'
+services:
+  mongo:
+    restart: always
+    image: mongo
+    container_name: mongo
+    expose:
+      - "27017"
+    volumes:
+      - ../data/mongodb:/data/db
+sed -n '1,5p' docker-compose.yml 
+version: '2'
+services:
+  mongo:
+    restart: always
+    image: mongo
+sed -n '2p' docker-compose.yml 
+services:
