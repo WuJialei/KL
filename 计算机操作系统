@@ -105,3 +105,41 @@ free 列显示还有多少物理内存和交换空间可用使用
 shared 列显示被共享使用的物理内存大小
 buff/cache 列显示被 buffer 和 cache 使用的物理内存大小
 available 列显示还可以被应用程序使用的物理内存大小
+
+5.4.du命令（ du命令也是查看使用空间的，但是与df命令不同的是Linux du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的）
+du -h --max-depth=1(输出当前目录下各个子目录所使用的空间)
+976K	./dockerSH
+432K	./.rpmdb
+8.3M	./.cache
+8.0K	./.ssh
+2.1G	./.ethash
+45M	./eth
+97M	./.vscode-server
+2.2G	.
+说明：
+只显示当前目录下面的子目录的目录大小和当前目录的总的大小，最下面的2.2G为当前目录的总大小
+du -h dockerSH --max-depth=1(指定目录下各个子目录所使用的空间)
+804K	dockerSH/.git
+136K	dockerSH/services
+976K	dockerSH804K	dockerSH/.git
+136K	dockerSH/services
+976K	dockerSH
+
+5.5.df命令（df命令的功能是用来检查linux服务器的文件系统的磁盘空间占用情况。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息）
+df -h
+Filesystem      Size  Used Avail Use% Mounted on
+udev            2.0G     0  2.0G   0% /dev
+tmpfs           396M   31M  365M   8% /run
+/dev/vda1        39G   11G   29G  28% /
+tmpfs           2.0G     0  2.0G   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           2.0G     0  2.0G   0% /sys/fs/cgroup
+tmpfs           396M     0  396M   0% /run/user/0
+说明：
+文件系统               容量   已用  可用 已用% 挂载点
+
+
+
+
+
+
