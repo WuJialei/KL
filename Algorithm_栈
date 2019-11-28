@@ -327,4 +327,28 @@
 
     }
 
+2.6.模拟栈的入栈出栈过程
+2.6.1.验证栈序列（leetcode [946] Validate Stack Sequences）
+  代码：
+  class Solution {
+      public boolean validateStackSequences(int[] pushed, int[] popped) {
+          Stack<Integer> stack = new Stack<Integer>();
+          int i = 0, j = 0;
+          int len = pushed.length;
+          for (; i <= len;) {
+              while (!stack.isEmpty() && stack.peek() == popped[j]) {
+                  stack.pop();
+                  ++j;
+              }
+              if (i < len) {
+                  stack.push(pushed[i]);
+              }
+              ++i;
+
+          }
+          return j==len;
+
+      }
+  }
+  
 
