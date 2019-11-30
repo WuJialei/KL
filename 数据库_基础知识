@@ -4,5 +4,6 @@
   B树和B+树：https://www.cnblogs.com/nullzx/p/8729425.html
   MySQL存储引擎中MyISAM和InnoDB的介绍和区别：https://www.linuxdaxue.com/mysql-myisam-innodb.html
 2.1.数据库锁：https://blog.csdn.net/qq_41701956/article/details/81623448#commentBox
+2.2.mysql的mvcc实现机制：https://blog.csdn.net/whoamiyang/article/details/51901888
   
   
