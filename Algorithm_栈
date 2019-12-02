@@ -426,6 +426,44 @@
       }
 
   }
+2.5.3.使用辅助栈实现二叉树非递归后序遍历（leetcode [145] Binary Tree Postorder Traversal）
+  代码：
+  class Solution {
+
+      List<Integer> ans = new ArrayList<Integer>();
+
+      public List<Integer> postorderTraversal(TreeNode root) {
+          /*
+          dfs (root);
+          return ans;
+          */
+          Stack<TreeNode> stack = new Stack<TreeNode>();
+          // 与前序遍历的区别，使用LinkedList进行首部插入
+          LinkedList<Integer> ret = new LinkedList<Integer>();
+          TreeNode node = root;
+          while (node != null || !stack.isEmpty()) {
+              while (node != null) {
+                  stack.push(node);
+                  ret.addFirst(node.val);
+                  // 先右后左
+                  node = node.right;
+              }
+              TreeNode n = stack.pop();
+              node = n.left;
+          }
+          return ret;
+      }
+
+      public void dfs (TreeNode node) {
+          if (node == null) {
+              return;
+          }
+          dfs(node.left);
+          dfs(node.right);
+          ans.add(node.val);
+      }
+
+  }
 
 
 2.6.模拟栈的入栈出栈过程
