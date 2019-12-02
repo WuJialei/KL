@@ -401,22 +401,17 @@
           dfs(root);
           return ans;
           */
-          List<Integer> ret = new ArrayList<Integer>();
           Stack<TreeNode> stack = new Stack<TreeNode>();
-          if (root == null) {
-              return ret;
-          }
-          stack.push(root);
-          while (!stack.isEmpty()) {
-              TreeNode node = stack.pop();
-              ret.add(node.val);
-              // 先序遍历入栈时先如右子树，后入左子树，出栈时才能先出左子树，本质时bfs
-              if (node.right != null) {
-                  stack.push(node.right);
+          List<Integer> ret = new ArrayList<Integer>();
+          TreeNode node = root;
+          while (node != null || !stack.isEmpty()) {
+              while (node != null) {
+                  stack.push(node);
+                  ret.add(node.val);
+                  node = node.left;
               }
-              if (node.left != null) {
-                  stack.push(node.left);
-              }
+              TreeNode n = stack.pop();
+              node = n.right;
           }
           return ret;
       }
