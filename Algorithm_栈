@@ -218,6 +218,38 @@
           return res;
       }
   }
+2.2.4.股票跨度记录（leetcode [901] Online Stock Span）
+  代码：
+  class StockSpanner {
+
+      List<Integer> list;
+      Stack<Integer> stack;
+      int index;
+
+      public StockSpanner() {
+          // 存个数
+          index = -1;
+          // 存结果
+          list = new ArrayList<Integer>();
+          // 最小栈
+          stack = new Stack<Integer>();
+      }
+
+      public int next(int price) {
+          int ret = 1;
+          int cur = index;
+          while (!stack.isEmpty() && price >= stack.peek()) {
+              ret += list.get(cur);
+              cur -= list.get(cur);
+              stack.pop();
+          }
+          stack.push(price);
+          list.add(ret);
+          ++index;
+          return ret;      
+      }
+  }
+
   
 2.3.栈和队列的相互转换
 2.3.1.双栈实现队列(leetcode [232] Implement Queue using Stacks)
