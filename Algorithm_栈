@@ -496,6 +496,63 @@
       }
 
   }
+2.5.4.中序遍历的变型（leetcode [173] Binary Search Tree Iterator）
+  关键：O（h）内存实现
+  代码：
+  class BSTIterator {
+
+      List<Integer> list;
+      int index;
+      Stack<TreeNode> stack;
+
+      public BSTIterator(TreeNode root) {
+          /*
+          list = new ArrayList<Integer>();
+          dfs(root);
+          index = 0;
+          */
+          stack = new Stack<TreeNode>();
+          TreeNode node = root;
+          while (node != null) {
+              stack.push(node);
+              node = node.left;
+          }
+      }
+
+      public void dfs(TreeNode node) {
+          if (node == null) {
+              return;
+          }
+          dfs(node.left);
+          list.add(node.val);
+          dfs(node.right);
+      }
+
+      /** @return the next smallest number */
+      public int next() {
+          /*
+          int ret = list.get(index);
+          ++index;
+          return ret;
+          */
+          TreeNode node  = stack.pop();
+          int ret = node.val;
+          node = node.right;
+          while (node != null) {
+              stack.push(node);
+              node = node.left;
+          }
+          return ret;
+      }
+
+      /** @return whether we have a next smallest number */
+      public boolean hasNext() {
+          return !stack.isEmpty();
+          /*
+          return index < list.size();
+          */
+      }
+  }
 
 
 2.6.模拟栈的入栈出栈过程
