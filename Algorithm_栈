@@ -714,6 +714,77 @@
       }
   }
 
+2.8.NestedInteger嵌套
+2.8.1.NestedInteger的反序列化（leetcode [385] Mini Parser）
+  思路：
+  1. 遍历字符串
+  2. 如果当前字符是'['则新建一个NestedInteger入栈
+  3. 如果当前字符是0-9或者-，则加入到当前数字字符串序列中
+  4. 如果当前字符是','或者']'，如果数字字符串非空，则把该数字加入到栈顶的NestedInteger中，如果当前字符是']'则还要把栈顶元素弹出并添加到新的栈顶元素中
+  5. 遍历结束后如果最后的数字序列非空，则把该数字加入栈顶元素并返回栈顶元素，否则直接返回栈顶元素。
+  代码：
+  class Solution {
+      public NestedInteger deserialize(String s) {
 
+          Stack<NestedInteger> stack = new Stack<NestedInteger>();
+          StringBuilder str = new StringBuilder("");
+          for (char c : s.toCharArray()) {
+              if (c == '[') {
+                  stack.push(new NestedInteger());
+              } else if ((c >= '0' && c <= '9') || (c == '-')) {
+                  str.append(c);
+              } else {
+                  if (str.toString().length() > 0) {
+                      NestedInteger n = stack.peek();
+                      n.add(new NestedInteger(Integer.parseInt(str.toString())));
+                      str = new StringBuilder("");
+                  }
+                  if (c == ']') {
+                      NestedInteger n = stack.pop();
+                      if (stack.isEmpty()) {
+                          return n;
+                      }
+                      NestedInteger last = stack.peek();
+                      last.add(n);
+                  }
+              }
+          }
+          if (str.toString().length() > 0) {
+              return new NestedInteger(Integer.parseInt(str.toString()));
+          }
+          return stack.peek();
+
+      }
+  }
+2.8.2.NestedInteger展开（leetcode [341] Flatten Nested List Iterator）
+  代码：
+  public class NestedIterator implements Iterator<Integer> {
+
+      Queue<Integer> queue = new LinkedList<Integer>();
+
+      public NestedIterator(List<NestedInteger> nestedList) {
+          dfs(nestedList);
+      }
+
+      public void dfs(List<NestedInteger> nestedList){
+          for (NestedInteger n : nestedList) {
+              if (n.isInteger()) {
+                  queue.offer(n.getInteger());
+              } else {
+                  dfs(n.getList());
+              }
+          }
+      }
+
+      @Override
+      public Integer next() {
+          return queue.poll();
+      }
+
+      @Override
+      public boolean hasNext() {
+          return !queue.isEmpty();
+      }
+  }
 
 
