@@ -11,6 +11,8 @@
 1.4.curator开源工具使用
       参考1：https://www.kancloud.cn/smaster/zk/633439
       参考2：https://juejin.im/post/5da2d9dcf265da5ba273c451
+1.4.1.curator实际使用参考：https://www.kancloud.cn/smaster/zk/633439
+1.4.2.curator官方api文档：https://curator.apache.org/apidocs/index.html
       
 2.kafka
 2.1.kafka参考：https://blog.csdn.net/lizhitao/article/details/39499283
