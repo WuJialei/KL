@@ -1,1 +1,28 @@
 1.参考：https://zhuanlan.zhihu.com/p/37467686
+
+2.基本使用
+2.1.普通队列
+2.2.双向队列
+2.3.优先队列
+2.4.循环队列
+
+3.普通队列
+3.1.到现在为止的某个时间段内的请求次数（leetcode [933] Number of Recent Calls）
+  代码：
+  class RecentCounter {
+
+      Queue<Integer> queue;
+
+      public RecentCounter() {
+          queue = new LinkedList<Integer>();
+      }
+
+      public int ping(int t) {
+          queue.offer(t);
+          int cnt = t - 3000;
+          while (!queue.isEmpty() && queue.peek() < cnt) {
+              queue.poll();
+          }
+          return queue.size();
+      }
+  }
