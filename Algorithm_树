@@ -1,3 +1,50 @@
 1.基本知识
 1.1.树的基本概念：https://blog.csdn.net/csdn_aiyang/article/details/84977814
 1.2.树的基本算法：cnblogs.com/maybe2030/p/4732377.html
+
+2.BST(Binary Sort Tree) 二叉搜索/排序/查找树
+2.1.基本点
+二叉排序树或者是一棵空树，或者是具有下列性质的二叉树：
+　　1) 若左子树不空，则左子树上所有结点的值均小于它的根结点的值；
+　　2) 若右子树不空，则右子树上所有结点的值均大于或等于它的根结点的值；
+　　3) 左、右子树也分别为二叉排序树；
+　　4) 没有键值相等的节点。
+  二叉查找树的性质：对二叉查找树进行中序遍历，即可得到有序的数列。
+  二叉查找树的时间复杂度：它和二分查找一样，插入和查找的时间复杂度均为O(logn)，但是在最坏的情况下仍然会有O(n)的时间复杂度。
+原因在于插入和删除元素的时候，树没有保持平衡。我们追求的是在最坏的情况下仍然有较好的时间复杂度，这就是平衡查找树设计的初衷。
+  二叉查找树的高度决定了二叉查找树的查找效率。
+  BST的插入、删除、遍历及其他相关概念参考cnblogs.com/maybe2030/p/4732377.html BST部分。
+2.2.BST的遍历
+2.2.1.二叉搜索树的范围和（leetcode [938] Range Sum of BST）
+  基本思路：
+  二叉搜索树的中序遍历是升序，其范围即为取排序后的两个范围和
+  代码：
+  class Solution {
+
+      int ans;
+
+      public int rangeSumBST(TreeNode root, int L, int R) {
+          ans = 0;
+          dfs(root, L, R);
+          return ans;
+      }
+
+      public void dfs (TreeNode node, int l, int r) {
+          if (node == null) {
+              return;
+          }
+
+          if (node.val >= l && node.val <= r) {
+              ans += node.val;
+          }
+          // 要不要走左子树
+          if (node.val > l) {
+              dfs (node.left, l, r);
+          }
+          // 要不要走右子树
+          if (node.val < r) {
+              dfs (node.right, l, r);
+          }
+      }
+
+  }
