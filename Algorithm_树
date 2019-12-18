@@ -86,7 +86,7 @@
 
     }
     
-  3.N叉树的前中后序遍历（递归/迭代）
+  3.N叉树
   3.1.N叉树的前序遍历（leetcode [589] N-ary Tree Preorder Traversal）
     代码：
     class Solution {
@@ -166,3 +166,27 @@
       }
 
   }
+  3.4.N叉树树的深度（leetcode [559] Maximum Depth of N-ary Tree）
+    代码：
+    class Solution {
+        public int maxDepth(Node root) {
+            return depth(root);
+        }
+
+        public int depth(Node node) {
+            if (node == null) {
+                return 0;
+            } else if (node.children == null) {
+                return 1;
+            } else {
+                int ans = 0;
+                for (Node child : node.children) {
+                    ans = Math.max(ans, depth(child));
+                }
+                return ans + 1;
+            }
+
+        }
+
+    }
+    
