@@ -211,3 +211,27 @@
 
     }
     
+4.二叉树
+4.1.二叉树的遍历（leetcode  [1022] Sum of Root To Leaf Binary Numbers）
+  代码：
+  class Solution {
+        int sum;
+        public int sumRootToLeaf(TreeNode root) {
+            sum = 0;
+            dfs(root, 0);
+            return sum;
+        }
+
+        public void dfs (TreeNode node, int cntSum) {
+            if (node == null) {
+                return;
+            } else if (node.left == null && node.right == null) {
+                sum += cntSum * 2 + node.val;
+                return;
+            } else {
+                dfs(node.left, cntSum * 2 + node.val);
+                dfs(node.right, cntSum * 2 + node.val);
+            }
+        }
+    }
+
