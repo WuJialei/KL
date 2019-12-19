@@ -189,4 +189,25 @@
         }
 
     }
+  二叉树的深度（leetcode [104] Maximum Depth of Binary Tree）
+    代码：
+    class Solution {
+        public int maxDepth(TreeNode root) {
+            if (root == null) {
+                return 0;
+            }
+            return dfs(root);
+        }
+
+        public int dfs(TreeNode node){
+            if (node == null) {
+                return 0;
+            } else if (node.left == null && node.right == null) {
+                return 1;
+            } else {
+                return 1 + Math.max(dfs(node.left), dfs(node.right));
+            }
+        }
+
+    }
     
