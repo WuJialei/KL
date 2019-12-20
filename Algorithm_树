@@ -256,4 +256,40 @@
             }
         }
     }
+  4.2.二叉树的翻转（leetcode [226] Invert Binary Tree）
+    代码：（递归/迭代）
+    class Solution {
+        public TreeNode invertTree(TreeNode root) {
+            if(root == null) {
+                return null;
+            }
+            /*
+            // 递归
+            TreeNode l = root.left;
+            TreeNode r = root.right;
+            root.left = invertTree(r);
+            root.right = invertTree(l);
+            return root;
+            */
+
+            // 迭代
+            Queue<TreeNode> queue = new LinkedList<TreeNode>();
+            queue.offer(root);
+            while (!queue.isEmpty()) {
+                TreeNode node = queue.poll();
+                TreeNode tmp = node.left;
+                node.left = node.right;
+                node.right = tmp;
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+            }
+            return root;
+
+        }
+    }
+
 
