@@ -291,5 +291,39 @@
 
         }
     }
+  4.3.二叉树各层的平均值（leetcode [637] Average of Levels in Binary Tree）
+    代码：（BFS）
+    class Solution {
+
+        Queue<TreeNode> queue;
+
+        public List<Double> averageOfLevels(TreeNode root) {
+            queue = new LinkedList<TreeNode>();
+            List<Double> list = new ArrayList<Double>();
+            if (root == null) {
+                return list;
+            }
+            queue.offer(root);
+            while (!queue.isEmpty()) {
+                Queue<TreeNode> tmp = new LinkedList<TreeNode>();
+                int cnt = 0;
+                double sum = 0;
+                while(!queue.isEmpty()) {
+                    TreeNode node = queue.poll();
+                    ++cnt;
+                    sum += node.val;
+                    if (node.left != null) {
+                        tmp.offer(node.left);
+                    }
+                    if (node.right != null) {
+                        tmp.offer(node.right);
+                    }
+                }
+                list.add(sum/cnt);
+                queue = tmp;
+            }
+            return list;
+        }
+    }
 
 
