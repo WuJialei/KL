@@ -325,5 +325,30 @@
             return list;
         }
     }
+    
+5.平衡二叉树(Balanced Binary Tree又被称为AVL树，AVL树是最先发明的自平衡二叉查找树,且具有以下性质：
+它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。很好的解决了
+二叉查找树退化成链表的问题，把插入，查找，删除的时间复杂度最好情况和最坏情况都维持在O(logN)。但是频繁
+旋转会使插入和删除牺牲掉O(logN)左右的时间，不过相对二叉查找树来说，时间上稳定了很多。)
+5.1.平衡二叉树的建立
+5.1.1.有序数组转化为平衡二叉树（leetcode [108] Convert Sorted Array to Binary Search Tree）
+  代码：（二分）
+  class Solution {
+      public TreeNode sortedArrayToBST(int[] nums) {
+          return bs(nums, 0, nums.length-1);
+      }
+
+      public TreeNode bs(int[] arrays, int start, int end) {
+          if (start > end) {
+              return null;
+          }
+          int mid = start + (end - start)/2;
+          TreeNode node = new TreeNode(arrays[mid]);
+          node.left = bs(arrays, start, mid - 1);
+          node.right = bs(arrays, mid + 1, end);
+          return node;
+      }
+
+  }
 
 
