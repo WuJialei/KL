@@ -143,6 +143,25 @@
       }
 
   }
+2.2.5.二叉搜索树比该节点值大的累加和（leetcode [538] Convert BST to Greater Tree）
+  代码：
+  class Solution {
+
+      int sum = 0;
+
+      public TreeNode convertBST(TreeNode root) {
+          if (root == null) {
+              return null;
+          }
+          // dfs先右后左，右到底才会渐渐从底层往左
+          convertBST(root.right);
+          root.val += sum;
+          sum = root.val;
+          convertBST(root.left);
+          return root;
+      }
+
+  }
     
   3.N叉树
   3.1.N叉树的前序遍历（leetcode [589] N-ary Tree Preorder Traversal）
