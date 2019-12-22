@@ -311,6 +311,34 @@
             }
         }
     }
+ 二叉树前序遍历的变体（leetcode [606] Construct String from Binary Tree）
+  思路：递归+边界情况考虑
+  代码：
+  class Solution {
+      public String tree2str(TreeNode t) {
+          return dfs(t);
+      }
+
+      public String dfs (TreeNode node) {
+          if (node == null) {
+              return "";
+          }
+          StringBuilder sb = new StringBuilder("");
+          sb.append(node.val);
+          if (node.left == null && node.right == null) {
+              return sb.toString();
+          }
+          sb.append("(");
+          sb.append(dfs(node.left));
+          sb.append(")");
+          if (node.right != null) {
+              sb.append("(");
+              sb.append(dfs(node.right));
+              sb.append(")");
+          }
+          return sb.toString();
+      }
+  }
   4.2.二叉树的翻转（leetcode [226] Invert Binary Tree）
     代码：（递归/迭代）
     class Solution {
