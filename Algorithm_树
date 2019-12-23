@@ -339,6 +339,33 @@
           return sb.toString();
       }
   }
+  二叉树遍历的普通变体，判断两个兄弟是否是堂兄弟（leetcode [993] Cousins in Binary Tree）
+    代码：
+    class Solution {
+
+        Map<Integer, TreeNode> parent;
+        Map<Integer, Integer> depth;
+
+        public boolean isCousins(TreeNode root, int x, int y) {
+
+            parent = new HashMap<Integer, TreeNode>();
+            depth = new HashMap<Integer, Integer>();
+            dfs(new TreeNode(-1), root, 0);
+            return depth.get(x) == depth.get(y) && parent.get(x) != parent.get(y);
+
+        }
+
+        public void dfs (TreeNode pre, TreeNode node, int cnt) {
+            if (node == null) {
+                return;
+            }
+            depth.put(node.val, cnt);
+            parent.put(node.val, pre);
+            dfs(node, node.left, cnt + 1);
+            dfs(node, node.right, cnt + 1);
+        }
+
+    }
   4.2.二叉树的翻转（leetcode [226] Invert Binary Tree）
     代码：（递归/迭代）
     class Solution {
