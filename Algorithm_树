@@ -435,6 +435,28 @@
             return list;
         }
     }
+4.4.二叉树的深度（leetcode [543] Diameter of Binary Tree）
+  代码：
+  class Solution {
+
+      int ans = 0;
+
+      public int diameterOfBinaryTree(TreeNode root) {
+          dfs(root);
+          return ans;
+      }
+
+      public int dfs (TreeNode node) {
+          if (node == null) {
+              return 0;
+          }
+          int left = dfs(node.left);
+          int right = dfs(node.right);
+          ans = Math.max(ans, left + right);
+          return Math.max(left, right) + 1;
+      }
+
+  }
     
 5.平衡二叉树(Balanced Binary Tree又被称为AVL树，AVL树是最先发明的自平衡二叉查找树,且具有以下性质：
 它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。很好的解决了
