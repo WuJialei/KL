@@ -162,9 +162,36 @@
       }
 
   }
+2.2.6.二叉树搜索树中任意两个节点的最低公共祖先（leetcode [235] Lowest Common Ancestor of a Binary Search Tree）
+  代码：
+  class Solution {
+
+    int minNode, maxNode;
     
-  3.N叉树
-  3.1.N叉树的前序遍历（leetcode [589] N-ary Tree Preorder Traversal）
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        minNode = Math.min(p.val, q.val);
+        maxNode = Math.max(p.val, q.val);
+        return dfs(root);
+    }
+
+    public TreeNode dfs (TreeNode node) {
+        if (node == null) {
+            return node;
+        }
+        if (node.val < minNode) {
+            return dfs(node.right);
+        } else if (node.val > maxNode) {
+            return dfs(node.left);
+        } else {
+            return node;
+        }
+
+    }
+
+}
+    
+3.N叉树
+3.1.N叉树的前序遍历（leetcode [589] N-ary Tree Preorder Traversal）
     代码：
     class Solution {
 
