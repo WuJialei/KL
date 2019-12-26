@@ -484,6 +484,51 @@
       }
 
   }
+4.5.对称二叉树 递归/迭代（leetcode [101] Symmetric Tree）
+  代码：
+  class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.offer(root);
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode node1 = queue.poll();
+            TreeNode node2 = queue.poll();
+            if (node1 == null && node2 == null) {
+                continue;
+            } else if (node1 != null && node2 != null) {
+                if (node1.val != node2.val) {
+                    return false;
+                }          
+            } else {
+                return false;
+            }
+            queue.offer(node1.left);
+            queue.offer(node2.right);
+            queue.offer(node1.right);
+            queue.offer(node2.left);
+        }
+        return true;
+    }
+
+    public boolean dfs (TreeNode node1, TreeNode node2) {
+        if (node1 == null && node2 == null) {
+            return true;
+        } else if (node1 != null && node2 != null) {
+            if (node1.val != node2.val) {
+                return false;
+            } else {
+                return dfs(node1.left, node2.right) && dfs(node1.right, node2.left);
+            }            
+        } else {
+            return false;
+        }
+    }
+
+}
     
 5.平衡二叉树(Balanced Binary Tree又被称为AVL树，AVL树是最先发明的自平衡二叉查找树,且具有以下性质：
 它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。很好的解决了
