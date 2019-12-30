@@ -393,6 +393,42 @@
         }
 
     }
+二叉树的任意自顶向下的路径和为指定值（leetcode [437] Path Sum III）
+  代码：
+  class Solution {
+
+    int cnt;
+    int sum;
+
+    public int pathSum(TreeNode root, int sum) {
+        cnt = 0;
+        this.sum = sum;
+        dfs(root);
+        return cnt;
+    }
+
+    public void dfs (TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        dfs1(node, sum);
+        dfs(node.left);
+        dfs(node.right);
+    }
+
+    public void dfs1 (TreeNode node, int val) {
+        if (node == null) {
+            return;
+        }
+        int tmp = val - node.val;
+        if (tmp == 0) {
+            ++cnt;
+        } 
+        dfs1(node.left, tmp);
+        dfs1(node.right, tmp);     
+    }
+
+}
   4.2.二叉树的翻转（leetcode [226] Invert Binary Tree）
     代码：（递归/迭代）
     class Solution {
