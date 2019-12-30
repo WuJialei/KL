@@ -393,43 +393,71 @@
         }
 
     }
-二叉树的任意自顶向下的路径和为指定值（leetcode [437] Path Sum III）
-  代码：
+二叉树的任意自顶向下的路径和为指定值（leetcode [437] Path Sum III / leetcode [572] Subtree of Another Tree）
+  代码：(437)
   class Solution {
 
-    int cnt;
-    int sum;
+      int cnt;
+      int sum;
 
-    public int pathSum(TreeNode root, int sum) {
-        cnt = 0;
-        this.sum = sum;
-        dfs(root);
-        return cnt;
-    }
+      public int pathSum(TreeNode root, int sum) {
+          cnt = 0;
+          this.sum = sum;
+          dfs(root);
+          return cnt;
+      }
 
-    public void dfs (TreeNode node) {
-        if (node == null) {
-            return;
-        }
-        dfs1(node, sum);
-        dfs(node.left);
-        dfs(node.right);
-    }
+      public void dfs (TreeNode node) {
+          if (node == null) {
+              return;
+          }
+          dfs1(node, sum);
+          dfs(node.left);
+          dfs(node.right);
+      }
 
-    public void dfs1 (TreeNode node, int val) {
-        if (node == null) {
-            return;
-        }
-        int tmp = val - node.val;
-        if (tmp == 0) {
-            ++cnt;
-        } 
-        dfs1(node.left, tmp);
-        dfs1(node.right, tmp);     
-    }
+      public void dfs1 (TreeNode node, int val) {
+          if (node == null) {
+              return;
+          }
+          int tmp = val - node.val;
+          if (tmp == 0) {
+              ++cnt;
+          } 
+          dfs1(node.left, tmp);
+          dfs1(node.right, tmp);     
+      }
 
-}
-  4.2.二叉树的翻转（leetcode [226] Invert Binary Tree）
+  }
+  代码：(572)
+  class Solution {
+      public boolean isSubtree(TreeNode s, TreeNode t) {
+          if (dfs(s, t)) {
+              return true;
+          }
+          if (s == null) {
+              return false;
+          }
+          boolean ans = isSubtree(s.left, t) || isSubtree(s.right, t);
+          return ans;
+      }
+
+      public boolean dfs (TreeNode pat, TreeNode ex) {
+          if (pat == null && ex == null) {
+              return true;
+          } else if (pat == null || ex == null) {
+              return false;
+          } else {
+              if (pat.val != ex.val) {
+                  return false;
+              } else {
+                  return dfs(pat.left, ex.left) && dfs(pat.right, ex.right);
+              }
+          }
+      }
+
+  }
+4.2.二叉树的翻转（leetcode [226] Invert Binary Tree）
     代码：（递归/迭代）
     class Solution {
         public TreeNode invertTree(TreeNode root) {
@@ -464,7 +492,7 @@
 
         }
     }
-  4.3.二叉树各层的平均值（leetcode [637] Average of Levels in Binary Tree）
+4.3.二叉树各层的平均值（leetcode [637] Average of Levels in Binary Tree）
     代码：（BFS）
     class Solution {
 
