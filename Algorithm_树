@@ -548,6 +548,46 @@
       }
 
   }
+变体：二叉树是否是深度平衡（leetcode [110] Balanced Binary Tree）
+  代码：
+  class Solution {
+      public boolean isBalanced(TreeNode root) {
+          getHeight(root);
+          return dfs(root);
+      }
+
+      public int getHeight(TreeNode node) {
+          if (node == null) {
+              return 0;
+          }
+          node.val = Math.max(getHeight(node.left), getHeight(node.right)) + 1;
+          return node.val;
+      }
+
+      public boolean dfs(TreeNode node) {
+          if (node == null) {
+              return true;
+          }
+          if (node.left == null && node.right == null) {
+              return true;
+          } else if (node.left == null || node.right == null) {
+              int tmp = node.left == null ? node.right.val : node.left.val;
+              if (tmp > 1) {
+                  return false;
+              } else {
+                  return true;
+              }
+          } else {
+              if (Math.abs(node.left.val - node.right.val) > 1) {
+                  return false;
+              } else {
+                  return dfs(node.left) && dfs(node.right);
+              }
+          }
+
+      }
+
+  }
 4.5.对称二叉树 递归/迭代（leetcode [101] Symmetric Tree）
   代码：
   class Solution {
