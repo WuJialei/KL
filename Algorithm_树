@@ -668,6 +668,50 @@
     }
 
 }
+4.6.二叉树节点值相等的最长路径（leetcode [687] Longest Univalue Path）
+  代码：
+  class Solution {
+
+      int ans;
+
+      public int longestUnivaluePath(TreeNode root) {
+          ans = 0;
+          dfs(root);
+          return ans;
+      }
+
+      public void dfs(TreeNode node) {
+          if (node == null) {
+              return;
+          }
+          int tmp = 0;
+          if (node.left != null && node.left.val == node.val) {
+              tmp += dfs1(node.left, node.val) + 1;
+          }
+          if (node.right != null && node.right.val == node.val) {
+              tmp += dfs1(node.right, node.val) + 1;
+          }
+          ans = Math.max(ans, tmp);
+          dfs(node.left);
+          dfs(node.right);
+      }
+
+      public int dfs1(TreeNode node, int val) {
+          if (node == null) {
+              return 0;
+          }
+          int tmp1 = 0;
+          int tmp2 = 0;
+          if (node.left != null && node.left.val == val) {
+              tmp1 = dfs1(node.left, val) + 1;
+          }
+          if (node.right != null && node.right.val == val) {
+              tmp2 = dfs1(node.right, val) + 1;
+          }
+          return Math.max(tmp1, tmp2);
+      }
+
+  }
     
 5.平衡二叉树(Balanced Binary Tree又被称为AVL树，AVL树是最先发明的自平衡二叉查找树,且具有以下性质：
 它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。很好的解决了
