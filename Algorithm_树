@@ -746,6 +746,44 @@
       }
 
   }
+4.7.根据给定数组构建最大二叉树（leetcode [654] Maximum Binary Tree）
+  代码：
+  class Solution {
+
+      boolean[] visited;
+      int[] nums;
+
+      public TreeNode constructMaximumBinaryTree(int[] nums) {
+          int len = nums.length;
+          this.nums = nums;
+          visited = new boolean[len];
+          return dfs(0, len - 1);
+      }
+
+      public TreeNode dfs (int start, int end) {
+          if (start > end) {
+              return null;
+          }
+          int index = start;
+          int maxVal = nums[start];
+          for (int i = start; i <= end; ++i) {
+              if (!visited[i] && nums[i] > maxVal) {
+                  maxVal = nums[i];
+                  index = i;
+              }
+          }
+          if (visited[index]) {
+              return null;
+          }
+          visited[index] = true;
+          TreeNode node = new TreeNode(nums[index]);
+          node.left = dfs(start, index - 1);
+          node.right = dfs(index + 1, end);
+          return node;
+      }
+
+  }
+
     
 5.平衡二叉树(Balanced Binary Tree又被称为AVL树，AVL树是最先发明的自平衡二叉查找树,且具有以下性质：
 它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。很好的解决了
