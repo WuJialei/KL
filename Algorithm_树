@@ -662,7 +662,7 @@
       }
 
   }
-变体：二叉树是否是深度平衡（leetcode [110] Balanced Binary Tree）
+4.4.1.二叉树是否是深度平衡（leetcode [110] Balanced Binary Tree）
   代码：
   class Solution {
       public boolean isBalanced(TreeNode root) {
@@ -702,6 +702,35 @@
       }
 
   }
+4.4.2.最深叶节点的最近公共祖先（leetcode [1123] Lowest Common Ancestor of Deepest Leaves）
+  代码：
+  class Solution {
+      public TreeNode lcaDeepestLeaves(TreeNode root) {
+          if (root == null) {
+              return root;
+          }
+          // 最深叶子节点的最低公共祖先的高度相同
+          // 深度优先越深则公共节点越低
+          int leftD = depth(root.left);
+          int rightD = depth(root.right);
+          if (leftD == rightD) {
+              return root;
+          } else if (leftD > rightD) {
+              return lcaDeepestLeaves(root.left);
+          } else {
+              return lcaDeepestLeaves(root.right);
+          }
+
+      }
+
+      public int depth (TreeNode node) {
+          if (node == null) {
+              return 0;
+          }
+          return 1 + Math.max(depth(node.left), depth(node.right));
+      }
+  }
+  
 4.5.对称二叉树 递归/迭代（leetcode [101] Symmetric Tree）
   代码：
   class Solution {
