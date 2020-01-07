@@ -592,6 +592,20 @@
 
         }
     }
+4.2.1.判断两颗二叉树能否相等或者能否翻转相等（leetcode [951] Flip Equivalent Binary Trees）
+  代码：
+  class Solution {
+      public boolean flipEquiv(TreeNode root1, TreeNode root2) {
+          if (root1 == root2) {
+              return true;
+          }
+          if (root1 == null || root2 == null || root1.val != root2.val) {
+              return false;
+          }
+          // 判断左右子节点是否相等或者可以通过翻转相等
+          return (flipEquiv(root1.left, root2.left) && flipEquiv(root1.right, root2.right)) || (flipEquiv(root1.left, root2.right) && flipEquiv(root1.right, root2.left));
+      }
+  }
 4.3.二叉树各层的平均值（leetcode [637] Average of Levels in Binary Tree）
     代码：（BFS）
     class Solution {
