@@ -882,6 +882,52 @@
       }
 
   }
+4.9.二叉树删除指定集合中的节点返回剩下的森林（leetcode [1110] Delete Nodes And Return Forest）
+  代码：
+  class Solution {
+
+    HashSet<Integer> set;
+    List<TreeNode> ans;
+
+    public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
+        set = new HashSet<Integer>();
+        ans = new ArrayList<TreeNode>();
+        for (int i : to_delete) {
+            set.add(i);
+        }
+        if (root == null) {
+            return ans;
+        }
+        root = dfs(root);
+        if (root != null) {
+            ans.add(root);
+        }
+        return ans;
+    }
+
+    // 若当前节点是删除点，返回null；不是删除点，返回当前节点（子节点删除与否判断完成）
+    public TreeNode dfs(TreeNode node) {
+        if (node == null) {
+            return null;
+        }
+        node.left = dfs(node.left);
+        node.right = dfs(node.right);
+        // 节点要删（要删才会产生新树）
+        if (set.contains(node.val)) {
+            if (node.left != null) {
+                ans.add(node.left);
+            }
+            if (node.right != null) {
+                ans.add(node.right);
+            }
+            return null;
+        } else {
+            return node;
+        }
+    }
+
+}
+
 
     
 5.平衡二叉树(Balanced Binary Tree又被称为AVL树，AVL树是最先发明的自平衡二叉查找树,且具有以下性质：
