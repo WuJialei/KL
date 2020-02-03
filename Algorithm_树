@@ -956,7 +956,7 @@
       }
 
   }
-4.10.使用单调栈解决叶值的最小代价生成数（leetcode [1130] Minimum Cost Tree From Leaf Values）
+4.11.使用单调栈解决叶值的最小代价生成数（leetcode [1130] Minimum Cost Tree From Leaf Values）
   思路：https://leetcode-cn.com/problems/minimum-cost-tree-from-leaf-values/solution/dong-tai-gui-hua-dan-diao-zhan-python3-by-smoon1-2/
   代码：
   class Solution {
@@ -978,6 +978,57 @@
           }
           return res;
       }
+  }
+4.12.二叉树节点与祖先间的最大差值（leetcode [1026] Maximum Difference Between Node and Ancestor）
+  代码：
+  class Solution {
+
+      int ans;
+
+      public class MinMaxNode {
+          int min;
+          int max;
+          MinMaxNode(int x, int y) { 
+              min = x; 
+              max = y;
+          }
+      }
+
+      public int maxAncestorDiff(TreeNode root) {
+          ans = Integer.MIN_VALUE;
+          dfs(root);
+          return ans;
+      }
+
+      public MinMaxNode dfs(TreeNode node) {
+          if (node == null) {
+              return null;
+          }
+          if(node.left == null && node.right == null) {
+              return new MinMaxNode(node.val, node.val);
+          } else {
+              int min = node.val;
+              int max = node.val;
+              MinMaxNode left = dfs(node.left);
+              MinMaxNode right = dfs(node.right);
+              if (left != null) {
+                  min = Math.min(min, left.min);
+                  max = Math.max(max, left.max);
+                  ans = Math.max(Math.abs(node.val - left.min), ans);
+                  ans = Math.max(Math.abs(node.val - left.max), ans);
+              }
+              if (right != null) {
+                  min = Math.min(min, right.min);
+                  max = Math.max(max, right.max);
+                  ans = Math.max(Math.abs(node.val - right.min), ans);
+                  ans = Math.max(Math.abs(node.val - right.max), ans);
+              }
+              min = Math.min(node.val, min);
+              max = Math.max(node.val, max);
+              return new MinMaxNode(min, max);
+          }
+      }
+
   }
 
 
