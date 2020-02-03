@@ -1030,6 +1030,29 @@
       }
 
   }
+4.13 最大二叉树（leetcode [998] Maximum Binary Tree II）
+  代码：
+  class Solution {
+      public TreeNode insertIntoMaxTree(TreeNode root, int val) {
+          return dfs(root, val);
+      }
+
+      public TreeNode dfs(TreeNode node, int val) {
+          if (node == null) {
+              return new TreeNode(val);
+          }
+          if (node.val < val) {
+              TreeNode root = new TreeNode(val);
+              root.left = node;
+              return root;
+          } else {
+              node.right = dfs(node.right, val);
+              return node;
+          }
+      }
+
+  }
+
 
 
     
