@@ -956,7 +956,29 @@
       }
 
   }
-
+4.10.使用单调栈解决叶值的最小代价生成数（leetcode [1130] Minimum Cost Tree From Leaf Values）
+  思路：https://leetcode-cn.com/problems/minimum-cost-tree-from-leaf-values/solution/dong-tai-gui-hua-dan-diao-zhan-python3-by-smoon1-2/
+  代码：
+  class Solution {
+      public int mctFromLeafValues(int[] arr) {
+          Stack<Integer> stack = new Stack<Integer>();
+          stack.push(Integer.MAX_VALUE);
+          int res = 0;
+          for (int num : arr) {
+              // 对于出现在小于它的数，都要将该数去除，即为寻找该数左右最小的数
+              while (num >= stack.peek()) {
+                  int little = stack.pop();
+                  res += little * Math.min(num, stack.peek());
+              }
+              stack.push(num);
+          }
+          while (stack.size() > 2) {
+              int top = stack.pop();
+              res += top * stack.peek();
+          }
+          return res;
+      }
+  }
 
 
     
