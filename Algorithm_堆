@@ -1,0 +1,8 @@
+1.堆的概念
+堆是一种特殊类型的二叉树，具有以下两个性质：
+  每个节点的值大于等于(或小于等于)其每个子节点的值
+  堆属于完全二叉树
+
+2.基本知识参考
+2.1.https://juejin.im/post/5c3067866fb9a04a0a5f5578
+2.2.https://dracarys.github.io/2019/03/02/Algorithm-club-heap/
