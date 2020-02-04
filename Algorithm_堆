@@ -37,3 +37,39 @@
           }
       }
   }
+3.2.求第k大元素（不是第k个不同）（leetcode [703] Kth Largest Element in a Stream）
+  思路：构建固定容量的优先级队列，最大堆
+  代码：
+  class KthLargest {
+
+      PriorityQueue<Integer> queue;
+      int k;
+
+      public KthLargest(int k, int[] nums) {
+          this.k = k;
+          queue = new PriorityQueue<Integer>(
+              k,
+              new Comparator<Integer>() {
+                  @Override
+                  public int compare(Integer a, Integer b) {
+                      return a - b;
+                  }
+              }
+          );
+          for (int num : nums) {
+              add(num);
+          }
+      }
+
+      public int add(int val) {
+          // 判断优先级队列是否需要调整，即固定容量的逆序最大堆是否发生变化
+          if (queue.size() < k) {
+              queue.offer(val);
+          } else if (val > queue.peek()) {
+              queue.poll();
+              queue.offer(val);
+          }
+          return queue.peek();
+      }
+  }
+
