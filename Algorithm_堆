@@ -6,3 +6,34 @@
 2.基本知识参考
 2.1.https://juejin.im/post/5c3067866fb9a04a0a5f5578
 2.2.https://dracarys.github.io/2019/03/02/Algorithm-club-heap/
+
+3.优先级队列
+3.1.石头撞击消除（leetcode [1046] Last Stone Weight）
+  代码：
+  class Solution {
+      public int lastStoneWeight(int[] stones) {
+          PriorityQueue<Integer> queue = new PriorityQueue<Integer>(
+              new Comparator<Integer>() {
+                  @Override
+                  public int compare(Integer a, Integer b) {
+                      return b - a;
+                  }
+              }
+          );
+          for (int stone : stones) {
+              queue.offer(stone);
+          }
+          while (queue.size() > 1) {
+              int a = queue.poll();
+              int b = queue.poll();
+              if (a > b) {
+                  queue.offer(a-b);
+              }
+          }
+          if (queue.isEmpty()) {
+              return 0;
+          } else {
+              return queue.peek();
+          }
+      }
+  }
