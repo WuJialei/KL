@@ -73,4 +73,40 @@
           return queue.peek();
       }
   }
+  变体，求出现频率在top k的数组(链表)(leetcode [347] Top K Frequent Elements)
+    代码：
+    class Solution {
+
+      HashMap<Integer, Integer> map;
+
+      public List<Integer> topKFrequent(int[] nums, int k) {
+          map = new HashMap<Integer, Integer>();
+          for (int num : nums) {
+              map.put(num, map.getOrDefault(num, 0) + 1);
+          }
+
+          PriorityQueue<Integer> queue = new PriorityQueue<Integer>(k,
+              new Comparator<Integer>() {
+                  @Override
+                  public int compare(Integer a, Integer b){
+                      return map.get(a) - map.get(b);
+                  }
+              }
+          );
+          for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+              if (queue.size() < k) {
+                  queue.offer(entry.getKey());
+              } else if (entry.getValue() > map.get(queue.peek())) {
+                  queue.poll();
+                  queue.offer(entry.getKey());
+              }
+          }
+          List<Integer> ans = new ArrayList<Integer>();
+          while(!queue.isEmpty()) {
+              ans.add(queue.poll());
+          }       
+          return ans;
+
+      }
+  }
 
