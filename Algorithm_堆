@@ -39,7 +39,7 @@
       }
   }
 3.2.求第k大元素（不是第k个不同）（leetcode [703] Kth Largest Element in a Stream）
-  思路：构建固定容量的优先级队列，最大堆
+  思路：构建固定容量的优先级队列，最大堆(利用系统自带的PriorityQueue实现最大堆/最小堆)
   代码：
   class KthLargest {
 
@@ -73,7 +73,7 @@
           return queue.peek();
       }
   }
-  变体1，求出现频率在top k的数组(链表)(leetcode [347] Top K Frequent Elements)
+变体1，求出现频率在top k的数组(链表)(leetcode [347] Top K Frequent Elements)
     代码：
     class Solution {
 
@@ -109,34 +109,87 @@
 
       }
   }
-  变体2，求离原点最近的top k个点(leetcode [973] K Closest Points to Origin)
+变体2，求离原点最近的top k个点(leetcode [973] K Closest Points to Origin)
     代码：
     class Solution {
 
-    public int squre (int a, int b) {
-        return a * a + b * b;
-    }
+      public int squre (int a, int b) {
+          return a * a + b * b;
+      }
 
-    public int[][] kClosest(int[][] points, int K) {
-        PriorityQueue<int[]> queue = new PriorityQueue<>(K, (o2, o1) -> o1[0] * o1[0] + o1[1] * o1[1] - o2[0] * o2[0] - o2[1] * o2[1]);
+      public int[][] kClosest(int[][] points, int K) {
+          PriorityQueue<int[]> queue = new PriorityQueue<>(K, (o2, o1) -> o1[0] * o1[0] + o1[1] * o1[1] - o2[0] * o2[0] - o2[1] * o2[1]);
 
-        for (int i = 0; i < points.length; ++i) {
-            if (queue.size() < K) {
-                queue.offer(points[i]);
-            } else if (squre(points[i][0], points[i][1]) < squre(queue.peek()[0], queue.peek()[1])) {
-                queue.poll();
-                queue.offer(points[i]);
-            }
-        }
-        int[][] ans = new int[K][2];
-        int cnt = 0;
-        while(!queue.isEmpty()) {
-            ans[cnt] = queue.poll();
-            ++cnt;
-        }
-        return ans;
-    }
-}
+          for (int i = 0; i < points.length; ++i) {
+              if (queue.size() < K) {
+                  queue.offer(points[i]);
+              } else if (squre(points[i][0], points[i][1]) < squre(queue.peek()[0], queue.peek()[1])) {
+                  queue.poll();
+                  queue.offer(points[i]);
+              }
+          }
+          int[][] ans = new int[K][2];
+          int cnt = 0;
+          while(!queue.isEmpty()) {
+              ans[cnt] = queue.poll();
+              ++cnt;
+          }
+          return ans;
+      }
+  }
+变体3.查找和最小的K对数字（leetcode [373] Find K Pairs with Smallest Sums）
+  代码：
+  class Solution {
+
+      public class Data{
+          int x, y;
+          public Data(int a, int b){
+              x = a;
+              y = b;
+          }
+      }
+
+      public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+          List<Data> list = new ArrayList<>();
+          for (int i = 0; i < nums1.length; ++i) {
+              for (int j = 0; j < nums2.length; ++j) {
+                  list.add(new Data(nums1[i], nums2[j]));
+              }
+          }
+          Collections.sort(list, (a, b) -> (a.x + a.y) - (b.x + b.y));
+          List<List<Integer>> ans = new ArrayList<>();
+          for (int i = 0; i < k && i < list.size(); ++i) {
+              List<Integer> temp = new ArrayList<Integer>();
+              temp.add(list.get(i).x);
+              temp.add(list.get(i).y);
+              ans.add(temp);
+          }
+          return ans;
+          /*
+          PriorityQueue<Data> queue = new PriorityQueue<>(k, (a, b) -> (b.x + b.y) - (a.x + a.y));
+          for (int i = 0; i < nums1.length; ++i) {
+              for(int j = 0; j < nums2.length; ++j) {
+                  Data data = new Data(nums1[i], nums2[j]);
+                  if (queue.size() < k) {
+                      queue.offer(data);
+                  } else if (nums1[i] + nums2[j] < queue.peek().x + queue.peek().y) {
+                      queue.poll();
+                      queue.offer(data);
+                  }
+              }
+          }
+          List<List<Integer>> ans = new ArrayList<>();
+          while (!queue.isEmpty()) {
+              Data data = queue.poll();
+              List<Integer> temp = new ArrayList<Integer>();
+              temp.add(data.x);
+              temp.add(data.y);
+              ans.add(temp);
+          }
+          return ans;
+          */
+      }
+  }
 相关：HashMap的排序（leetcode [451] Sort Characters By Frequency）
   代码：
   class Solution {
