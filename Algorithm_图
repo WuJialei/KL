@@ -74,6 +74,7 @@
       }
   }
 2.2.使用邻接矩阵表示图（leetcode [1042] Flower Planting With No Adjacent）
+  思路：染色问题，保证相邻点颜色不同；
   代码：
   class Solution {
       public int[] gardenNoAdj(int N, int[][] paths) {
