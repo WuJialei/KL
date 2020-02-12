@@ -3,6 +3,77 @@
 1.2.最小生成树算法：https://www.cnblogs.com/wuxiangnong/p/10885129.html
 1.3.最短路之floyd算法：https://blog.csdn.net/qq_42866708/article/details/81629494
 
+2.应用
+2.1.图中边的出度和入度(leetcode [997] Find the Town Judge)
+  基本思路：使用出入度比邻接矩阵的时空都降低，时间复杂度为O(n)
+  代码:
+  class Solution {
+
+      public class Point{
+          int in;
+          int out;
+      }
+
+      public int findJudge(int N, int[][] trust) {
+          Point[] points = new Point[N+1];
+          for (int i = 0; i <= N; ++i) {
+              points[i] = new Point();
+          }
+          for (int i = 0; i < trust.length; ++i) {
+              ++points[trust[i][0]].out;
+              ++points[trust[i][1]].in;
+          }
+          int cnt = 0;
+          int index = 0;
+          for (int i = 1; i <= N; ++i) {
+              if (points[i].in == N-1 && points[i].out == 0) {
+                  ++cnt;
+                  index = i;
+              }
+          }
+          if (cnt == 1) {
+              return index;
+          } else {
+              return -1;
+          }
+          /*
+          boolean[][] graph = new boolean[N+1][N+1];
+          for (int i = 0; i < trust.length; ++i) {
+              int y = trust[i][0];
+              int x = trust[i][1];
+              graph[x][y] = true;
+          }
+          int index = 0;
+          int cnt = 0;
+          for (int i = 1; i <= N; ++i) {
+              boolean flag = true;
+              for (int j = 1; j <= N; ++j) {
+                  if (i != j) {
+                      flag &= graph[i][j];
+                  }                
+              }
+              if (flag) {
+                  ++cnt;
+                  index = i;
+              }
+          }
+          if (cnt != 1) {
+              return -1;
+          } else {
+              boolean flag = false;
+              for (int i = 1; i <= N; ++i) {
+                  flag |= graph[i][index];
+              }
+              if (flag) {
+                  return -1;
+              } else {
+                  return index;
+              }
+          }
+          */
+      }
+  }
+
 
 最短路
 狄杰斯特拉算法（leetcode [743] Network Delay Time）
