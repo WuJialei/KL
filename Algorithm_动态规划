@@ -1,4 +1,20 @@
 
+分割数组得到最大和（leetcode [1043] Partition Array for Maximum Sum）
+  代码：
+  class Solution {
+      public int maxSumAfterPartitioning(int[] A, int K) {
+          int len = A.length;
+          int[] dp = new int[len + 1];
+          for (int i = 0; i <= len; ++i) {      
+              int max = Integer.MIN_VALUE;
+              for (int j = i - 1; j >= 0 && i-j <= K; --j) {
+                  max = Math.max(max, A[j]);
+                  dp[i] = Math.max(dp[i], dp[j] + max * (i-j));
+              }
+          }
+          return dp[len];
+      }
+  }
 
 
 素数表自定义的丑数（leetcode [313] Super Ugly Number）
