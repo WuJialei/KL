@@ -189,6 +189,35 @@
       }
 
   }
+2.4.bfs/dfs解决路径存在问题
+2.4.1.存在回路的路径探索问题（leetcode [841] Keys and Rooms）
+  代码：
+  class Solution {
+
+      List<Integer> ans;
+      List<List<Integer>> graph;
+
+      public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+          graph = rooms;
+          ans = new ArrayList<Integer>();
+          int n = rooms.size();
+          ans.add(0);
+          dfs(0);
+          return ans.size() == n;
+      }
+
+      public void dfs (int index) {
+          for (int next : graph.get(index)) {
+              if (!ans.contains(next)) {
+                  ans.add(next);
+                  dfs(next);
+              }
+          }
+      }
+
+  }
+  
+  
 
 最短路
 狄杰斯特拉算法（leetcode [743] Network Delay Time）
