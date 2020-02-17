@@ -2,6 +2,7 @@
 1.1.图算法简介：http://harlon.org/2018/04/03/datastructuregraph/
 1.2.最小生成树算法：https://www.cnblogs.com/wuxiangnong/p/10885129.html
 1.3.最短路之floyd算法：https://blog.csdn.net/qq_42866708/article/details/81629494
+1.4.图(有向、无向)中环存在的判断和记录：https://www.cnblogs.com/tenosdoit/p/3644225.html
 
 2.应用
 2.1.图中边的出度和入度(leetcode [997] Find the Town Judge)
