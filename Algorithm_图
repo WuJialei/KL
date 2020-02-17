@@ -398,6 +398,43 @@
       }
 
   }
+2.6.二分图
+2.6.1.二分图的判断（leetcode [785] Is Graph Bipartite?）
+  代码：
+  class Solution {
+
+      int[][] g;
+      int[] color;
+
+      public boolean isBipartite(int[][] graph) {
+          g = graph;
+          int len = graph.length;
+          color = new int[len];
+          for (int i = 0; i < len; ++i) {
+              if (color[i] == 0) {
+                  if (!dfs(i, 1)) {
+                      return false;
+                  }
+              }
+          }
+          return true;
+      }
+
+      public boolean dfs (int index, int c) {
+          color[index] = c;
+          for (int j = 0; j < g[index].length; ++j) {
+              if (color[g[index][j]] == 0) {
+                  if (!dfs(g[index][j], -c)) {
+                      return false;
+                  }
+              } else if (color[g[index][j]] == c) {
+                  return false;
+              }
+          }
+          return true;
+      }
+
+  }
 
 
 最短路
