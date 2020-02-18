@@ -437,8 +437,8 @@
   }
 
 
-最短路
-狄杰斯特拉算法（leetcode [743] Network Delay Time）
+2.7.最短路
+2.7.1.狄杰斯特拉算法（leetcode [743] Network Delay Time）
   代码：
   class Solution {
 
