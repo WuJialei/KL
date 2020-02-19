@@ -4,6 +4,7 @@
 1.3.最短路之floyd算法：https://blog.csdn.net/qq_42866708/article/details/81629494
 1.4.图(有向、无向)中环存在的判断和记录：https://www.cnblogs.com/tenosdoit/p/3644225.html
 1.5.二分图及二分图的判断：https://www.cnblogs.com/wenruo/p/5243034.html
+1.6.最短路问题：https://blog.csdn.net/qq_35644234/article/details/60870719
 
 2.应用
 2.1.图中边的出度和入度(leetcode [997] Find the Town Judge)
@@ -596,6 +597,72 @@
           return ans>=6005 ? -1 : ans;
       }
   }
+2.7.2.阈值距离内邻居最少的城市（leetcode 1334. Find the City With the Smallest Number of Neighbors at a Threshold Distance）
+  思路：求到达各个城市的最短路，然后判断距离是否小于阈值
+  代码：
+  class Solution {
+
+      public int findTheCity(int n, int[][] edges, int distanceThreshold) {
+
+          //求到达各个城市的最短路，然后判断距离是否小于阈值
+          int[][] graph = new int[n][n];
+          for (int i = 0; i < n; ++i) {
+              Arrays.fill(graph[i], Integer.MAX_VALUE/2);
+              graph[i][i] = 0;
+          }
+          for (int i = 0; i < edges.length; ++i) {
+              int x = edges[i][0];
+              int y = edges[i][1];
+              int val = edges[i][2];
+              graph[x][y] = val;
+              graph[y][x] = val;
+          }
+
+          int ans = -1;
+          int minCity = n;
+          for (int i = 0; i < n; ++i) {
+              int[] dist = new int[n];
+              for (int j = 0; j < n; ++j) {
+                  dist[j] = graph[i][j];
+              }
+              boolean[] visited = new boolean[n];
+              visited[i] = true;
+              for (int c = 1; c < n; ++c) {
+                  int index = 0;
+                  int minDist = Integer.MAX_VALUE/2;
+                  for (int m = 0; m < n; ++m) {
+                      if (!visited[m] && dist[m] < minDist) {
+                          index = m;
+                          minDist = dist[m];
+                      }
+                  }
+                  visited[index] = true;
+                  for (int l = 0; l < n; ++l) {
+                      if (!visited[l] && dist[l] > dist[index] + graph[index][l]) {
+                          dist[l] = dist[index] + graph[index][l];
+                      }
+                  }
+              }
+              int tmp = 0;
+              for (int k = 0; k < n; ++k) {
+                  if (i != k && dist[k] <= distanceThreshold) {
+                      ++tmp;
+                  }
+              }
+              if (tmp <= minCity) {
+                  minCity = tmp;
+                  ans = i;
+              }
+
+          }
+          return ans;
+
+      }
+
+  }
+  
+  
+  
 狄杰斯特拉未解出来（[787] Cheapest Flights Within K Stops）
   代码：
   class Solution {
