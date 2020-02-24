@@ -5,6 +5,7 @@
 1.4.图(有向、无向)中环存在的判断和记录：https://www.cnblogs.com/tenosdoit/p/3644225.html
 1.5.二分图及二分图的判断：https://www.cnblogs.com/wenruo/p/5243034.html
 1.6.最短路问题：https://blog.csdn.net/qq_35644234/article/details/60870719
+1.7.欧拉路径、环：https://sighingnow.github.io/algorithm/euler_path.html
 
 2.应用
 2.1.图中边的出度和入度(leetcode [997] Find the Town Judge)
@@ -884,3 +885,41 @@
           return dist[K&1][dst] < Integer.MAX_VALUE/2 ? dist[K&1][dst] : -1;
       }
   }
+  
+  2.8.欧拉路径
+  2.8.1.按字典序走的欧拉路径（leetcode [332] Reconstruct Itinerary）
+    代码：
+    class Solution {
+
+      HashMap<String, List<String>> graph;
+
+      public List<String> findItinerary(List<List<String>> tickets) {
+          graph = new HashMap<String, List<String>>();
+          for (int i = 0; i < tickets.size(); ++i) {
+              String src = tickets.get(i).get(0);
+              String dst = tickets.get(i).get(1);
+              if (!graph.containsKey(src)) {
+                  graph.put(src, new ArrayList<String>());
+              }
+              graph.get(src).add(dst);
+          }
+          for (String key : graph.keySet()) {
+              Collections.sort(graph.get(key), (a, b) -> a.compareTo(b));
+          }
+          List<String> ans = new ArrayList<>();
+          dfs("JFK", ans);
+          return ans;
+
+      }
+
+      // dfs路径访问的节点逆序插入结果集，结果集读的时候是顺序
+      public void dfs (String src, List<String> list) {
+          List<String> tmp = graph.get(src);
+          while (tmp != null && tmp.size() > 0) {
+              String next = tmp.remove(0);
+              dfs(next, list);
+          }
+          list.add(0, src);
+      }
+  }
+    
