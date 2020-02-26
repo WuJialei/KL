@@ -1,3 +1,41 @@
 1.基础知识
 1.1.排序基础讲解：https://juejin.im/post/5b95da8a5188255c775d8124#comment
 1.2.快排时间复杂度分析：https://blog.csdn.net/weshjiness/article/details/8660583
+
+2.应用
+2.1.奇偶平均分组，不消耗内存（leetcode [922] Sort Array By Parity II）
+  代码：
+  class Solution {
+      public int[] sortArrayByParityII(int[] A) {
+          int j = 1;
+          for (int i = 0; i < A.length; i += 2) {
+              if (A[i] % 2 == 1) {
+                  while (A[j] % 2 == 1) {
+                      j += 2;
+                  }
+                  int temp = A[i];
+                  A[i] = A[j];
+                  A[j] = temp;
+              }
+          }
+          return A;
+          /*
+          int[] odds = new int[A.length/2];
+          int[] evens = new int[A.length/2];
+          int o = 0, e = 0;
+          for (int a : A) {
+              if ((a%2) == 0) {
+                  evens[e++] = a;
+              } else {
+                  odds[o++] = a;
+              }
+          }
+          int[] ans = new int[A.length];
+          for (int i = 0; i < A.length/2; i++) {
+              ans[i*2] = evens[i];
+              ans[i*2+1] = odds[i];
+          }
+          return ans;
+          */
+      }
+  }
