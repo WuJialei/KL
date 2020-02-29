@@ -193,3 +193,51 @@
           return ans;
       }
   }
+
+2.3.选择排序变体(leetcode [969] Pancake Sorting)
+  思路:
+  找出最大元素，部分翻转将该最大元素至链表头部，全翻转将链表头部元素到最后，相当于每一步都是找最大元素然后翻转到最后；
+  代码:
+  class Solution {
+
+      public int maxIndex (List<Integer> list) {
+          int index = 0;
+          for (int i = 1; i < list.size(); ++i) {
+              if (list.get(i) > list.get(index)) {
+                  index = i;
+              }
+          }
+          return index;
+      }
+
+      public List<Integer> pancakeSort(int[] A) {
+          List<Integer> list = new ArrayList<>();
+          for (int a : A) {
+              list.add(a);
+          }
+          List<Integer> ans = new ArrayList<>();
+          for (int i = A.length - 1; i > 0; --i) {
+              int j = maxIndex(list);
+              if (j == i) {
+                  list.remove(j);
+              } else {
+                  if (j > 0) {
+                      List<Integer> list1 = list.subList(0, j+1);
+                      List<Integer> list2 = list.subList(j+1, i+1);
+                      ans.add(j+1);
+                      Collections.reverse(list1);
+                      list = new ArrayList<>();
+                      list.addAll(list1);
+                      list.addAll(list2);
+                  }
+                  Collections.reverse(list);
+                  ans.add(i+1);
+                  list.remove(i);
+              }
+          }
+          return ans;
+      }
+  }
+  
+  
+  
