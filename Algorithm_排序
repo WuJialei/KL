@@ -141,6 +141,7 @@
       }
 
   }
+  
 2.2.归并排序（leetcode 1305. All Elements in Two Binary Search Trees）
   代码：
   import java.util.ArrayList;
@@ -456,6 +457,38 @@
               }
           }
           return ans;
+      }
+  }
+  
+2.8.插入排序
+2.8.1.插入排序与链表结合（leetcode [147] Insertion Sort List）
+  代码：
+  class Solution {
+      public ListNode insertionSortList(ListNode head) {
+          if (head == null || head.next == null) {
+              return head;
+          }
+          ListNode h = new ListNode(-1);
+          h.next = head;
+          ListNode pre = h;
+          ListNode cur = h.next;
+          while (cur != null) {
+              ListNode nex = cur.next;
+              if (nex != null && nex.val < cur.val) {
+                  while (pre.next != null && pre.next.val < nex.val) {
+                      pre = pre.next;
+                  }
+                  ListNode t = pre.next;
+                  pre.next = nex;
+                  ListNode l = nex.next;
+                  nex.next = t;
+                  cur.next = l;
+                  pre = h;
+              } else {
+                  cur = cur.next;
+              }
+          }
+          return h.next;
       }
   }
 
