@@ -195,12 +195,14 @@
       }
   }
 2.2.1.链表的归并排序（leetcode [148] Sort List）
+  空间复杂度分析：递归算法空间复杂度=递归深度*每次递归所要的辅助空间，本算法的递归深度为log(n)，每次递归需要的辅助空间为常数，所以递归算法的空间复杂度为log(n)
   代码：
   class Solution {
       public ListNode sortList(ListNode head) {
           if (head == null || head.next == null) {
               return head;
           }
+          // 快慢指针寻找中点
           ListNode slow = head;
           ListNode fast = head.next;
           while (fast != null && fast.next != null) {
