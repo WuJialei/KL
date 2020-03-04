@@ -576,5 +576,22 @@
       }
   }
 
+2.9.数组的排序
+2.9.1.h指数（leetcode [274] H-Index）
+  思路：由于Arrays.sort排序支持的是对Integer[]数组的排序，所以对int[]数组自定义降序排序比较麻烦，只采用默认的升序遍历时从后向前扫描即可
+  代码：
+  class Solution {
+      public int hIndex(int[] citations) {
+          Arrays.sort(citations);
+          int cnt = 0;
+          int len = citations.length;
+          while (cnt < len && citations[len-1-cnt] > cnt) {
+              cnt++;
+          }
+          return cnt;
+      }
+  }
+
+  
 
 
