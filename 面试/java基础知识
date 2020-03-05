@@ -5,4 +5,13 @@
   链接1：https://juejin.im/post/5a99544ef265da23a334ab6c#heading-0
   链接2：https://github.com/Snailclimb/JavaGuide/blob/master/docs/java/collection/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98.md
   SKK/java集合
+3.java数值之间的类型转换
+  for(short i = 0; i <100; i++) { 
+      map.put(i, String.valueOf(i)); 
+      map.remove(i-1); // 最后map的size是100，short 2字节， 1是int，i-1是int，key为short
+      //map.remove((short)(i-1)); // 最后map的size是1
+  }
+  链接1：https://zhuanlan.zhihu.com/p/58405918
+  
+  
   
