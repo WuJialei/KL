@@ -28,6 +28,80 @@
       }
 
   }
+  
+2.2.股票买卖
+2.2.1.股票只能买卖一次（leetcode [121] Best Time to Buy and Sell Stock）
+  思路：在价格曲线图中，纵轴差值的绝对值表示盈利或者亏本的金额，买卖一次，最大利润即为找盈利情况下的最大差值
+  代码：
+  class Solution {
+      public int maxProfit(int[] prices) {
+          if (prices == null || prices.length <= 1) {
+              return 0;
+          }
+          int maxProfit = 0;
+          int minPrice = prices[0];
+          for (int i = 1; i < prices.length; ++i) {
+              int tempProfit = prices[i] - minPrice > 0 ? prices[i] - minPrice : 0;
+              maxProfit = Math.max(maxProfit, tempProfit);
+              minPrice = Math.min(minPrice, prices[i]);
+
+          }
+          return maxProfit;
+      }
+  }
+  
+2.2.2.股票可以买卖无数次（leetcode [122] Best Time to Buy and Sell Stock II）
+  思路：在价格曲线图中，曲线斜率大于0表示有利润，曲线斜率小于0表示亏本，在可以买卖无数次的情况下，只要斜率大于0就交易，即只要价格大于前一天就买，就算后一天
+  价格大于今天利润更大也可以今天买了之后再买入，利润是不变的
+  代码：
+  class Solution {
+      public int maxProfit(int[] prices) {
+          if (prices == null || prices.length <= 1) {
+              return 0;
+          }
+          int profits = 0;
+          for (int i = 1; i < prices.length; ++i) {
+              int temp = prices[i] - prices[i-1];
+              if (temp > 0) {
+                  profits += temp;
+              }
+          }
+          return profits;
+      }
+  }
+  
+2.2.3.股票可以买卖两次（leetcode [123] Best Time to Buy and Sell Stock III）
+  思路：结合当前卖出能赚的利润(最大利润)和当前买入能赚的利润(最大利润)
+  代码：
+  class Solution {
+      public int maxProfit(int[] prices) {
+          if (prices == null || prices.length <= 1) {
+              return 0;
+          }
+          int len = prices.length;
+          // 当前卖出能赚的利润(最大利润)
+          int[] dp1 = new int[len];
+          // 当前买入能赚的利润(最大利润)
+          int[] dp2 = new int[len];
+          int minPrice = prices[0];
+          for (int i = 1; i < len; ++i) {            
+              dp1[i] = Math.max(prices[i] - minPrice, dp1[i-1]);
+              minPrice = Math.min(minPrice, prices[i]);         
+          }
+          int maxPrice = prices[len-1];
+          for (int i = len-2; i >= 0; --i) {           
+              dp2[i] = Math.max(maxPrice - prices[i], dp2[i+1]);
+              maxPrice = Math.max(maxPrice, prices[i]);          
+          }
+          int ans = 0;
+          for (int i = 0; i < len; ++i) {
+              ans = Math.max(ans, dp1[i] + dp2[i]);
+          }
+          return ans;
+      }
+  }
+
+  
 
 
 分割数组得到最大和（leetcode [1043] Partition Array for Maximum Sum）
