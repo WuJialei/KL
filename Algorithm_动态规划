@@ -4,6 +4,30 @@
 1.3.背包九讲java实现：https://www.zhihu.com/people/liu-xun-39-54/posts
 1.4.最长公共子序列和最长公共子串(最长共同子序列)：https://www.cnblogs.com/en-heng/p/3963803.html
 
+2.1.数的除法
+2.1.1.除数博弈（leetcode [1025] Divisor Game）
+  代码：
+  class Solution {
+      public boolean divisorGame(int N) {
+          // 最优的数不是最大的约数，而是能找到的让自己立于不败之地的最合适的数
+          if (N <= 1) {
+              return false;
+          }
+          boolean[] dp = new boolean[N+1];
+          dp[1] = false;
+          dp[2] = true;
+          for (int i = 3; i <= N; ++i) {
+              for (int j = 1; j < i; ++j) {
+                  if (i%j==0 && !dp[i-j]) {
+                      dp[i] = true;
+                      break;
+                  }
+              }
+          }
+          return dp[N];
+      }
+
+  }
 
 
 分割数组得到最大和（leetcode [1043] Partition Array for Maximum Sum）
