@@ -134,7 +134,7 @@
           return sell[k];
       }
   }
-2.2.5.股票买卖含冷冻期（leetcode [309] Best Time to Buy and Sell Stock with Cooldown）
+2.2.5.股票买卖(无限次)含冷冻期（leetcode [309] Best Time to Buy and Sell Stock with Cooldown）
   思路：
   考虑第i天不持有dp[i][0]和持有dp[i][1]的转移方程：
     dp[i][0]=max(dp[i-1][0],dp[i-1][1]+p[i])
@@ -160,6 +160,34 @@
               cur[1] = Math.max(bf2[0] - prices[i], bf1[1]);
               bf2[0] = bf1[0];
               bf2[1] = bf1[1];
+              bf1[0] = cur[0];
+              bf1[1] = cur[1];
+          }
+          return cur[0];
+      }
+  }
+2.2.6.股票买卖(无限次)含手续费（leetcode [714] Best Time to Buy and Sell Stock with Transaction Fee）
+  思路：
+  考虑第i天不持有dp[i][0]和持有dp[i][1]的转移方程：
+    dp[i][0]=max(dp[i-1][0],dp[i-1][1]+p[i])
+    dp[i][1]=max(dp[i-1][1],dp[i-1][0]-p[i]-fee)
+  压缩
+    可以对i这个属性进行压缩，但是计算i需要i-1和i-2的信息，所以至少需要三行记录（类似斐波那契求解）
+    cur[0] = max(bf1[0], bf1[1] + prices[i])
+    cur[1] = max(bf1[1], bf1[0] - prices[i] - fee)
+  代码：
+  class Solution {
+      public int maxProfit(int[] prices, int fee) {
+          if (prices == null || prices.length <= 1) {
+              return 0;
+          }
+          int[] bf1 = new int[2];
+          int[] cur = new int[2];
+          bf1[0] = 0;
+          bf1[1] = -prices[0] - fee;
+          for (int i = 1; i < prices.length; ++i) {
+              cur[0] = Math.max(bf1[0], bf1[1] + prices[i]);
+              cur[1] = Math.max(bf1[1], bf1[0] - prices[i] - fee);
               bf1[0] = cur[0];
               bf1[1] = cur[1];
           }
