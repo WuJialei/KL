@@ -100,9 +100,72 @@
           return ans;
       }
   }
-
+2.2.4.股票可以买卖k次（leetcode [188] Best Time to Buy and Sell Stock IV）
+  思路：当k >= len/2时，问题就退化成了可以交易任意次了，所以只要将任意两天股票差大于０的加起来即可．当k < len/2时，可以记录k次交易每次买之后和卖以后
+最大的利润：１．第ｉ次买操作买下当前股票之后剩下的最大利润为第(i-1)次卖掉股票之后的利润－当前的股票价格．状态转移方程为：
+                buy[i] = max(sell[i-1]- curPrice, buy[i]);
+          ２．第ｉ次卖操作卖掉当前股票之后剩下的最大利润为第ｉ次买操作之后剩下的利润＋当前股票价格．状态转移方程为：
+                sell[i] = max(buy[i]+curPrice, sell[i]);
   
-
+  代码：
+  class Solution {
+      public int maxProfit(int k, int[] prices) {
+          int len = prices.length;
+          if (k >= len/2) {
+              int profit = 0;
+              for (int i = 1; i < len; ++i) {
+                  if (prices[i] > prices[i-1]) {
+                      profit += prices[i] - prices[i-1];
+                  }
+              }
+              return profit;
+          }        
+          int[] buy = new int[k+1];
+          int[] sell = new int[k+1];
+          // buy数组初始化为整数最小值是为了确保每件商品购入时最大利润不为0
+          Arrays.fill(buy, Integer.MIN_VALUE);
+          // 从每件商品开始
+          for (int price : prices) {
+              for (int i = 1; i <= k; ++i) {
+                  buy[i] = Math.max(buy[i], sell[i-1] - price);
+                  sell[i] = Math.max(sell[i], buy[i] + price);
+              }
+          }
+          return sell[k];
+      }
+  }
+2.2.5.股票买卖含冷冻期（leetcode [309] Best Time to Buy and Sell Stock with Cooldown）
+  思路：
+  考虑第i天不持有dp[i][0]和持有dp[i][1]的转移方程：
+    dp[i][0]=max(dp[i-1][0],dp[i-1][1]+p[i])
+    dp[i][1]=max(dp[i-1][1],dp[i-2][0]-p[i])
+  压缩
+    可以对i这个属性进行压缩，但是计算i需要i-1和i-2的信息，所以至少需要三行记录（类似斐波那契求解）
+    cur[1]=max(bf1[1],bf2[0]-p[i])
+    cur[0]=max(bf1[0],bf1[1]+p[i])
+  代码：
+  class Solution {
+      public int maxProfit(int[] prices) {
+          if (prices == null || prices.length <= 1) {
+              return 0;
+          }
+          int[] cur = new int[2];
+          int[] bf1 = new int[2];
+          int[] bf2 = new int[2];
+          bf1[0] = 0;
+          bf1[1] = -prices[0];
+          bf2[0] = 0;
+          for (int i = 1; i < prices.length; ++i) {
+              cur[0] = Math.max(bf1[1] + prices[i], bf1[0]);
+              cur[1] = Math.max(bf2[0] - prices[i], bf1[1]);
+              bf2[0] = bf1[0];
+              bf2[1] = bf1[1];
+              bf1[0] = cur[0];
+              bf1[1] = cur[1];
+          }
+          return cur[0];
+      }
+  }
 
 分割数组得到最大和（leetcode [1043] Partition Array for Maximum Sum）
   代码：
@@ -172,3 +235,5 @@
           return ans[n-1];
       }
   }
+
+
