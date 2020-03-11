@@ -241,6 +241,28 @@
           return c;
       }
   }
+  
+2.4.序列中的dp
+2.4.1.最大连续子序和（leetcode [53] Maximum Subarray）
+  代码：
+  class Solution {
+      public int maxSubArray(int[] nums) {
+          if (nums == null || nums.length == 0) {
+              return 0;
+          }
+          int a = nums[0];
+          int b = 0;
+          int ans = a;
+          // dp[i]表示以结尾的最大连续子序和
+          // dp[i] = max{dp[i-1]+nums[i], nums[i]}
+          for (int i = 1; i < nums.length; ++i) {
+              b = Math.max(a + nums[i], nums[i]);
+              ans = Math.max(b, ans);
+              a = b;
+          }
+          return ans;
+      }
+  }
 
 
 分割数组得到最大和（leetcode [1043] Partition Array for Maximum Sum）
