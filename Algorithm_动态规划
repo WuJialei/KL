@@ -536,26 +536,57 @@
 2.6.2.石子堆选择堆数加限制（leetcode [1140] Stone Game II）
   代码：
   class Solution {
-    public int stoneGameII(int[] piles) {
-        int n = piles.length;
-        int[][] dp = new int[n+1][n+1];
-        int[] sums = new int[n+1];
-        for (int i = 1; i <= n; ++i) {
-            sums[i] = sums[i-1] + piles[i-1];
-        }
-        // dp[i][j]表示剩余i堆且M为j时的最大数量
-        // dp[i][j] = max{(sums[n]-sums[n-i])-dp[i-k][max(k,j)]} k>=1 && k <= 2*j
-        for (int i = 1; i <= n; ++i) {
-            for (int j = 1; j <= n; ++j) {
-                for (int k = 1; k <= 2*j && k <= i; ++k) {
-                    dp[i][j] = Math.max(dp[i][j], sums[n] - sums[n-i] - dp[i-k][Math.min(Math.max(j,k), n)]);
-                }
-                
-            }
-        }
-        return dp[n][1];
-    }
-}
+      public int stoneGameII(int[] piles) {
+          int n = piles.length;
+          int[][] dp = new int[n+1][n+1];
+          int[] sums = new int[n+1];
+          for (int i = 1; i <= n; ++i) {
+              sums[i] = sums[i-1] + piles[i-1];
+          }
+          // dp[i][j]表示剩余i堆且M为j时的最大数量
+          // dp[i][j] = max{(sums[n]-sums[n-i])-dp[i-k][max(k,j)]} k>=1 && k <= 2*j
+          for (int i = 1; i <= n; ++i) {
+              for (int j = 1; j <= n; ++j) {
+                  for (int k = 1; k <= 2*j && k <= i; ++k) {
+                      dp[i][j] = Math.max(dp[i][j], sums[n] - sums[n-i] - dp[i-k][Math.min(Math.max(j,k), n)]);
+                  }
+
+              }
+          }
+          return dp[n][1];
+      }
+  }
+
+2.7.字符串
+2.7.1.判断字符串中回文子串的个数（leetcode [647] Palindromic Substrings）
+  代码：
+  class Solution {
+      public int countSubstrings(String s) {
+          int n = s.length();
+          boolean[][] dp = new boolean[n][n];
+          int ans = 0;
+          // dp[start][end] = (s.charAt(start)==s.charAt(end)) && dp[start+1][end-1]
+          for (int end = 0; end < n; ++end) {
+              for (int start = end; start >= 0; --start) {
+                  if (start == end) {
+                      dp[start][end] = true;
+                      ++ans;
+                  } else if (end - start == 1) {
+                      if (s.charAt(start) == s.charAt(end)) {
+                          dp[start][end] = true;
+                          ++ans;
+                      }
+                  } else if (end - start >= 2) {
+                      if (s.charAt(start) == s.charAt(end) && dp[start+1][end-1]) {
+                          dp[start][end] = true;
+                          ++ans;
+                      }
+                  }
+              }
+          }
+          return ans;
+      }
+  }
 
 
 
