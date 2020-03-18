@@ -428,7 +428,28 @@
 
       }
   }
-  
+变体2，一个字符串的最长回文子序列（leetcode [516] Longest Palindromic Subsequence）
+  思路：
+  一个字符串的回文子序列就是从正着数和倒着数的公共子序列，求一个字符串的最长回文子序列就是求一个字符串和其逆序字符串的最长公共子序列
+  代码：
+  class Solution {
+      public int longestPalindromeSubseq(String s) {
+          if (s == null || s.length() < 1) {
+              return 0;
+          }
+          int len = s.length();
+          String str1 = new StringBuilder(s).reverse().toString();
+          int[][] dp = new int[2][len+1];
+          for (int i = 1; i <= len; ++i) {
+              int index = i & 1;
+              for (int j = 1; j <= len; ++j) {
+                  dp[index][j] = s.charAt(i-1)==str1.charAt(j-1) ? dp[1-index][j-1] + 1: Math.max(dp[index][j-1], dp[1-index][j]);
+              }
+          }
+          return dp[len&1][len];
+      }
+  }
+
 2.4.5.书架填充的最小高度（leetcode [1105] Filling Bookcase Shelves）
   代码：
   class Solution {
