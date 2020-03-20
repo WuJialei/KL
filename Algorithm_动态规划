@@ -124,6 +124,23 @@
 
 
   }
+2.1.5.数拆解求最大乘积（leetcode [343] Integer Break）
+  代码：
+  class Solution {
+      public int integerBreak(int n) {
+          int[] dp = new int[n+1];
+          dp[1] = 1;
+          dp[2] = 1;
+          // 遍历，然后按需不需要拆解
+          // dp[i] = max{j*dp[i-j], j*(i-j)}
+          for (int i = 3; i <= n; ++i) {
+              for (int j = 1; j < i; ++j) {
+                  dp[i] = Math.max(dp[i], Math.max(j*dp[i-j], j*(i-j)));
+              }
+          }
+          return dp[n];
+      }
+  }
 
   
 2.2.股票买卖
