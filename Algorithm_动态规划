@@ -554,6 +554,26 @@
           return dp[len&1][len];
       }
   }
+变体3，最长公共子串（leetcode [718] Maximum Length of Repeated Subarray）
+  代码：
+  class Solution {
+      public int findLength(int[] A, int[] B) {
+          int m = A.length;
+          int n = B.length;
+          int[][] dp = new int[2][n+1];
+          int ans = 0;
+          // dp[i][j] = dp[i-1][j-1] if A[i]==B[j]; 0 ,else;
+          for (int i = 1; i <= m; ++i) {
+              int index = i & 1;
+              for (int j = 1; j <= n; ++j) {
+                  dp[index][j] = A[i-1]==B[j-1] ? dp[1-index][j-1] + 1: 0;
+                  ans = Math.max(ans, dp[index][j]);
+              }
+
+          }
+          return ans;
+      }
+  }
 
 2.4.5.书架填充的最小高度（leetcode [1105] Filling Bookcase Shelves）
   代码：
