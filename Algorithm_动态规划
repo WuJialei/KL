@@ -773,34 +773,82 @@
           return ans;
       }
   }
-2.4.11.数组最多有k个分组的最大均值和（leetcode [813] Largest Sum of Averages）
+变体，视频拼接（leetcode [1024] Video Stitching）
   代码：
   class Solution {
-      public double largestSumOfAverages(int[] A, int K) {
-          int n = A.length;
-          double[] sums = new double[n+1];
-          for (int i = 1; i <= n; ++i) {
-              sums[i] = A[i-1] + sums[i-1];
-          }
-          double[][] dp = new double[2][n+1];
-          for (int i = 1; i <= n; ++i) {
-              dp[1][i] = sums[i]/i;
-          }
-          // dp[i,k]表示前i个元素有k个分组的最大均值和，dp[i,k]和dp[k,i]一样
-          // dp[i,k] = max{dp[j, k-1] + (nums[j+1]+...nums[i])/(i-j)}
-          for (int k = 2; k <= K; ++k) {
-              int index = k & 1;
-              for (int i = 1; i <= n; ++i) {
-                  double temp = dp[1-index][i];
-                  for (int j = 1; j < i; ++j) {
-                      temp = Math.max(temp, dp[1-index][j] + (sums[i]-sums[j])/(i-j));
-                  }
-                  dp[index][i] = temp;
-              }
-          }
-          return dp[K&1][n];
-      }
-  }
+
+        public class Line {
+            int left;
+            int right;
+            public Line (int a, int b) {
+                left = a;
+                right = b;
+            }
+        }
+
+        public int videoStitching(int[][] clips, int T) {
+            int n = clips.length;
+            int maxVal = 100_000_0000;
+            Line[] lines = new Line[n];
+            for (int i = 0; i < n; ++i) {
+                lines[i] = new Line(clips[i][0], clips[i][1]);
+            }
+            Arrays.sort(
+                lines,
+                (a, b) -> {
+                    if (a.left == b.left) {
+                        return a.right - b.right;
+                    } else {
+                        return a.left - b.left;
+                    }
+                }
+            );
+            int[] dp = new int[T+1];
+            Arrays.fill(dp, maxVal);
+            dp[0] = 0;
+            // dp[i] 表示到达i的最少段数
+            for (int i = 1; i <= T; ++i) {
+                for (Line line : lines) {
+                    if (i < line.left) {
+                        break;
+                    }
+                    if (i > line.left && i <= line.right) {
+                        dp[i] = Math.min(dp[i], dp[line.left] + 1);
+                    }
+                }
+            }
+            return dp[T] == maxVal ? -1 : dp[T];
+        }
+    }
+
+  2.4.11.数组最多有k个分组的最大均值和（leetcode [813] Largest Sum of Averages）
+    代码：
+    class Solution {
+        public double largestSumOfAverages(int[] A, int K) {
+            int n = A.length;
+            double[] sums = new double[n+1];
+            for (int i = 1; i <= n; ++i) {
+                sums[i] = A[i-1] + sums[i-1];
+            }
+            double[][] dp = new double[2][n+1];
+            for (int i = 1; i <= n; ++i) {
+                dp[1][i] = sums[i]/i;
+            }
+            // dp[i,k]表示前i个元素有k个分组的最大均值和，dp[i,k]和dp[k,i]一样
+            // dp[i,k] = max{dp[j, k-1] + (nums[j+1]+...nums[i])/(i-j)}
+            for (int k = 2; k <= K; ++k) {
+                int index = k & 1;
+                for (int i = 1; i <= n; ++i) {
+                    double temp = dp[1-index][i];
+                    for (int j = 1; j < i; ++j) {
+                        temp = Math.max(temp, dp[1-index][j] + (sums[i]-sums[j])/(i-j));
+                    }
+                    dp[index][i] = temp;
+                }
+            }
+            return dp[K&1][n];
+        }
+    }
 
   
 2.5.小偷偷盗问题
