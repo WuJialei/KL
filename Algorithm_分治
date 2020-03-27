@@ -74,5 +74,112 @@
 
   }
   // @lc code=end
+  
+  2.2.字符串加减乘运算的所有可能（leetcode [241] Different Ways to Add Parentheses）
+    代码：
+    class Solution {
+
+      List<Integer> ans;
+      String pat;
+      HashMap<Integer, List<Integer>> map;
+      int n;
+
+      public List<Integer> diffWaysToCompute(String input) {
+          ans = new ArrayList<Integer>();
+          map = new HashMap<>();
+          if (input == null || input.length() < 1) {
+              return ans;
+          }
+          pat = input;
+          n = input.length()+1;        
+          return dfs(0, input.length()-1);
+      }
+
+      public List<Integer> dfs (int left, int right) {
+          // 剪枝，记忆化搜索
+          if (map.containsKey(left*n + right)) {
+              return map.get(left*n + right);
+          }
+          int key = left*n + right;
+          List<Integer> value = new ArrayList<>();
+          //HashSet<Integer> value = new HashSet<>();
+          boolean flag = true;
+          // 分解为子问题
+          for (int mid = left; mid <= right; ++mid) {
+              char c = pat.charAt(mid);
+              if (c == '+' || c == '-' || c == '*') {
+                  if (flag) {
+                      flag = false;
+                  }
+                  List<Integer> l = dfs(left, mid-1);
+                  List<Integer> r = dfs(mid+1, right);
+                  switch (c) {
+                      case '+' : 
+                          for (int a : l) {
+                              for (int b : r) {
+                                  value.add(a+b);
+                              }
+                          }
+                          break;
+                      case '-' :
+                          for (int a : l) {
+                              for (int b : r) {
+                                  value.add(a-b);
+                              }
+                          }
+                          break;
+                      default:
+                          for (int a : l) {
+                              for (int b : r) {
+                                  value.add(a*b);
+                              }
+                          }
+                          break;
+                  }
+              }
+          }
+          // 子问题出口
+          if (flag) {
+              value.add(Integer.valueOf(pat.substring(left, right+1)));
+          }
+          map.put(key, value);
+          return value;
+      }
+
+  }
+
+2.3.最美数组（leetcode [932] Beautiful Array）
+  代码：
+  class Solution {
+
+      HashMap<Integer, int[]> map;
+
+      public int[] beautifulArray(int N) {
+          map = new HashMap<>();
+          return dfs(N);
+      }
+
+      public int[] dfs (int n) {
+          if (map.containsKey(n)) {
+              return map.get(n);
+          }
+          if (n == 1) {
+              return new int[]{1};
+          }
+          int[] ans = new int[n];
+          int cnt = 0;
+          // dfs(n) 表示是1->n的最美数组，左面是奇数，右面是偶数，i在奇数，j在偶数，k在i和j之间所以此时肯定是最美数组
+          // 所以需要保证在奇数数组、偶数数组里也是最美数组，分割为两个子问题
+          for (int left : dfs((n+1)/2)) {
+              ans[cnt++] = 2 * left - 1;
+          }
+          for (int right : dfs(n/2)) {
+              ans[cnt++] = 2 * right;
+          }
+          return ans;
+      }
+
+  }
+
 
 
