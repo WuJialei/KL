@@ -180,6 +180,67 @@
       }
 
   }
+  
+2.4.数组中的第k大数字（leetcode [215] Kth Largest Element in an Array）
+  代码：
+  class Solution {
+
+      private static Random random = new Random(System.currentTimeMillis());
+
+      int[] arrays;
+
+      public int findKthLargest(int[] nums, int k) {
+          /*
+          Integer nums1[] = new Integer[nums.length];
+          for (int i = 0 ; i < nums.length ; i ++) nums1[i] = nums[i];
+          // Arrays.sort()支持Integer [] 而不支持 int []
+          Arrays.sort(nums1, (a, b) -> b-a);
+          return nums1[k-1];
+          */
+          int target = nums.length - k;
+          arrays = nums;
+          int left = 0;
+          int right = nums.length - 1;
+          while (true) {
+              int index = dc(left, right);
+              if (index == target) {
+                  return arrays[target];
+              } else if (index < target) {
+                  left = index + 1;
+              } else {
+                  right = index - 1;
+              }
+          }
+
+      }
+
+      public int dc (int left, int right) {
+          //int random = 0;
+          if (right > left) {
+              int randomIndex = left + 1 + random.nextInt(right - left);
+              swap(left, randomIndex);
+          }        
+          int j = left;
+          int i = left + 1;
+          while (i <= right) {
+              if (arrays[i] <= arrays[left]) {
+                  swap(i, ++j);
+              }
+              ++i;
+          }
+          swap(left, j);
+          return j;
+      }
+
+      public void swap (int i, int j) {
+          int temp = arrays[i];
+          arrays[i] = arrays[j];
+          arrays[j] = temp;
+      }
+
+  }
+变体，手写快排，代码框架可参考：https://juejin.im/post/5b55660ee51d4519202e2003#comment，partition还是参考以上实现
+
 
 
 
