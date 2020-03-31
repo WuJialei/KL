@@ -86,4 +86,28 @@
           return set.size();
       }
   }
+ 
+ 2.4.分割字符串得到平衡子串（leetcode [1221] Split a String in Balanced Strings）
+  代码：
+  class Solution {
+      public int balancedStringSplit(String s) {
+          int left = 0;
+          int right = 0;
+          int ans = 0;
+          for (char c : s.toCharArray()) {
+              if (c == 'L') {
+                  ++left;
+              }
+              if (c == 'R') {
+                  ++right;
+              }
+              if (left > 0 && left == right) {
+                  ++ans;
+                  left = 0;
+                  right = 0;
+              }
+          }
+          return ans;
+      }
+  }
 
