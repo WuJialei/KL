@@ -38,6 +38,32 @@
           }
       }
   }
+变体，k次翻转求数组最大和（leetcode [1005] Maximize Sum Of Array After K Negations）
+  代码：
+  class Solution {
+      public int largestSumAfterKNegations(int[] A, int K) {
+          PriorityQueue<Integer> queue = new PriorityQueue<>(
+              (a, b) -> a - b
+          );
+          int sum = 0;
+          for (int a : A) {
+              sum += a;
+              queue.offer(a);
+          }
+          while (K > 0) {
+              if (queue.peek() == 0) {
+                  break;
+              } else {
+                  int temp = queue.poll();
+                  sum -= temp;
+                  sum += -temp;
+                  queue.offer(-temp);
+              }
+              --K;
+          }
+          return sum;
+      }
+  }
 3.2.求第k大元素（不是第k个不同）（leetcode [703] Kth Largest Element in a Stream）
   思路：构建固定容量的优先级队列，最大堆(利用系统自带的PriorityQueue实现最大堆/最小堆)
   代码：
