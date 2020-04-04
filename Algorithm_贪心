@@ -210,7 +210,37 @@
       }
   }
  
- 
+ 2.4.括号问题
+ 2.4.1.括号嵌套深度（leetcode [1111] Maximum Nesting Depth of Two Valid Parentheses Strings）
+  代码：
+  class Solution {
+      public int[] maxDepthAfterSplit(String seq) {
+          int len = seq.length();
+          int[] ans = new int[len];
+          int depth = 0;
+          Stack<Character> stack = new Stack<>();
+          for (int i = 0; i < len; ++i) {
+              if (seq.charAt(i) == '(') {
+                  stack.push(seq.charAt(i));
+                  ans[i] = stack.size();
+                  depth = Math.max(depth, stack.size());
+              } else {
+                  ans[i] = stack.size();
+                  stack.pop();
+              }
+          }
+          int val = depth/2;
+          for (int i = 0; i < len; ++i) {
+              if (ans[i] <= val) {
+                  ans[i] = 0;
+              } else {
+                  ans[i] = 1;
+              }
+          }
+          return ans;
+      }
+  }
+
   
   2.5.贪心之排序问题
   2.5.1.飞机飞往两个地方的选择调度的最小费用问题（leetcode [1029] Two City Scheduling）
