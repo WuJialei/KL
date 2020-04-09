@@ -19,3 +19,4 @@
   以binlog的为准，如果binlog中不存在的，就认为是需要回滚的。这个地方，是不是我漏了什么，拉不通。。。 麻烦老师解下疑，多谢～文章中有提到“binlog没
   有被用来做崩溃恢复”，历史上的原因是，这个是一开始就这么设计的，所以不能只依赖binlog。操作上的原因是，binlog是可以关的，你如果有权限，可以
   set sql_log_bin=0关掉本线程的binlog日志。 所以只依赖binlog来恢复就靠不住。
+2.3.mysql两阶段锁协议：https://yq.aliyun.com/articles/626848
