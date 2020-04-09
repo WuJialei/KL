@@ -6,7 +6,7 @@
 
 
 2.
-2.1.(leetcode [621] Task Scheduler)
+2.1.任务调度(leetcode [621] Task Scheduler)
   代码：
   class Solution {
       public int leastInterval(char[] tasks, int n) {
