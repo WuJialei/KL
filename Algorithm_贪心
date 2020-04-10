@@ -538,3 +538,27 @@
       }
   }
 
+2.8.数字运算问题
+2.8.1.只能乘2和减1的计算器（leetcode [991] Broken Calculator）
+  思路：逆着来，除2和加1
+  代码：
+  class Solution {
+
+      public int brokenCalc(int X, int Y) {
+          int x = X;
+          int y = Y;
+          int cnt = 0;
+          while (x < y) {
+              if (y%2 == 0) {
+                  y /= 2;
+              } else {
+                  ++y;
+              }
+              ++cnt;
+          }
+          return cnt + x - y;
+      }
+
+  }
+
+
