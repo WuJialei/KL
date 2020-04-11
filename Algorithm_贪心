@@ -413,7 +413,42 @@
           // return cnt;
       }
   }
-
+2.5.4.重新洗牌使得占有的优势最大（leetcode [870] Advantage Shuffle）
+  代码：
+  class Solution {
+      public int[] advantageCount(int[] A, int[] B) {
+          int len = A.length;
+          int[][] BB = new int[len][2];
+          for (int i = 0; i < len; ++i) {
+              BB[i][0] = i;
+              BB[i][1] = B[i];
+          }
+          Arrays.sort(A);
+          Arrays.sort(
+              BB,
+              (a, b) -> a[1] - b[1]
+          );
+          int[] ans = new int[len];
+          List<Integer> list = new ArrayList<>();
+          int i = 0;
+          int j = 0;
+          for (; i < len && j < len; ++i) {
+              if (A[i] > BB[j][1]) {
+                  ans[BB[j][0]] = A[i];
+                  ++j;
+              } else {
+                  list.add(A[i]);
+              }
+          }
+          int cnt = 0;
+          while (j < len) {
+              ans[BB[j][0]] = list.get(cnt);
+              ++cnt;
+              ++j;
+          }
+          return ans;
+      }
+  }
 
 2.6.矩阵问题
 2.6.1.存在障碍和旋转的机器人移动问题（leetcode [874] Walking Robot Simulation）
