@@ -502,6 +502,33 @@
           return ans;
       }
   }
+2.5.5.单调递增的数字（leetcode [738] Monotone Increasing Digits）
+  代码：
+  class Solution {
+      public int monotoneIncreasingDigits(int N) {
+          if (N < 10) {
+              return N;
+          }
+          char[] s = String.valueOf(N).toCharArray();
+          int len = s.length;
+          int index = -1;
+          // 从右向左寻找第一个下降且不会因为下降导致前面非降序的位置
+          for (int i = len - 2; i >= 0; --i) {
+              if (s[i] > s[i+1]) {
+                  index = i;
+                  s[i] = (char)((int)s[i] - 1);
+              }
+          }
+          if (index >= 0) {
+              while (index+1 < len) {
+                  s[index+1] = '9';
+                  ++index;
+              }
+          }
+          return Integer.valueOf(new String(s));
+      }
+  }
+
 
 2.6.矩阵问题
 2.6.1.存在障碍和旋转的机器人移动问题（leetcode [874] Walking Robot Simulation）
