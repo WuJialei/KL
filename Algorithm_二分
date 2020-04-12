@@ -30,7 +30,8 @@
 
 
 
-3.1.有序矩阵中的第k小元素（leetcode [378] Kth Smallest Element in a Sorted Matrix）
+3.1.有序数组
+3.1.1.有序矩阵中的第k小元素（leetcode [378] Kth Smallest Element in a Sorted Matrix）
   代码：
   class Solution {
       public int kthSmallest(int[][] matrix, int k) {
@@ -52,6 +53,39 @@
               }
           }
           return left;
+      }
+  }
+3.1.2.有序数组的负数统计（leetcode 1351. Count Negative Numbers in a Sorted Matrix）
+  代码：
+  class Solution {
+      public int countNegatives(int[][] grid) {
+          int m = grid.length;
+          int n = grid[0].length;
+          int cnt = 0;
+          for (int i = 0; i < m; ++i) {
+              if (grid[i][n-1] >= 0) {
+                  continue;
+              }
+              if (grid[i][0] < 0) {
+                  cnt += n;
+                  continue;
+              }
+              int left = 0;
+              int right = n - 1;
+              // 找第一个小于0的位置
+              while (left < right) {
+                  int mid = left + (right - left)/2;
+                  if (grid[i][mid] >= 0) {
+                      left = mid + 1;
+                  } else {
+                      right = mid;
+                  }
+              }
+              if (grid[i][left] < 0) {
+                  cnt += n - left;
+              }
+          }
+          return cnt;
       }
   }
   
