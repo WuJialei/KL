@@ -1,5 +1,32 @@
+1.二分
+1.1.二分模板讲解：https://www.liwei.party/2019/06/18/leetcode-solution-new/search-insert-position/
+  l < r保证返回时l=r;
+  mid = l + (r-l)/2保证r+l不溢出，r-l在l为负数且r为很大正数的时候也会溢出，但一般l，r为索引不会有这种情况
+1.2.二分模板（以leetcode 35为例）
+  代码：
+  public class Solution {
 
-
+      public int searchInsert(int[] nums, int target) {
+          int len = nums.length;
+          if (len == 0) {
+              return 0;
+          }
+          if (target > nums[len - 1]) {
+              return len;
+          }
+          int left = 0;
+          int right = len - 1;
+          while (left < right) {
+              int mid = left + (right - left) / 2;
+              if (nums[mid] < target) {
+                  left = mid + 1;
+              } else {
+                  right = mid;
+              }
+          }
+          return right;
+      }
+  }
 
 
 
