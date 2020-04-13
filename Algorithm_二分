@@ -106,6 +106,38 @@
           return left-1;
       }
   }
+3.1.4.给定函数求所有解（leetcode [1237] Find Positive Integer Solution for a Given Equation）
+  代码：
+  class Solution {
+      public List<List<Integer>> findSolution(CustomFunction customfunction, int z) {
+          List<List<Integer>> ans = new ArrayList<>();
+          for (int i = 1; i <= 1000; ++i) {
+              if (customfunction.f(i, 1) > z) {
+                  break;
+              }
+              int left = 1;
+              int right = 1000;
+              while (left < right) {
+                  int mid = left + (right - left)/2;
+                  if (customfunction.f(i, mid) <= z) {
+                      left = mid + 1;
+                  } else {
+                      right = mid;
+                  }
+              }
+              for (int j = 1; j < left; ++j) {
+                  if (customfunction.f(i, j) == z) {
+                      List<Integer> list = new ArrayList<>();
+                      list.add(i);
+                      list.add(j);
+                      ans.add(list);
+                  }
+              }
+          }
+          return ans;
+      }
+  }
+
   
 大规模的字符串检查是否是模板的子序列（leetcode [392] Is Subsequence）
   代码：
