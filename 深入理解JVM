@@ -4,6 +4,9 @@ jvm面试题
 jvm具体问题
 1.什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言
     链接：https://blog.csdn.net/YgoodmanM/article/details/50788137
+2.java的对象结构和创建过程
+    链接：https://juejin.im/post/5cc668aff265da037129a8c2
+
 
 1.第二章 Java内存区域与内存溢出异常：https://juejin.im/post/5d7a6de9e51d4562165535a5
 2.第三章 垃圾收集器与内存分配策略：https://juejin.im/post/5d7ba549e51d453b5e465bd4#heading-28
