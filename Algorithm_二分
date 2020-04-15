@@ -186,18 +186,47 @@
 3.3.1.判断一个数是否是平方数（leetcode [367] Valid Perfect Square）
   代码：
   class Solution {
-      public boolean isPerfectSquare(int num) {
+        public boolean isPerfectSquare(int num) {
+            int left = 1;
+            int right = num/2 + 1;
+            while (left < right) {
+                int mid = left + (right - left)/2;
+                // z注意整数相乘的溢出
+                long temp = ((long)mid) * mid;
+                if (temp < (long)num) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+            long temp = ((long)left) * left;
+            return temp == (long)num ? true : false;
+        }
+    }
+ 3.3.2.1到n的数组求和问题（leetcode [441] Arranging Coins）
+  代码：
+  class Solution {
+      public int arrangeCoins(int n) {
+          if (n == 0) {
+              return 0;
+          }
+          // if (n == 1) {
+          //     return 1;
+          // }
           int left = 1;
-          int right = num/2 + 1;
+          int right = n;
           while (left < right) {
               int mid = left + (right - left)/2;
-              // z注意整数相乘的溢出
-              if (mid < num/mid) {
+              // 乘法溢出问题
+              long temp = ((long)mid) * (mid+1)/2;
+              if (temp < (long)n) {
                   left = mid + 1;
               } else {
                   right = mid;
               }
           }
-          return left * left == num ? true : false;
+          // return left-1;
+          long temp = ((long)left)*(left+1)/2;
+          return temp == (long)n ? left : left - 1;
       }
   }
