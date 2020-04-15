@@ -181,3 +181,23 @@
           return true;
       }
   }
+  
+3.3.数学问题
+3.3.1.判断一个数是否是平方数（leetcode [367] Valid Perfect Square）
+  代码：
+  class Solution {
+      public boolean isPerfectSquare(int num) {
+          int left = 1;
+          int right = num/2 + 1;
+          while (left < right) {
+              int mid = left + (right - left)/2;
+              // z注意整数相乘的溢出
+              if (mid < num/mid) {
+                  left = mid + 1;
+              } else {
+                  right = mid;
+              }
+          }
+          return left * left == num ? true : false;
+      }
+  }
