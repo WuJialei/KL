@@ -188,6 +188,7 @@
   class Solution {
         public boolean isPerfectSquare(int num) {
             int left = 1;
+            // (n/2 + 1)*(n/2 + 1) > n
             int right = num/2 + 1;
             while (left < right) {
                 int mid = left + (right - left)/2;
