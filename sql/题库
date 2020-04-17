@@ -40,6 +40,8 @@
     6、执行速度，一般来说: drop> truncate > delete。
     7、delete语句是数据库操作语言(dml)，这个操作会放到 rollback segement 中，事务提交之后才生效；如果有相应的 trigger，执行的时候将被触发。
              truncate、drop 是数据库定义语言(ddl)，操作立即生效，原数据不放到 rollback segment 中，不能回滚，操作不触发 trigger。 
+10.数据库的设计范式
+  https://segmentfault.com/a/1190000013695030
 
 -------------------2.https://juejin.im/post/5d351303f265da1bd30596f9#comment
 -------------------3.https://learnku.com/articles/40216
