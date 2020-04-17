@@ -274,7 +274,8 @@
           return temp == (long)n ? left : left - 1;
       }
   }
-3.3.3.一个数组最多分成m段，求各字段区间和的最小值（leetcode [1011] Capacity To Ship Packages Within D Days）
+3.4.不排序数组
+3.4.1.一个数组最多分成m段，求各字段区间和的最小值（leetcode [1011] Capacity To Ship Packages Within D Days）
   代码：
   class Solution {
 
@@ -313,3 +314,31 @@
           return left;
       }
   }
+3.4.2.寻找数组中的重复数（leetcode [287] Find the Duplicate Number）
+  代码：
+  class Solution {
+      public int findDuplicate(int[] nums) {
+          // 数值取值范围在[1,n]的数组成n+1个数，且只有一个数字重复i，则则小于等于i的数出现的次数必定大于i数字本身
+          // 时间：O(nlog(n))
+          // 空间：O(1)
+          // 没有修改数组
+          int left  = 1;
+          int right = nums.length - 1;
+          while (left < right) {
+              int mid = left + (right - left)/2;
+              int cnt = 0;
+              for (int num : nums) {
+                  if (num <= mid) {
+                      ++cnt;
+                  }                
+              }
+              if (cnt <= mid) {
+                  left = mid + 1;
+              } else {
+                  right = mid;
+              }
+          }
+          return left;
+      }
+  }
+
