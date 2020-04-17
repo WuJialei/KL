@@ -247,7 +247,7 @@
             return temp == (long)num ? true : false;
         }
     }
- 3.3.2.1到n的数组求和问题（leetcode [441] Arranging Coins）
+ 3.3.2.到n的数组求和问题（leetcode [441] Arranging Coins）
   代码：
   class Solution {
       public int arrangeCoins(int n) {
@@ -272,5 +272,44 @@
           // return left-1;
           long temp = ((long)left)*(left+1)/2;
           return temp == (long)n ? left : left - 1;
+      }
+  }
+3.3.3.一个数组最多分成m段，求各字段区间和的最小值（leetcode [1011] Capacity To Ship Packages Within D Days）
+  代码：
+  class Solution {
+
+      int[] weights;
+      int d;
+
+      public boolean Judge(int cnt) {
+          int days = d;
+          int k = cnt;
+          for (int weight : weights) {
+              if (days < 1 || weight > cnt) {
+                  return false;
+              }
+              if (k < weight) {
+                  k = cnt;
+                  --days;
+              }
+              k -= weight; 
+          }
+          return days > 0;
+      }
+
+      public int shipWithinDays(int[] weights, int D) {
+          this.weights = weights;
+          d = D;
+          int left = 0;
+          int right = 500 * 50000;
+          while (left < right) {
+              int mid = left + (right - left)/2;
+              if (!Judge(mid)) {
+                  left = mid + 1;
+              } else {
+                  right = mid;
+              }
+          }
+          return left;
       }
   }
