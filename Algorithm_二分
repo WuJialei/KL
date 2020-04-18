@@ -341,4 +341,39 @@
           return left;
       }
   }
+  
+3.4.3.寻找在指定时间内消耗掉数组中数字的最小速度（leetcode [875] Koko Eating Bananas）
+  代码：
+  class Solution {
+
+      private int[] piles;
+
+      public int count (int speed) {
+          int ans = 0;
+          for (int pile : piles) {
+              if (pile <= speed) {
+                  ++ans;
+              } else {                
+                  int temp = (pile % speed) ==0 ? pile/speed: pile/speed + 1;
+                  ans += temp;
+              }
+          }
+          return ans;
+      }
+
+      public int minEatingSpeed(int[] piles, int H) {
+          this.piles = piles;
+          int left = 1;
+          int right = 1000_000_000;
+          while (left < right) {
+              int mid = left + (right - left)/2;
+              if (count(mid) > H) {
+                  left = mid + 1;
+              } else {
+                  right = mid;
+              }
+          }
+          return left;
+      }
+  }
 
