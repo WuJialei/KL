@@ -126,3 +126,26 @@
 3.2.矩形放置问题
   用2*1的矩形去覆盖2*n的矩形，求方案数目
   第一步考虑横着放还是竖着放，f(n) = f(n-1) + f(n-2)
+  
+4.旋转数组的最小数字（11）
+  代码：
+  public class Solution {
+      public int minNumberInRotateArray(int [] array) {
+          if (array == null || array.length < 1) {
+              return 0;
+          }
+          int left = 0;
+          int right = array.length - 1;
+          while (left < right) {
+              int mid = left + (right - left)/2;
+              if (array[mid] < array[right]) {
+                  right = mid;
+              } else if (array[mid] == array[right]) {
+                  --right;
+              } else {
+                  left = mid + 1;
+              }
+          }
+          return array[left];
+      }
+  }
