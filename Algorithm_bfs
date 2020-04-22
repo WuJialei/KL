@@ -4,3 +4,51 @@
 1.3.记录最短路径长度
 1.4.优先级队列
 1.5.双端bfs？
+
+2.树
+2.1.n叉树的深度（leetcode [559] Maximum Depth of N-ary Tree）
+  代码：
+  class Solution {
+      public int maxDepth(Node root) {
+          return bfs(root);
+          // return depth(root);
+      }
+
+      public int bfs (Node node) {
+          if (node == null) {
+              return 0;
+          }
+          Queue<Node> queue = new LinkedList<>();
+          queue.offer(node);
+          int ans = 0;
+          while (!queue.isEmpty()) {
+              ++ans;
+              Queue<Node> temp = new LinkedList<>();
+              while (!queue.isEmpty()) {
+                  Node cur = queue.poll();
+                  for (Node child : cur.children) {
+                      temp.offer(child);
+                  }
+              }
+              queue = temp;
+          }
+          return ans;
+
+      }
+
+      public int depth(Node node) {
+          if (node == null) {
+              return 0;
+          } else if (node.children == null) {
+              return 1;
+          } else {
+              int ans = 0;
+              for (Node child : node.children) {
+                  ans = Math.max(ans, depth(child));
+              }
+              return ans + 1;
+          }
+
+      }
+
+  }
