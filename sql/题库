@@ -71,5 +71,7 @@
 
 -------------------2.https://juejin.im/post/5d351303f265da1bd30596f9#comment
 5.覆盖索引：https://www.cnblogs.com/chenpingzhao/p/4776981.html
+表结构问题：
+  3.字段为什么要求定义为非null：https://blog.csdn.net/u010737354/article/details/53081830
 
 -------------------3.https://learnku.com/articles/40216
