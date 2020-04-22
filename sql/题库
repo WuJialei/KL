@@ -73,5 +73,8 @@
 5.覆盖索引：https://www.cnblogs.com/chenpingzhao/p/4776981.html
 表结构问题：
   3.字段为什么要求定义为非null：https://blog.csdn.net/u010737354/article/details/53081830
+  
+零散问题
+  4.超大分页的处理：https://www.cnblogs.com/geningchao/p/6649907.html
 
 -------------------3.https://learnku.com/articles/40216
