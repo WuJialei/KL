@@ -80,3 +80,4 @@
 -------------------3.https://learnku.com/articles/40216
  我以为我对Mysql索引很了解，直到我遇到了阿里的面试官
    索引失效：https://www.jianshu.com/p/932bcdf2c89f
+   索引下推优化：https://juejin.im/post/5deef343e51d455819022033
