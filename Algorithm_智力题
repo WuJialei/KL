@@ -15,3 +15,30 @@
           return Math.min(odd, even);
       }
   }
+
+2.1的个数计算问题
+  思路：
+  n与n-1的&会把n的最后一位1变为0
+  代码：
+  public class Solution {
+      public int NumberOf1(int n) {
+          /*
+          int cnt = 32;
+          int ans = 0;
+          while (cnt > 0) {
+              if ((n & 1) == 1) {
+                  ++ans;
+              }
+              n >>= 1;
+              --cnt;
+          }
+          return ans;
+          */
+          int ans = 0;
+          while (n != 0) {
+              ++ans;
+              n = n & (n-1);
+          }
+          return ans;
+      }
+  }
