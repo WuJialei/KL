@@ -1,8 +1,8 @@
 倒计时
-4月： 7
+4月： 6
 5月： 31
 6月： 30
-合：  68
+合：  67
 
 原则
   - 向着最高的目标、最好的选择出发（国内top里核心bu，外企顶级）
@@ -57,7 +57,7 @@
   http通信
   socket通信
   MongoDB
-  *4：springboot、restful、ftp、http通信、socket、mongdb（基本完成）
+  *4：springboot、restful、ftp、http通信、socket、mongodb（基本完成）
   
 2.2.flink
   flink
