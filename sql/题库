@@ -83,3 +83,7 @@
    索引下推优化：https://juejin.im/post/5deef343e51d455819022033
 腾讯面试：一条 SQL 语句执行得很慢的原因有哪些？
    偶尔很慢；一直很慢（没有索引，用错索引-索引失效）
+数据库面试题(开发者必看)：
+  乐观锁、悲观锁：
+      https://juejin.im/post/5b4977ae5188251b146b2fc8
+      https://www.jianshu.com/p/f5ff017db62a
