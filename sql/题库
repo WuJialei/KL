@@ -68,6 +68,7 @@
       如果有主键，则 select count（主键）的执行效率是最优的  
       如果表只有一个字段，则 select count（*）最优。
       转自：http://eeeewwwqq.iteye.com/blog/1972576
+      包含myisam和innodb原理比较参考：https://juejin.im/post/5dad103a518825579a1f9aaf
 
 -------------------2.https://juejin.im/post/5d351303f265da1bd30596f9#comment
 5.覆盖索引：https://www.cnblogs.com/chenpingzhao/p/4776981.html
