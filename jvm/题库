@@ -16,3 +16,8 @@ jconsole和jvisualvm：https://www.ibm.com/developerworks/cn/java/j-lo-visualvm/
 ----------3.https://blog.csdn.net/ThinkWon/article/details/104390752
 ----------4.https://blog.nowcoder.net/n/81d49187a7a14b0487438fa2bbb2e9a5
 ----------5.https://blog.csdn.net/noaman_wgs/article/details/74489549
+
+----------6.cpu利用率过高排查解决
+     思路：找利用率最高的java进程、通过进程找到进程里面cpu耗费最高的线程，展示线程里面的堆栈信息
+     参考1：https://www.cnblogs.com/doit8791/p/11895507.html
+     参考2：https://mp.weixin.qq.com/s/uajRpzDayZSwTEPhFUoVbQ
