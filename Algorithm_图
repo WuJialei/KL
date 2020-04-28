@@ -707,6 +707,9 @@
 
 2.6.二分图
 2.6.1.二分图的判断（leetcode [785] Is Graph Bipartite?）
+  思路：
+  a.染色法判断是否可以形成二分图，一条边的两个端点分别染不同颜色，因为是二分，所以不同颜色用±1表示
+  b.dfs(index, color)表示判断节点index是否可以染成color颜色
   代码：
   class Solution {
 
@@ -718,6 +721,7 @@
           int len = graph.length;
           color = new int[len];
           for (int i = 0; i < len; ++i) {
+              // color[i]为0，只可能是从第一个点开始或者就是找到一个新的连通图，不然dfs下去所有都联通的话顶点都会有颜色
               if (color[i] == 0) {
                   if (!dfs(i, 1)) {
                       return false;
