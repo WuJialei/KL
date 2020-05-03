@@ -1,7 +1,7 @@
 倒计时
-5月： 28
+5月： 27
 6月： 30
-合：  58
+合：  57
 
 原则
   - 向着最高的目标、最好的选择出发（国内top里核心bu，外企顶级）（确立目标公司目标部门，避开坑，收集面经，重要战略部署）
@@ -20,6 +20,7 @@
   leetcode：二分/bfs/dfs/top 100 liked; 复习
   OI：部分算法学习
   *4：剑指offer（达到一半）、二分（完成）、bfs（完成）
+  *5：剑指offer完成，复习leetcode(实际写)，部分算法学习，top 100 liked
   
 1.2.java
   1.2.1.java集合
@@ -27,21 +28,25 @@
   1.2.3.java基础
  +1.2.4.jvm
   *4：jvm（完成）、java集合（完成）
+  *5：java多线程/并发/锁，java集合/jvm面经复习
   
 1.3.数据库
  +数据库
  +mysql
   elasticsearch
-  MongoDB
+ +MongoDB
   *4：mysql（完成）、数据库（完成）
+  *5：elasticsearch，数据库/mysql复习
 
 1.4.网络
   计算机网络
   tcp/ip
+  *5：计算机网络，tcp/ip
   
 1.5.操作系统
-  Linux
+  linux
   操作系统
+  *5操作系统/linux
   
 1.6.杂项：
   设计模式
@@ -66,6 +71,7 @@
   kafka
   zookeeper
   elasticsearch
+  *5：flink，kafka，zookeeper，elasticsearch
 
 3.展示
 3.1.简历
