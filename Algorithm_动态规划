@@ -1063,7 +1063,38 @@
             return dp[K&1][n];
         }
     }
-
+2.4.12.最多经历k个中转到达目的地的最小票价（leetcode 787. Cheapest Flights Within K Stops）
+  代码：
+  class Solution {
+      public int findCheapestPrice(int n, int[][] flights, int src, int dst, int K) {
+          // dp[i][dst] = min{dp[i-1][src] + value[src][dst]}
+          // dp[i][dst]表示通过i个中间节点到目的节点dst的最小距离
+          int[][] dp = new int[2][n];
+          // int INF = Integer.MAX_VALUE/2;
+          int INF = 10_000_000;
+          for (int  i = 0; i < dp.length; ++i) {
+              for (int j = 0; j < dp[i].length; ++j) {
+                  dp[i][j] = INF;
+              }
+          }
+          for (int[] flight : flights) {
+              if (src == flight[0]) {
+                  dp[0][flight[1]] = flight[2];
+              }
+          }   
+          // Arrays.fill(dp, 10_000_005);
+          dp[0][src] = 0;
+          for (int i = 1; i <= K; ++i) {
+              for (int[] flight : flights) {
+                  int s = flight[0];
+                  int d = flight[1];
+                  int v = flight[2];
+                  dp[i&1][d] = Math.min(dp[i&1][d], dp[1-i&1][s] + v);
+              }
+          }
+          return dp[K&1][dst] >= INF ? -1 : dp[K&1][dst];
+      }
+  }
   
 2.5.小偷偷盗问题
 2.5.1.普通小偷偷盗问题（leetcode [198] House Robber）
