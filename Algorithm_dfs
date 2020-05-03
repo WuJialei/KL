@@ -148,3 +148,49 @@
           return ans;
       }
   }
+  
+无向图/有向图中环的判断（leetcode [207] Course Schedule）
+  代码：
+  class Solution {
+    
+      HashMap<Integer, List<Integer>> map;
+      int[] visited;
+
+      public boolean dfs (int node) {
+          visited[node] = 1;
+          if (map.containsKey(node)) {
+              for (int next : map.get(node)) {
+                  if (visited[next] == 1) {
+                      return false;
+                  } else if (visited[next] == 0) {
+                      if(!dfs(next)){
+                          return false;
+                      }
+                  }
+              }
+          }        
+          visited[node] = 2;
+          return true;
+      }
+
+      public boolean canFinish(int numCourses, int[][] prerequisites) {
+          map = new HashMap<>();
+          visited = new int[numCourses];
+          for (int[] array : prerequisites) {
+              int dst = array[0];
+              int src = array[1];
+              if (!map.containsKey(src)) {
+                  map.put(src, new ArrayList<Integer>());
+              }
+              map.get(src).add(dst);
+          }
+          for (int key : map.keySet()) {
+              if (visited[key] == 0) {
+                  if (!dfs(key)) {
+                      return false;
+                  }
+              }
+          }
+          return true;
+      }
+  }
