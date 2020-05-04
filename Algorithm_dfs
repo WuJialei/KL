@@ -1,4 +1,9 @@
-
+1.参考
+1.1.dfs简述：https://oi-wiki.org/graph/dfs/
+1.2.dfs题型分类及模板：https://blog.csdn.net/Chen_yuazzy/article/details/76423134
+  地图型第三个，HDU1045 Fire Net（DFS回溯）：https://arminli.com/blog/23
+  地图型第四个，奇偶剪枝(步数的偏移量永远为偶数-有来有回,因此可以得出：最短路径步数+偏移量（偶数）=某一可行解歩数，即最短路歩数
+  和某一可行解歩数的奇偶性相同)，参考：http://www.slyar.com/blog/depth-first-search-even-odd-pruning.html
 
 商品购买的原价和多种套餐选择问题（leetcode [638] Shopping Offers）
   代码：
