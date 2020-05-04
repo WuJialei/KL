@@ -46,7 +46,7 @@
 1.5.操作系统
   linux
   操作系统
-  *5操作系统/linux
+  *5：操作系统/linux
   
 1.6.杂项：
   设计模式
@@ -58,20 +58,21 @@
 2.项目
 2.1.北向
   springboot
-  restful
-  ftp
-  http通信
-  socket通信
-  MongoDB
+  +restful
+  +ftp
+  +http通信
+  +socket通信
+  +MongoDB
   spring
   *4：springboot、restful、ftp、http通信、java io/nio、socket、mongodb（基本完成）
+  *5：spring
   
 2.2.flink
   flink
   kafka
   zookeeper
   elasticsearch
-  *5：flink，kafka，zookeeper，elasticsearch
+  *5：flink项目本身，flink，kafka，zookeeper，elasticsearch
 
 3.展示
 3.1.简历
