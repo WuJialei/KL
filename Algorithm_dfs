@@ -33,7 +33,33 @@
           return sum;
       }
   }
-  
+2.2.二叉树中硬币的分配（leetcode [979] Distribute Coins in Binary Tree）
+  思路：https://zhanghuimeng.github.io/post/leetcode-979-distribute-coins-in-binary-tree/
+  代码：
+  class Solution {
+
+      int ans;
+
+      public int distributeCoins(TreeNode root) {
+          ans = 0;
+          dfs(root);
+          return ans;
+      }
+
+      // dfs(node)返回node节点要给父节点的个数，可以为负数
+      // dfs(node)时以node为根的树的每个节点都有且只有1
+      public int dfs(TreeNode node) {
+          if (node == null) {
+              return 0;
+          }
+          int left = dfs(node.left);
+          int right = dfs(node.right);
+          ans += Math.abs(left) + Math.abs(right);
+          int val = node.val + left + right - 1;
+          return val;
+      }
+
+  }
   
 
 商品购买的原价和多种套餐选择问题（leetcode [638] Shopping Offers）
