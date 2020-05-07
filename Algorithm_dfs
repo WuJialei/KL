@@ -5,6 +5,37 @@
   地图型第四个，奇偶剪枝(步数的偏移量永远为偶数-有来有回,因此可以得出：最短路径步数+偏移量（偶数）=某一可行解歩数，即最短路歩数
   和某一可行解歩数的奇偶性相同)，参考：http://www.slyar.com/blog/depth-first-search-even-odd-pruning.html
 
+2.题型
+2.1.树
+2.1.1.祖父节点为偶数的所有节点值之和（leetcode [1315] Sum of Nodes with Even-Valued Grandparent）
+  代码：
+  class Solution {
+
+      private int sum;
+
+      public void dfs (TreeNode node) {
+          if (node == null) {
+              return;
+          }
+          if ((node.val & 1) == 0) {
+              sum += node.left == null ? 0 : (node.left.left == null ? 0 : node.left.left.val);
+              sum += node.left == null ? 0 : (node.left.right == null ? 0 : node.left.right.val);
+              sum += node.right == null ? 0 : (node.right.left == null ? 0 : node.right.left.val);
+              sum += node.right == null ? 0 : (node.right.right == null ? 0 : node.right.right.val);
+          }
+          dfs(node.left);
+          dfs(node.right);
+      }
+
+      public int sumEvenGrandparent(TreeNode root) {
+          sum = 0;
+          dfs(root);
+          return sum;
+      }
+  }
+  
+  
+
 商品购买的原价和多种套餐选择问题（leetcode [638] Shopping Offers）
   代码：
   class Solution {
