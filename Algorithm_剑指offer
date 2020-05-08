@@ -447,3 +447,43 @@
           return node;
     }
   }
+  
+12.数据流中的中位数（41）
+  思路：建立最大堆(升序排序)、最小堆(降序排序)，插入时维持最大堆大小等于最小堆大小(已经插入数目为偶数)，
+  插入时维持最大堆大小-最小堆大小=1(已经插入数目为奇数)；取出时取最大堆与最小堆peek值得平均(已经插入数目为偶数)，
+  取出时取最大堆的peek值(已经插入数目为奇数)
+  代码：
+  import java.util.*;
+  public class Solution {
+
+      private PriorityQueue<Integer> minQueue = new PriorityQueue<Integer>(
+          (a, b) -> b - a
+      );
+      private PriorityQueue<Integer> maxQueue = new PriorityQueue<Integer>(
+          (a, b) -> a - b
+      );
+
+      public void Insert(Integer num) {
+          if (maxQueue.size() == 0 || num < maxQueue.peek()) {
+              minQueue.offer(num);
+          } else {
+              maxQueue.offer(num);
+          }
+          while (maxQueue.size() - minQueue.size() > 1) {
+              minQueue.offer(maxQueue.poll());
+          }
+          while (minQueue.size() - maxQueue.size() > 0) {
+              maxQueue.offer(minQueue.poll());
+          }
+      }
+
+      public Double GetMedian() {
+          if (minQueue.size() == maxQueue.size()) {
+              return (((double)minQueue.peek()) + maxQueue.peek())/2;
+          } else {
+              return (double)maxQueue.peek();
+          }
+      }
+
+
+  }
