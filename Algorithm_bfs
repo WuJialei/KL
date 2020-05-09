@@ -473,5 +473,67 @@
 
 
   }
+2.2.6.扫雷游戏（leetcode 529. Minesweeper）
+  思路：周围没有雷才可以继续往下扫
+  代码：
+  class Solution {
+    
+      private int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1};
+      private int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
+
+      public char[][] updateBoard(char[][] board, int[] click) {
+          if (board == null || board.length < 1 || board[0].length < 1) {
+              return null;
+          }
+          char[][] g = board;
+          int m = g.length;
+          int n = g[0].length;
+          boolean[][] visited = new boolean[m][n];
+          Queue<Integer> queue = new LinkedList<>();
+          int x = click[0];
+          int y = click[1];
+          if (g[x][y] == 'M') {
+              g[x][y] = 'X';
+              return g;
+          }
+          if (g[x][y] == 'E') {
+              queue.offer(x*n + y);
+              visited[x][y] = true;
+          }
+          while (!queue.isEmpty()) {
+              int cur = queue.poll();
+              int i = cur / n;
+              int j = cur % n;
+              if (g[i][j] == 'M') {
+                  g[i][j] = 'X';
+                  return g;
+              }
+              int ret = 0;
+              Queue<Integer> tmp = new LinkedList<>();
+              for (int t = 0; t < dx.length; ++t) {
+                  int ii = i + dx[t];
+                  int jj = j + dy[t];
+                  if (ii < 0 || ii >= m || jj < 0 || jj >= n || visited[ii][jj]) {
+                      continue;
+                  }
+                  if (g[ii][jj] == 'M') {
+                      ++ret;
+                  } else if (g[ii][jj] == 'E'){
+                      tmp.offer(ii * n + jj);
+                  }
+              }
+              if (ret == 0) {
+                  queue.addAll(tmp);
+                  for (int v : tmp) {
+                      visited[v/n][v%n] = true;
+                  }
+                  g[i][j] = 'B';
+              } else {
+                  g[i][j] = (char)('0' + ret);
+              }
+          }
+          return g;
+      }
+  }
 
 
