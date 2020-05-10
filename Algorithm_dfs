@@ -33,7 +33,7 @@
           return sum;
       }
   }
-2.2.二叉树中硬币的分配（leetcode [979] Distribute Coins in Binary Tree）
+2.1.2.二叉树中硬币的分配（leetcode [979] Distribute Coins in Binary Tree）
   思路：https://zhanghuimeng.github.io/post/leetcode-979-distribute-coins-in-binary-tree/
   代码：
   class Solution {
@@ -61,6 +61,43 @@
 
   }
   
+2.2.数组
+2.2.1.朋友圈（leetcode [547] Friend Circles）
+  代码：
+  class Solution {
+
+      private int[][] graph;
+      private int n;
+      private boolean[] visited;
+
+      public void dfs (int index) {
+          for (int next = 0; next < n; ++next) {
+              if (graph[index][next] == 1 && !visited[next]) {
+                  visited[next] = true;
+                  dfs(next);
+              }
+          }
+      }
+
+      public int findCircleNum(int[][] M) {
+          if (M == null || M.length < 1 || M[0].length < 1) {
+              return 0;
+          }
+          graph = M;
+          n = graph.length;
+          int ans = 0;
+          visited = new boolean[n];
+          for (int i = 0; i < n; ++i) {            
+              if (!visited[i]) {
+                  visited[i] = true;
+                  dfs(i);
+                  ++ans;
+              }
+          }
+          return ans;
+
+      }
+  }
 
 商品购买的原价和多种套餐选择问题（leetcode [638] Shopping Offers）
   代码：
