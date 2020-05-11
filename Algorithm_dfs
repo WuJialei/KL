@@ -191,6 +191,54 @@
           return ans;
       }
   }
+  
+2.3.抽象出模型
+2.3.1.金字塔转换矩阵（leetcode [756] Pyramid Transition Matrix）
+  思路：按层递归
+  代码：
+  class Solution {
+
+      private List<String> allowed;
+
+      public boolean dfs (HashSet<Character>[] lists, int cnt) {
+          if (cnt < 1) {
+              return true;
+          }
+          HashSet<Character>[] ans = new HashSet[cnt];
+          for (int i = 0; i < cnt; ++i) {
+              ans[i] = new HashSet<Character>();
+              for (char a : lists[i]) {
+                  for (char b : lists[i+1]) {
+                      String head = "" + a + b;
+                      for (int j = 0; j < allowed.size(); ++j) {
+                          if (allowed.get(j).startsWith(head) ) {
+                              ans[i].add(allowed.get(j).charAt(2));
+                          }
+                      }
+                  }
+              }
+              if (ans[i].size() < 1) {
+                  return false;
+              }
+          }
+          return dfs(ans, cnt - 1);
+      }
+
+      public boolean pyramidTransition(String bottom, List<String> allowed) {
+          if (bottom == null || bottom.length() < 1) {
+              return false;
+          }
+          this.allowed = allowed;
+          HashSet<Character>[] lists = new HashSet[bottom.length()];
+          char[] chars = bottom.toCharArray();
+          for (int i = 0; i < chars.length; ++i) {
+              lists[i] = new HashSet<>();
+              lists[i].add(chars[i]);
+          }
+          return dfs(lists, bottom.length() - 1);
+      }
+  }
+
 
 
 商品购买的原价和多种套餐选择问题（leetcode [638] Shopping Offers）
