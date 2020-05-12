@@ -239,19 +239,19 @@
       }
   }
 
-
-
-商品购买的原价和多种套餐选择问题（leetcode [638] Shopping Offers）
+2.3.2.商品购买的原价和多种套餐选择问题（leetcode [638] Shopping Offers）
   代码：
   class Solution {
       public int shoppingOffers(List<Integer> price, List<List<Integer>> special, List<Integer> needs) {
           int n = price.size();
           int ans = 0;
+          // 对于当前所需商品数，按单价购买，不用礼包
           for (int i = 0; i < n; ++i) {
               ans += price.get(i) * needs.get(i);
           }
           for (List<Integer> offer : special) {
               boolean flag = true;
+              // 使用一种礼包，如果礼包内所有商品数都小于等于所需商品数，深搜前提
               for (int i = 0; i < n; ++i) {
                   if (needs.get(i) - offer.get(i) < 0) {
                       flag = false;
@@ -261,6 +261,7 @@
               if (flag) {
                   ans = Math.min(ans, offer.get(n) + shoppingOffers(price, special, needs));
               }
+              // 回溯
               for (int i = 0; i < n; ++i) {
                   needs.set(i, needs.get(i) + offer.get(i));
               }
