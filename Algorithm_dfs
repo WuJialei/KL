@@ -269,6 +269,56 @@
           return ans;
       }
   }
+2.3.3.多级双向链表扁平化（leetcode [430] Flatten a Multilevel Doubly Linked List）
+  代码：
+  class Solution {
+
+      public class MyNode {
+          Node first;
+          Node last;
+      }
+
+      public MyNode dfs (Node node) {
+          if (node == null) {
+              return null;
+          }
+          MyNode ans = new MyNode();
+          ans.first = node;
+          while (node != null) {
+
+              if (node.child != null) {
+                  Node cur = node;
+                  Node next = node.next;
+                  MyNode tmp = dfs(cur.child);
+                  node.next = tmp.first;
+                  tmp.first.prev = node;
+                  node.child = null;
+                  if (next != null) {
+                      next.prev = tmp.last;
+                      tmp.last.next = next;
+
+                  }
+                  ans.last = next == null ? tmp.last : next;
+                  node = next;
+              } else {
+                  ans.last = node;
+                  node = node.next;
+              }
+
+          }
+
+          return ans;
+      }
+
+      public Node flatten(Node head) {
+          if (head == null) {
+              return null;
+          }
+          MyNode myNode = dfs(head);
+          return myNode.first;
+      }
+  }
+
   
 扫雷游戏（leetcode [529] Minesweeper）
   代码：
