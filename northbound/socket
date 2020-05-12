@@ -1,1 +1,5 @@
 1.参考：https://www.cnblogs.com/yiwangzhibujian/p/7107785.html
+2.参考：https://www.jianshu.com/p/c793a279f698
+  socket本质是编程接口(API)，对TCP/IP的封装。TCP/IP只是一个协议栈，必须要具体实现，同时还要提供对外的操作接口（API），这就是Socket接口。
+通过Socket,我们才能使用TCP/IP协议，因此有了一系列我们知道的函数接口——connect、accept、send、read、write等。
+
