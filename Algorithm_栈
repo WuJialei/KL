@@ -152,8 +152,44 @@
       }
   }
 2.1.6.括号的嵌套之字符串的拼接（leetcode [394] Decode String）
+  思路：设置两个栈，数字和字符串都是全局，数字栈和字符串栈，[负责两个全局数字和字符串的压栈即可
   代码：
   class Solution {
+      /*
+      public String decodeString(String s) {
+          Stack<String> strStack = new Stack<>();
+          Stack<Integer> numStack = new Stack<>();
+          String str = "";
+          int num = 0;
+          for (int i = 0; i < s.length(); ++i) {
+              char cur = s.charAt(i);
+              if (cur == '[') {
+                  numStack.push(num);
+                  num = 0;
+                  strStack.push(str);
+                  str = "";
+
+              } else if (cur == ']') {
+                  int cnt = numStack.pop();
+                  String tmp = strStack.pop();
+                  String plus = "";
+                  while (cnt > 0) {
+                      plus = plus + str;
+                      --cnt;
+                  }
+                  str = tmp + plus;
+
+              } else if ((cur >= '0') && (cur <= '9')) {
+                  num = num * 10 + ((int)(cur - '0'));
+              } else {
+                  str = str + cur;
+              }
+
+          }
+          return str;
+      }
+
+      */
 
       Stack<Integer> cntS = new Stack<Integer>();
       Stack<String> strS = new Stack<String>();
