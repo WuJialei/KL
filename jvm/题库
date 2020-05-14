@@ -2,6 +2,7 @@
 JDK命令行工具：https://www.cnblogs.com/yeyang/p/10295578.html
 jconsole和jvisualvm：https://www.ibm.com/developerworks/cn/java/j-lo-visualvm/
 内存泄漏和内存溢出的比较：https://www.zhihu.com/question/40560123/answer/512873873
+full gc排查实战及原理：https://mp.weixin.qq.com/s/510vljVjp2aSMI2D8sUbbA
 
 ----------1.https://juejin.im/post/5d22f4e8e51d455a68490bf4#heading-3
 7.类的加载
