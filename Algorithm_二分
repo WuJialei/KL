@@ -1,5 +1,8 @@
 1.二分
 1.1.二分模板讲解：https://www.liwei.party/2019/06/18/leetcode-solution-new/search-insert-position/
+  参考：https://www.yuque.com/liweiwei1419/algo/feiopy
+  left = mid + 1 or right = mid - 1根据自己想要的区间选
+  left = mid出现则mid计算时要上取整
   l < r保证返回时l=r;
   mid = l + (r-l)/2保证r+l不溢出，r-l在l为负数且r为很大正数的时候也会溢出，但一般l，r为索引不会有这种情况
 1.2.二分模板（以leetcode 35为例）
