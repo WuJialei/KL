@@ -7,6 +7,7 @@
   volatile总结1：https://blog.csdn.net/u012723673/article/details/80682208
   volatile总结2：https://mp.weixin.qq.com/s/HligCpRd_LLcW133KIc5dA
   jdk1.6之后对sychronized的优化：深入理解JVM，13.3
+  sychronized总结：https://www.cnblogs.com/aspirant/p/11470858.html
 2.题库
 2.1.https://www.cnblogs.com/dolphin0520/p/3932934.html
   Java并发面试：
