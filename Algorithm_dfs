@@ -158,6 +158,47 @@
           }
       }
   }
+2.1.5.翻转二叉树以匹配优先遍历（leetcode [971] Flip Binary Tree To Match Preorder Traversal）
+  代码：
+  class Solution {
+
+    private int[] arrays;
+    private List<Integer> ans;
+    private int index;
+
+    public void dfs (TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        if (node.val != arrays[index++]) {
+            ans.clear();
+            ans.add(-1);
+            return;
+        }
+        if ((node.left != null) && (index < arrays.length) && (node.left.val != arrays[index])) {
+            ans.add(node.val);
+            dfs(node.right);
+            dfs(node.left);
+        } else {
+            dfs(node.left);
+            dfs(node.right);
+        }
+    }
+
+    public List<Integer> flipMatchVoyage(TreeNode root, int[] voyage) {
+        arrays = voyage;
+        ans = new ArrayList<>();
+        index = 0;
+        dfs(root);
+        if (!ans.isEmpty() && (ans.get(0) == -1)) {
+            ans.clear();
+            ans.add(-1);
+            return ans;
+        } else {
+            return ans;
+        }
+    }
+}
   
 2.2.数组
 2.2.1.朋友圈（leetcode [547] Friend Circles）
