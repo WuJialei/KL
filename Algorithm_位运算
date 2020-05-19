@@ -1,0 +1,21 @@
+1.参考
+
+2.应用
+2.1.异或
+2.1.1.汉明距离(leetcode [461] Hamming Distance)
+  代码：
+  class Solution {
+      public int hammingDistance(int x, int y) {
+          int tmp = x ^ y;
+          int ans = 0;
+          int cnt = 32;
+          while (cnt > 0) {
+              if ((tmp & 1) == 1) {
+                  ++ans;
+              }
+              tmp >>= 1;
+              --cnt;
+          }
+          return ans;
+      }
+  }
