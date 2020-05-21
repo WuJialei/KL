@@ -21,7 +21,7 @@
           return ans;
       }
   }
-  2.1.2.数字的补数（leetcode [476] Number Complement）
+2.1.2.数字的补数（leetcode [476] Number Complement）
     代码：
     class Solution {
         public int findComplement(int num) {
