@@ -1,4 +1,6 @@
 1.参考
+1.1.https://oi-wiki.org/math/bit/
+1.2.n&(n-1)的用法(将最低位的1变为0)：https://blog.csdn.net/navyifanr/article/details/19496459
 
 2.应用
 2.1.异或
@@ -19,3 +21,18 @@
           return ans;
       }
   }
+  2.1.2.数字的补数（leetcode [476] Number Complement）
+    代码：
+    class Solution {
+        public int findComplement(int num) {
+            int i = 1;
+            int cur = 0;
+            // 找高位第一为1的位数，与全1异或
+            while (num > 0) {
+                cur = ((num & 1) ^ 1)* i + cur;
+                i <<= 1;
+                num >>= 1;
+            }
+            return cur;
+        }
+    }
