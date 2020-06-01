@@ -1,11 +1,10 @@
 倒计时
-5月： 2
 6月： 30
-合：  32
+合：  30
 
 原则
   - 人生的关口，严阵以待
-  - 提前批战役已经打响（准备投vivo试水）
+  - 决战来临（准备投vivo试水）
   - 向着最高的目标、最好的选择出发（国内top里核心bu(阿里)，外企顶级(微软)）（确立目标公司目标部门，避开坑，收集面经，重要战略部署）
   - 模拟实战(利用面经适应氛围，进行演练)，注重交流共赢，积极获取新信息及时调整，不闭门造车（关注面经，小战略大影响）
   - 明晰技术线，知识目标明确，聚焦主线
@@ -20,20 +19,21 @@
   leetcode：二分/bfs/dfs/top 100 liked; 复习
   OI：部分算法学习
   *4：剑指offer（达到一半）、二分（完成）、bfs（完成）
-  *5：剑指offer完成，复习leetcode(实际写)，部分算法学习，top 100 liked
+  *6：剑指offer完成，复习leetcode(实际写)，部分算法学习，top 100 liked
   
 1.2.java
-  1.2.1.java集合
-  1.2.2.java多线程/并发/锁
+ +1.2.1.java集合
+ +1.2.2.java多线程/并发/锁
   1.2.3.java基础
  +1.2.4.jvm
   *4：jvm（完成）、java集合（完成）
   *5：java多线程/并发/锁，java集合/jvm面经复习
+  *6：java基础
   
 1.3.数据库
  +数据库
  +mysql
-  elasticsearch
+ +elasticsearch
  +MongoDB
   *4：mysql（完成）、数据库（完成）
   *5：elasticsearch，数据库/mysql复习
@@ -46,7 +46,7 @@
 1.5.操作系统
   linux
   操作系统
-  *5：操作系统/linux
+  *6：操作系统/linux
   
 1.6.杂项：
   设计模式
@@ -68,10 +68,10 @@
   *5：spring
   
 2.2.flink
-  flink
-  kafka
-  zookeeper
-  elasticsearch
+  +flink
+  +kafka
+  +zookeeper
+  +elasticsearch
   *5：flink项目本身，flink，kafka，zookeeper，elasticsearch
 
 2.3.日志项目
