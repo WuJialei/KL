@@ -1,5 +1,6 @@
 重要知识点参考：
 1.redo、undo：https://pjmike.github.io/2019/01/14/%E6%B5%85%E6%9E%90MySQL%E4%BA%8B%E5%8A%A1%E4%B8%AD%E7%9A%84redo%E4%B8%8Eundo/
+2.MySQL 性能优化神器 Explain 使用分析：https://segmentfault.com/a/1190000008131735
 ------------------1.https://www.nowcoder.com/discuss/135748
 补充说明：
 一.基础知识
