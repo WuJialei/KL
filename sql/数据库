@@ -20,3 +20,7 @@
   有被用来做崩溃恢复”，历史上的原因是，这个是一开始就这么设计的，所以不能只依赖binlog。操作上的原因是，binlog是可以关的，你如果有权限，可以
   set sql_log_bin=0关掉本线程的binlog日志。 所以只依赖binlog来恢复就靠不住。
 2.3.mysql两阶段锁协议：https://yq.aliyun.com/articles/626848
+
+3.mysql语句
+1.mysql的基本sql语句：https://www.cnblogs.com/qianguyihao/p/4028178.html
+2.mysql的数据类型：https://www.cnblogs.com/qianguyihao/p/4028040.html
