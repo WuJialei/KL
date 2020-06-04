@@ -85,6 +85,7 @@
   
 零散问题
   4.超大分页的处理：https://www.cnblogs.com/geningchao/p/6649907.html
+      如果对于有where 条件，又想走索引用limit的，必须设计一个索引，将where 放第一位，limit用到的主键放第2位，而且只能select 主键
 
 -------------------3.https://learnku.com/articles/40216
  我以为我对Mysql索引很了解，直到我遇到了阿里的面试官
