@@ -3,6 +3,7 @@
 2.手写快排及快排时间复杂度分析(最好：恰好基准在中间，树比较低，递归次数少；最坏：正序或者逆序)
 3.重点题
 3.1.归并：数组交集349(利用HashMap求交集，350);链表的归并148(快慢指针寻找链表中点)
+3.2.选择：煎饼排序969(部分翻转使得最后数组有序，找最大基于两次翻转使其到最后);
 
 1.基础知识
 1.1.排序基础讲解：https://juejin.im/post/5b95da8a5188255c775d8124#comment
@@ -320,11 +321,13 @@
                       List<Integer> list1 = list.subList(0, j+1);
                       List<Integer> list2 = list.subList(j+1, i+1);
                       ans.add(j+1);
+                      // 第一次翻转，最大到最前
                       Collections.reverse(list1);
                       list = new ArrayList<>();
                       list.addAll(list1);
                       list.addAll(list2);
                   }
+                  // 最前到最后，除去
                   Collections.reverse(list);
                   ans.add(i+1);
                   list.remove(i);
