@@ -53,6 +53,22 @@
             return cur;
         }
     }
+变体，二进制手表([401] Binary Watch)
+  思路：Integer.bitCount()计算数中二进制1的个数
+  代码：
+  class Solution {
+      public List<String> readBinaryWatch(int num) {
+          List<String> ans = new ArrayList<>();
+          for (int hour = 0; hour < 12; ++hour) {
+              for (int minute = 0; minute < 60; ++minute) {
+                  if (Integer.bitCount(hour) + Integer.bitCount(minute) == num) {
+                      ans.add(String.format("%d:%02d", hour, minute));
+                  }
+              }
+          }
+          return ans;
+      }
+  }
 2.1.3.缺失数字（[268] Missing Number）
    代码：
    class Solution {
