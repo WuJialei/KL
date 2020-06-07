@@ -368,56 +368,75 @@
   
   2.5.java集合排序（Collections.sort()结合lambda表达式的写法）
   2.5.1.查找字典里最匹配的字符串（leetcode [524] Longest Word in Dictionary through Deleting）
+    思路：
+    一个字符串可以通过删除与另一个字符串相等(字母位置记录+二分搜索)；集合排序
     代码：
     class Solution {
+    
+      private HashMap<Character, ArrayList<Integer>> map;
 
-      String s;
-
-      public boolean find (String str) {
-          int index = 0;
-          int len = s.length();
-          int cnt = 0;
-          for (; cnt < str.length();) {
-              if (index >= len) {
-                  break;
+      public void init (String str) {
+          for (int i = 0; i < str.length(); ++i) {
+              char c = str.charAt(i);
+              if (!map.containsKey(c)) {
+                  map.put(c, new ArrayList<Integer>());
               }
-              if (str.charAt(cnt) == s.charAt(index)) {
-                  ++cnt;
-                  ++index;
+              map.get(c).add(i);
+          }
+      }
+
+      public boolean judge (String str) {
+          int pre = -1;
+          for (char c : str.toCharArray()) {
+              if (!map.containsKey(c)) {
+                  return false;
+              }
+              int left = 0;
+              int right = map.get(c).size() - 1;
+              while (left < right) {
+                  int mid = left + (right - left)/2;
+                  if (map.get(c).get(mid) <= pre) {
+                      left = mid + 1;
+                  } else {
+                      right = mid;
+                  }
+              }
+              if (map.get(c).get(left) > pre) {
+                  pre = map.get(c).get(left);
               } else {
-                  ++index;
+                  return false;
               }
           }
-          return cnt == str.length();
+          return true;
       }
 
       public String findLongestWord(String s, List<String> d) {
-          this.s = s;
-          List<String> list = new ArrayList<String>();
+          if (s == null || d == null || d.size() < 1) {
+              return "";
+          }
+          map = new HashMap<>();
+          List<String> ans = new ArrayList<>();
+          init(s);
           for (String str : d) {
-              if (find(str)) {
-                  if (list.size() == 0) {
-                      list.add(str);
-                  } else {
-                      if (str.length() == list.get(0).length()) {
-                          list.add(str);
-                      } else if (str.length() > list.get(0).length()) {
-                          list = new ArrayList<String>();
-                          list.add(str);
-                      }
-                  }
-
+              if (judge(str)) {
+                  ans.add(str);
               }
           }
-          if (list.size() == 0) {
+          if (ans.size() < 1) {
               return "";
-          } else {
-              if (list.size() > 1) {
-                  Collections.sort(list, (a, b) -> a.compareTo(b));
-              }            
-              return list.get(0);
           }
-
+          Collections.sort(
+              ans,
+              (a, b) -> {
+                  if (a.length() != b.length()) {
+                      return b.length() - a.length();
+                  } else {
+                      // error
+                      return a.compareTo(b);
+                  }
+              }
+          );
+          return ans.get(0);
       }
   }
   2.5.2.车队追赶到达问题（leetcode [853] Car Fleet）
