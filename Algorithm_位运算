@@ -36,3 +36,18 @@
             return cur;
         }
     }
+2.1.3.缺失数字（[268] Missing Number）
+   代码：
+   class Solution {
+      public int missingNumber(int[] nums) {
+          if (nums == null || nums.length < 1) {
+
+          }
+          int ans = 0;
+          for (int i = 0; i < nums.length; ++i) {
+              ans ^= i ^ nums[i];
+          }
+          ans ^= nums.length;
+          return ans;
+      }
+  }
