@@ -21,6 +21,23 @@
           return ans;
       }
   }
+变体，数(含负数)的1的个数（[191] Number of 1 Bits）
+  代码：
+  public class Solution {
+      // you need to treat n as an unsigned value
+      public int hammingWeight(int n) {
+          int ans = 0;
+          int cnt = 32;
+          while (cnt > 0) {
+              if ((n & 1) == 1) {
+                  ++ans;
+              }
+              --cnt;
+              n >>= 1;
+          }
+          return ans;
+      }
+  }
 2.1.2.数字的补数（leetcode [476] Number Complement）
     代码：
     class Solution {
