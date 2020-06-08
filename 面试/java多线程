@@ -9,5 +9,7 @@
   SKK/并发
 3.java锁
   链接1：https://www.jianshu.com/p/e674ee68fd3f
+  AQS：https://www.cnblogs.com/waterystone/p/4920797.html
+  CyclicBarrier、CountDownLatch以及Semaphore使用及其原理分析：https://my.oschina.net/wenbo123/blog/1834618
   链接2：https://juejin.im/post/5adf14dcf265da0b7b358d58#heading-1
   SKK/并发
