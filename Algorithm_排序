@@ -2,7 +2,9 @@
 1.基本排序：选择、冒泡/快排、归并、堆(大小顶堆是完全二叉树)/基数排序
 2.手写快排及快排时间复杂度分析(最好：恰好基准在中间，树比较低，递归次数少；最坏：正序或者逆序)
 3.重点题
-3.1.归并：数组交集349(利用HashMap求交集，350);链表的归并148(快慢指针寻找链表中点);
+3.1.归并：数组交集349(利用HashMap求交集，350);
+         链表的归并148(快慢指针寻找链表中点);
+         三色旗问题75（使用线性空间使得只有三类数的数组有序；可以基于归并，但最快是依次将把所有0放在左边，再依次把所有1放在0的后面）
 3.2.选择：煎饼排序969(部分翻转使得最后数组有序，找最大基于两次翻转使其到最后);
 3.3.Collections.sort()使用及集合排序：查找字符串中最匹配的字符串524(一个字符串可以通过删除与另一个字符串相等(字母位置记录+二分搜索)；集合排序);
                                    车队853(位置、速度联合排序+比较到达时间看是否是同一车队);
@@ -568,6 +570,67 @@
  
 2.6.三色旗问题（leetcode [75] Sort Colors）
     代码：
+    /*
+    // 看这个，这种复合要求且易理解
+    class Solution {
+        public void sortColors(int[] nums) {
+            if (nums == null || nums.length < 2) {
+                return;
+            }
+            int len = nums.length;
+            int i = 0;
+            int j = len - 1;
+            while (i < j) {
+                while (i < len) {
+                    if (nums[i] != 0) {
+                       break; 
+                    }
+                    ++i;
+                }
+                while (j >= 0) {
+                    if (nums[j] == 0) {
+                        break;
+                    }
+                    --j;
+                }
+                if (i < j) {
+                    int tmp = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = tmp;
+                    ++i;
+                    --j;
+                }
+            }
+            j = len - 1;
+            while (i < j) {
+                while (i < len) {
+                    if (nums[i] == 0) {
+                        ++i;
+                        continue;
+                    }
+                    if (nums[i] != 1) {
+                       break; 
+                    }
+                    ++i;
+                }
+                while (j >= 0) {
+                    if (nums[j] == 1) {
+                        break;
+                    }
+                    --j;
+                }
+                if (i < j) {
+                    int tmp = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = tmp;
+                    ++i;
+                    --j;
+                }
+            }
+            //return nums;
+        }
+    }
+    */
     class Solution {
       public void sortColors(int[] nums) {
           // 三色旗问题，p0表示最右的0指针，p2表示最左的2指针，cur表示当前指针
@@ -727,7 +790,7 @@
       }
   }
   
-  2.10.摇摆排序（leetcode [324] Wiggle Sort II）
+2.10.1.摇摆排序（leetcode [324] Wiggle Sort II）
     代码：
     class Solution {
       public void wiggleSort(int[] nums) {
@@ -753,7 +816,7 @@
       }
   }
   
-2.10.TreeSet的用法(leetcode [220] Contains Duplicate III)
+2.10.2.TreeSet的用法(leetcode [220] Contains Duplicate III)
   代码：
   class Solution {
       public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
