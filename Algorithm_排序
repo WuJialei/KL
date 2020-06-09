@@ -10,6 +10,7 @@
                                    车队853(位置、速度联合排序+比较到达时间看是否是同一车队);
                                    数字拼接成为最大数179（字符串比较时可以a+b与b+a比较）
 3.4.插入排序：链表的插入排序147(结合递归)；
+3.5.Arrays.sort()使用：h指数274(n-index表示共有n-index篇论文分别被引用了arrays[index]次)
 
 1.基础知识
 1.1.排序基础讲解：https://juejin.im/post/5b95da8a5188255c775d8124#comment
@@ -780,6 +781,22 @@
 2.9.1.h指数（leetcode [274] H-Index）
   思路：由于Arrays.sort排序支持的是对Integer[]数组的排序，所以对int[]数组自定义降序排序比较麻烦，只采用默认的升序遍历时从后向前扫描即可
   代码：
+  /*
+  class Solution {
+             public int hIndex(int[] citations) {
+                 if (citations == null || citations.length < 1) {
+                     return 0;
+                 }
+                 int len = citations.length;
+                 Arrays.sort(citations);
+                 int ans = 0;
+                 for (int i = 0; i < len; ++i) {
+                     ans = Math.max(ans, Math.min(citations[i], len - i));
+                 }
+                 return ans;
+             }
+         }
+  */
   class Solution {
       public int hIndex(int[] citations) {
           Arrays.sort(citations);
