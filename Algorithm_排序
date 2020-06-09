@@ -9,6 +9,7 @@
 3.3.Collections.sort()使用及集合排序：查找字符串中最匹配的字符串524(一个字符串可以通过删除与另一个字符串相等(字母位置记录+二分搜索)；集合排序);
                                    车队853(位置、速度联合排序+比较到达时间看是否是同一车队);
                                    数字拼接成为最大数179（字符串比较时可以a+b与b+a比较）
+3.4.插入排序：链表的插入排序147(结合递归)；
 
 1.基础知识
 1.1.排序基础讲解：https://juejin.im/post/5b95da8a5188255c775d8124#comment
@@ -722,6 +723,30 @@
 2.8.插入排序
 2.8.1.插入排序与链表结合（leetcode [147] Insertion Sort List）
   代码：
+  /*
+  class Solution {
+             public ListNode insertionSortList(ListNode head) {
+                 if (head == null || head.next == null) {
+                     return head;
+                 }
+                 ListNode cur = new ListNode(head.val); 
+                 ListNode tmp = insertionSortList(head.next);
+                 if (tmp == null || tmp.val >= cur.val) {
+                     cur.next = tmp;
+                     return cur;
+                 }
+                 ListNode ret = tmp;
+                 ListNode pre = tmp;
+                 while (pre.next != null && pre.next.val < cur.val) {
+                     pre = pre.next;
+                 }
+                 ListNode next = pre.next;
+                 pre.next = cur;
+                 cur.next = next;
+                 return ret;
+             }
+         }
+  */
   class Solution {
       public ListNode insertionSortList(ListNode head) {
           if (head == null || head.next == null) {
