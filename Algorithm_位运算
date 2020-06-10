@@ -147,6 +147,38 @@
           }
       }
   }
+2.1.6.只出现一次的数字有两个(leetcode [260] Single Number III)
+  代码：
+  class Solution {
+      public int[] singleNumber(int[] nums) {
+          if (nums == null || nums.length < 2) {
+              return new int[2];
+          }
+          int ab = 0;
+          for (int num : nums) {
+              ab ^= num;
+          }
+          int cnt = 1;
+          while (ab != 0) {
+              if ((ab & 1) == 1) {
+                  break;
+              }
+              ab >>= 1;
+              cnt <<= 1;
+          }
+          int a = 0;
+          int b = 0;
+          for (int num : nums) {
+              if ((num & cnt) == cnt) {
+                  a ^= num;
+              } else {
+                  b ^= num;
+              }
+          }
+          int[] ans = new int[]{a, b};
+          return ans;
+      }
+  }
 
   
 2.2.动态规划
