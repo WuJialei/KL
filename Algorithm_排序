@@ -13,6 +13,7 @@
 3.5.Arrays.sort()使用：h指数274(n-index表示共有n-index篇论文分别被引用了arrays[index]次;
                       按照身高重新排序406(身高降序，索引升序排列；链表按照索引插入，因为身高降序，身高低的人不会排到它前面);
                       摇摆排序324(排序后分两半，每一半逆序依次填奇偶位);
+3.6.堆排序：基于优先级队列判断是否存在重复元素 III 220;
 
 1.基础知识
 1.1.排序基础讲解：https://juejin.im/post/5b95da8a5188255c775d8124#comment
@@ -862,6 +863,62 @@
   
 2.10.2.TreeSet的用法(leetcode [220] Contains Duplicate III)
   代码：
+  /*
+  // 基于优先级队列，未全部通过，int溢出
+  class Solution {
+    
+             private long t;
+
+             public boolean judge(PriorityQueue<Integer> queue) {
+                 PriorityQueue<Integer> tmp = new PriorityQueue<Integer>();
+                 int pre = queue.poll();
+                 tmp.offer(pre);
+                 boolean ans = false;
+                 while (!queue.isEmpty()) {
+                     int cur = queue.poll();
+                     tmp.offer(cur);
+                     long w = (long)cur - pre;
+                     if (w <= t) {
+                         ans = true;
+                         break;
+                     }
+                     pre = cur;
+                 }
+                 while (!tmp.isEmpty()) {
+                     queue.offer(tmp.poll());
+                 }
+                 return ans;
+             }
+
+             public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+                 if (nums == null || nums.length < 1 || k <= 0 || t < 0) {
+                     return false;
+                 }
+                 this.t = (long)t;
+                 int len = k + 1;
+                 PriorityQueue<Integer> queue = new PriorityQueue<>(
+                     len,
+                     (a, b) -> a - b
+                 );
+                 int i = 0;
+                 while (queue.size() < len && i < nums.length) {
+                     queue.offer(nums[i++]);
+                 }
+                 if (judge(queue)) {
+                     return true;
+                 }
+                 for (; i < nums.length; ++i) {
+                     queue.remove(nums[i-len]);
+                     queue.offer(nums[i]);
+                     if (judge(queue)) {
+                         return true;
+                     }
+                 }
+                 return false;
+
+             }
+         }
+  */
   class Solution {
       public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
           if (nums == null || nums.length ==0 || k <= 0 || t < 0) {
