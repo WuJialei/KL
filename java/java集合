@@ -8,7 +8,7 @@ i++和++i问题：https://zhuanlan.zhihu.com/p/40645506
 --------------5.java集合源码分析：https://juejin.im/post/5afbff9451882542877353dd#heading-2
 --------------6.skk_java集合
 --------------7.源码解读
-       7.1.HashMap源码解读：skk  + https://www.cnblogs.com/chengxiao/p/6059914.html
+       7.1.HashMap源码解读：skk  + https://www.cnblogs.com/chengxiao/p/6059914.html(结构；put、get、扩容过程；1.7、1.8比较；)
        7.2.ConcurrentHashMap源码解读：1.7：https://www.cnblogs.com/chengxiao/p/6842045.html
                                     1.8：https://www.jianshu.com/p/c0642afe03e0
                                     skk
