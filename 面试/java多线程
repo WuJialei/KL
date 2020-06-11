@@ -14,3 +14,6 @@
   链接2：https://juejin.im/post/5adf14dcf265da0b7b358d58#heading-1
   ReentrantLock和ReentrantReadWriteLock：https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247484206&idx=1&sn=9722748c0308b3e56220be1c9d939ad7&chksm=ebd7422fdca0cb39ac7825e565ac4e7ed7fd77638da1a931f916d3b6c06ef50beb5c085510bf&scene=21###wechat_redirect
   SKK/并发
+  
+4.基础
+Java 内存模型-同步八种操作：https://blog.csdn.net/timchen525/article/details/80412699
