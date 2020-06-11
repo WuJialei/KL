@@ -179,6 +179,39 @@
           return ans;
       }
   }
+2.1.7.两个数异或的最大值（leetcode [421] Maximum XOR of Two Numbers in an Array）
+  思路：
+   参考：http://tangyiheng.top/problem-421
+   参考：https://www.cxyxiaowu.com/298.html
+  代码：
+  class Solution {
+      public int findMaximumXOR(int[] nums) {
+          int mask = 0;
+          // ans = a ^ b
+          int ans = 0;
+          int cnt = 31;
+          while (cnt >= 0) {
+              mask += 1 << cnt;
+              HashSet<Integer> set = new HashSet<>();
+              for (int num : nums) {
+                  set.add(num & mask);
+              }
+              ans += 1 << cnt;
+              boolean flag = false;
+              for (int num : set) {
+                  if (set.contains(num ^ ans)) {
+                      flag = true;
+                      break;
+                  }
+              }
+              if (!flag) {
+                  ans -= 1 << cnt;
+              }            
+              --cnt;
+          }
+          return ans;
+      }
+  }
 
   
 2.2.动态规划
