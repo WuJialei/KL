@@ -372,6 +372,33 @@
           return maxProfit;
       }
   }
+变体，绝对值表达式的最大值（leetcode [1131] Maximum of Absolute Value Expression）
+  思路：
+    参考1：https://www.cnblogs.com/fish1996/p/11261100.html
+    参考2：https://coordinate.wang/index.php/archives/2540/
+  代码：
+  class Solution {
+      public int maxAbsValExpr(int[] arr1, int[] arr2) {
+          if (arr1 == null || arr2 == null || arr1.length != arr2.length) {
+              return 0;
+          }
+          int[][] count = {{1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
+          // 本质是股票只买卖一次的变体
+          // 需要将绝对值符号分类拆开，按照i和j分类放到一起(i > j)
+          int ans = Integer.MIN_VALUE;
+          for (int cnt = 0; cnt < count.length; ++cnt) {
+              int minPrice = Integer.MAX_VALUE;
+              for (int i = 0; i < arr1.length; ++i) {
+                  int cur = arr1[i] * count[cnt][0] + arr2[i] * count[cnt][1] + i;
+                  int profit = i == 0 ? 0 : cur - minPrice;
+                  ans = Math.max(ans, profit);
+                  minPrice = Math.min(minPrice, cur);
+              }
+          }
+          return ans;
+      }
+  }
+
   
 2.2.2.股票可以买卖无数次（leetcode [122] Best Time to Buy and Sell Stock II）
   思路：在价格曲线图中，曲线斜率大于0表示有利润，曲线斜率小于0表示亏本，在可以买卖无数次的情况下，只要斜率大于0就交易，即只要价格大于前一天就买，就算后一天
