@@ -9,7 +9,7 @@ i++和++i问题：https://zhuanlan.zhihu.com/p/40645506
 --------------6.skk_java集合
 --------------7.源码解读
        7.1.HashMap源码解读：skk  + https://www.cnblogs.com/chengxiao/p/6059914.html(结构；put、get、扩容过程；1.7、1.8比较；)
-       7.2.ConcurrentHashMap源码解读：1.7：https://www.cnblogs.com/chengxiao/p/6842045.html（思路；get(不加锁，volatile)；put(加锁)）
+       7.2.ConcurrentHashMap源码解读：1.7：https://www.cnblogs.com/chengxiao/p/6842045.html（思路；get(不加锁，volatile)；put(加锁，可重入锁)）
                                     1.8：https://www.jianshu.com/p/c0642afe03e0(底层数据结构，和hashmap1.8一样；
                                           原理(cas+sychronized)；get；put)
                                     skk
