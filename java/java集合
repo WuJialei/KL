@@ -10,6 +10,7 @@ i++和++i问题：https://zhuanlan.zhihu.com/p/40645506
 --------------7.源码解读
        7.1.HashMap源码解读：skk  + https://www.cnblogs.com/chengxiao/p/6059914.html(结构；put、get、扩容过程；1.7、1.8比较；)
        7.2.ConcurrentHashMap源码解读：1.7：https://www.cnblogs.com/chengxiao/p/6842045.html（思路；get(不加锁，volatile)；put(加锁)）
-                                    1.8：https://www.jianshu.com/p/c0642afe03e0
+                                    1.8：https://www.jianshu.com/p/c0642afe03e0(底层数据结构，和hashmap1.8一样；
+                                          原理(cas+sychronized)；get；put)
                                     skk
        7.3.HashSet的实现：https://www.jianshu.com/p/1ed5fa8e357b
