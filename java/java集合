@@ -9,6 +9,8 @@ i++和++i问题：https://zhuanlan.zhihu.com/p/40645506
 --------------6.skk_java集合
 --------------7.源码解读
        7.1.HashMap源码解读：skk  + https://www.cnblogs.com/chengxiao/p/6059914.html(结构；put、get、扩容过程；1.7、1.8比较；)
+              hashmap线程不安全：(1.put冲突，覆盖；2.1.7头插法扩容形成死循环，线程1，a->b，线程2，a->b，线程1a完成，b开始时cpu使用时间到，线程2开始，
+              并完成扩容，此时实际是b->a；线程1接着执行，b之后本来是空，但现在是a，形成死循环；)https://www.jianshu.com/p/e2f75c8cce01
        7.2.ConcurrentHashMap源码解读：1.7：https://www.cnblogs.com/chengxiao/p/6842045.html（思路；get(不加锁，volatile)；put(加锁，可重入锁)）
                                     1.8：https://www.jianshu.com/p/c0642afe03e0(底层数据结构，和hashmap1.8一样；
                                           原理(cas+sychronized)；get；put)
