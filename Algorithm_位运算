@@ -328,4 +328,47 @@
           return ans;
       }
   }
+相关：满足条件的子串的最大出现次数（leetcode [1297] Maximum Number of Occurrences of a Substring）
+  思路：
+    子串的最大限制长度是多余条件，对于一个最大串，它所能达到的最大出现次数必定也会至少存在一个最大串的长度为最小长度数的子串的次数也为最大出现次数，一次只考虑
+    最小串即可
+  代码：
+  class Solution {
+
+      private int letters;
+
+      public boolean judge (String str) {
+          HashSet<Character> set = new HashSet<>();
+          for (char c : str.toCharArray()) {
+              set.add(c);
+              if (set.size() > letters) {
+                  return false;
+              }
+          }
+          return true;
+      }
+
+      public int maxFreq(String s, int maxLetters, int minSize, int maxSize) {
+          if (s == null || s.length() < minSize) {
+              return 0;
+          }
+          letters = maxLetters;
+          int ans = 0;
+          HashMap<String, Integer> map = new HashMap<>();
+          for (int i = 0; i <= s.length() - minSize; ++i) {
+              String str = s.substring(i, i+minSize);
+              if (map.containsKey(str)) {
+                  map.put(str, map.get(str) + 1);
+                  ans = Math.max(ans, map.get(str));
+              } else {
+                  if (judge(str)) {
+                      map.put(str, 1);
+                      ans = Math.max(ans, map.get(str));
+                  }
+              }
+          }
+          return ans;
+      }
+  }
+
 
