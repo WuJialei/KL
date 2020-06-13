@@ -1,5 +1,6 @@
 1.快速幂
 参考：https://oi-wiki.org/math/quick-pow/
+参考：https://www.jianshu.com/p/898b251bec3d
   long long binpow(long long a, long long b) {
     if (b == 0) return 1;
     long long res = binpow(a, b / 2);
@@ -30,3 +31,29 @@
           return flag ? ans : 1.0/ans;
       }
   }
+1.2.快速幂取模（leetcode [372] Super Pow）
+  a^b mod c = (a mod c)^b mod c；
+  思路：https://www.cnblogs.com/grandyang/p/5651982.html
+  代码：
+  class Solution {
+
+      public long dfs (long a, int n) {
+          a = a % 1337;
+          if (n == 0) {
+              return 1;
+          }
+          long ret = dfs(a, n/2) % 1337;
+          return n%2==0 ? (ret * ret) % 1337 : (ret * ret * a) % 1337;
+      }
+
+      public int superPow(int a, int[] b) {
+          long ans = 1;
+          for (int bb : b) {
+              ans = dfs(ans, 10) * dfs(a, bb) % 1337;
+          }
+          return (int)(ans % 1337);
+      }
+  }
+变体，阿里2020笔试(快速幂结合排列组合公式)
+  参考：https://www.nowcoder.com/discuss/389635?type=1
+  参考：https://blog.csdn.net/bigtiao097/article/details/77242624
