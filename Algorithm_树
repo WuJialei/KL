@@ -2,6 +2,7 @@
 1.1.二叉搜索树的前、中、后序遍历非递归实现：栈，2.5；
 1.2.二叉搜索树的范围和938；
 1.3.二叉搜索树比该节点值大的累加和538(先右到底再左)；
+1.4.二叉搜索树的插入701(往叶子节点插)；
 
 
 1.基本知识
@@ -233,6 +234,19 @@
   代码：
   class Solution {
 
+      /*
+      public TreeNode insertIntoBST(TreeNode root, int val) {
+          if (root == null) {
+              return new TreeNode(val);
+          }
+          if (val < root.val) {
+              root.left = insertIntoBST(root.left, val);
+          } else {
+              root.right = insertIntoBST(root.right, val);
+          }
+          return root;
+      }
+      */
       public TreeNode insertIntoBST(TreeNode root, int val) {
           if (root == null) {
               return new TreeNode(val);
