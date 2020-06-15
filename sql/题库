@@ -3,6 +3,7 @@
 2.MySQL 性能优化神器 Explain 使用分析：https://segmentfault.com/a/1190000008131735
 3.间隙锁、后键锁：https://juejin.im/post/5b8577c26fb9a01a143fe04e#heading-6
 4.redo log与binlog：MySQL实战45讲/02讲日志系统：一条SQL更新语句是如何执行的.html
+5.mvcc：https://juejin.im/post/5e72246ae51d4527143e6a0d#heading-10
 ------------------1.https://www.nowcoder.com/discuss/135748
 补充说明：
 一.基础知识
