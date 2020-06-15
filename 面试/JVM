@@ -2,3 +2,26 @@
   链接1：https://blog.csdn.net/anxpp/article/details/51325838
   链接2：https://www.jianshu.com/p/2fdee831ed03
   SKK/JVM
+
+
+jvm面试题
+1.链接1：https://juejin.im/post/5d22f4e8e51d455a68490bf4
+    String类的intern()方法：https://blog.csdn.net/baidu_31657889/article/details/52315902
+
+jvm具体问题
+1.什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言
+    链接：https://blog.csdn.net/YgoodmanM/article/details/50788137
+    Java 虚拟机是一个可以执行 Java 字节码的虚拟机进程，相当于一个普通应用程序。Java 源文件被编译成能被 Java 虚拟机执行的字节码文件。 
+  java要在应用平台上执行，需要先安装执行虚拟机，java虚拟机屏蔽了平台操作系统的底层硬件信息，抽取整理了各平台公共的处理硬件的接口提供给
+  开发用户使用，java开发用户只要基于JVM开发java程序即可。
+2.java的对象结构和创建过程
+    链接：https://juejin.im/post/5cc668aff265da037129a8c2
+3.为什么java类加载要使用双亲委派模型
+    对于相同的class文件，使用不同的类加载器加载则加载出来的对象依旧是两个独立的类，做类的类型检查会被判定为不相等，解决各个类加载类的基础类统一问题
+
+
+1.第二章 Java内存区域与内存溢出异常：https://juejin.im/post/5d7a6de9e51d4562165535a5
+2.第三章 垃圾收集器与内存分配策略：https://juejin.im/post/5d7ba549e51d453b5e465bd4#heading-28
+3.第八章 JVM字节码执行引擎：https://www.cnblogs.com/deman/p/5489895.html
+4.第九章 类加载及执行实例
+    -Tomcat：https://www.cnblogs.com/aspirant/p/8991830.html
