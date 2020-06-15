@@ -7,6 +7,11 @@
 2.N叉树
 2.1.N叉树的前/后序非递归遍历实现589/590;
 
+3.二叉树
+3.1.二叉树的前序遍历变体606(括号对)；
+3.2.二叉树遍历的普通变体，判断两个兄弟是否是堂兄弟993(记录父亲节点和深度);
+3.3.二叉树的任意自顶向下的路径和为指定值437/另一个树的子树572(两个dfs)；
+
 
 1.基本知识
 1.1.树的基本概念：https://blog.csdn.net/csdn_aiyang/article/details/84977814
@@ -456,32 +461,79 @@
   思路：递归+边界情况考虑
   代码：
   class Solution {
-      public String tree2str(TreeNode t) {
-          return dfs(t);
-      }
+    
+      private StringBuilder sb;
 
-      public String dfs (TreeNode node) {
+      public void dfs (TreeNode node) {
           if (node == null) {
-              return "";
+              return;
           }
-          StringBuilder sb = new StringBuilder("");
-          sb.append(node.val);
+          sb.append(String.valueOf(node.val));
+          // 左右子树皆为空则无必要加入
           if (node.left == null && node.right == null) {
-              return sb.toString();
+              return;
           }
+          // 左右子树存在一个非空，空括号对在左时有影响
           sb.append("(");
-          sb.append(dfs(node.left));
+          dfs(node.left);
           sb.append(")");
           if (node.right != null) {
               sb.append("(");
-              sb.append(dfs(node.right));
+              dfs(node.right);
               sb.append(")");
           }
+      }
+
+
+      public String tree2str(TreeNode t) {
+          sb = new StringBuilder("");
+          dfs(t);
           return sb.toString();
       }
   }
-  二叉树遍历的普通变体，判断两个兄弟是否是堂兄弟（leetcode [993] Cousins in Binary Tree）
+二叉树遍历的普通变体，判断两个兄弟是否是堂兄弟（leetcode [993] Cousins in Binary Tree）
     代码：
+    /*
+    class Solution {
+    
+        public class Node {
+            int dep;
+            TreeNode pre;
+        }
+
+        public Node dfs (TreeNode pre, int dep, int val) {
+            if (pre == null) {
+                return null;
+            }
+            TreeNode left = pre.left;
+            TreeNode right = pre.right;
+            if (left != null && left.val == val) {
+                Node node = new Node();
+                node.dep = dep + 1;
+                node.pre = pre;
+                return node;
+            }
+            if (right != null && right.val == val) {
+                Node node = new Node();
+                node.dep = dep + 1;
+                node.pre = pre;
+                return node;
+            }
+            Node xRet = dfs(left, dep+1, val);
+            Node yRet = dfs(right, dep+1, val);
+            return xRet != null ? xRet : yRet;
+        }
+
+        public boolean isCousins(TreeNode root, int x, int y) {
+            if (root == null || root.val == x || root.val == y) {
+                return false;
+            }
+            Node xNode = dfs(root, 0, x);
+            Node yNode = dfs(root, 0, y);
+            return xNode.dep == yNode.dep && xNode.pre != yNode.pre;
+        }
+    }
+    */
     class Solution {
 
         Map<Integer, TreeNode> parent;
@@ -508,7 +560,7 @@
 
     }
 二叉树的任意自顶向下的路径和为指定值（leetcode [437] Path Sum III / leetcode [572] Subtree of Another Tree）
-  代码：(437)
+代码：(437)
   class Solution {
 
       int cnt;
@@ -522,15 +574,19 @@
       }
 
       public void dfs (TreeNode node) {
+          // 查找node子树的情况(没说以node节点为开始)
           if (node == null) {
               return;
           }
+          // 路径以node为节点开始
           dfs1(node, sum);
+          
           dfs(node.left);
           dfs(node.right);
       }
 
       public void dfs1 (TreeNode node, int val) {
+          // 查找以node节点开始，值为val的路径数
           if (node == null) {
               return;
           }
@@ -543,7 +599,7 @@
       }
 
   }
-  代码：(572)
+代码：(572)
   class Solution {
       public boolean isSubtree(TreeNode s, TreeNode t) {
           if (dfs(s, t)) {
