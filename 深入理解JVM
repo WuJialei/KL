@@ -5,6 +5,9 @@ jvm面试题
 jvm具体问题
 1.什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言
     链接：https://blog.csdn.net/YgoodmanM/article/details/50788137
+    Java 虚拟机是一个可以执行 Java 字节码的虚拟机进程，相当于一个普通应用程序。Java 源文件被编译成能被 Java 虚拟机执行的字节码文件。 
+  java要在应用平台上执行，需要先安装执行虚拟机，java虚拟机屏蔽了平台操作系统的底层硬件信息，抽取整理了各平台公共的处理硬件的接口提供给
+  开发用户使用，java开发用户只要基于JVM开发java程序即可。
 2.java的对象结构和创建过程
     链接：https://juejin.im/post/5cc668aff265da037129a8c2
 
