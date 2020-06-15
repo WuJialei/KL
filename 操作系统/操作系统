@@ -11,3 +11,4 @@
 2.6.https://blog.nowcoder.net/n/49211c67aaaa49eb8842f7e979c79498
 
 死锁的条件：互请不还(互斥、请求与保持、不可抢占、环路等待)
+主线程与其余线程：https://blog.csdn.net/Maspue/article/details/82875202
