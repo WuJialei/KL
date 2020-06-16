@@ -737,42 +737,28 @@
 4.4.1.二叉树是否是深度平衡（leetcode [110] Balanced Binary Tree）
   代码：
   class Solution {
-      public boolean isBalanced(TreeNode root) {
-          getHeight(root);
-          return dfs(root);
-      }
-
-      public int getHeight(TreeNode node) {
+    
+      public int dfs (TreeNode node) {
           if (node == null) {
               return 0;
           }
-          node.val = Math.max(getHeight(node.left), getHeight(node.right)) + 1;
-          return node.val;
-      }
-
-      public boolean dfs(TreeNode node) {
-          if (node == null) {
-              return true;
-          }
           if (node.left == null && node.right == null) {
-              return true;
-          } else if (node.left == null || node.right == null) {
-              int tmp = node.left == null ? node.right.val : node.left.val;
-              if (tmp > 1) {
-                  return false;
-              } else {
-                  return true;
-              }
-          } else {
-              if (Math.abs(node.left.val - node.right.val) > 1) {
-                  return false;
-              } else {
-                  return dfs(node.left) && dfs(node.right);
-              }
+              return 1;
           }
-
+          return Math.max(dfs(node.left), dfs(node.right)) + 1;
       }
 
+      public boolean isBalanced(TreeNode root) {
+          if (root == null) {
+              return true;
+          }
+          if (!isBalanced(root.left) || !isBalanced(root.right)) {
+              return false;
+          }
+          int l = dfs(root.left);
+          int r = dfs(root.right);
+          return Math.abs(l - r) <= 1;
+      }
   }
 4.4.2.最深叶节点的最近公共祖先（leetcode [1123] Lowest Common Ancestor of Deepest Leaves）
   代码：
