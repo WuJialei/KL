@@ -97,4 +97,32 @@
           return ans;
       }
   }
+  
+3.2.博弈
+3.2.1.选数字定输赢（leetcode [1025] Divisor Game）
+  代码：
+  class Solution {
+      public boolean divisorGame(int N) {
+          // 最优的数不是最大的约数，而是能找到的让自己立于不败之地的最合适的数
+          if (N <= 1) {
+              return false;
+          }
+          // dp[i]表示Alice在数字i下的输赢情况，true赢false输
+          // dp[i]中，Alice取x，则dp[i]与dp[i-x]的输赢情况相反
+          // 最佳状态是如有可能赢的情况一定会把握住
+          boolean[] dp = new boolean[N+1];
+          dp[1] = false;
+          dp[2] = true;
+          for (int i = 3; i <= N; ++i) {
+              for (int j = 1; j < i; ++j) {
+                  if (i%j==0 && !dp[i-j]) {
+                      dp[i] = true;
+                      break;
+                  }
+              }
+          }
+          return dp[N];
+      }
+
+  }
 
