@@ -12,3 +12,7 @@
 
 死锁的条件：互请不还(互斥、请求与保持、不可抢占、环路等待)
 主线程与其余线程：https://blog.csdn.net/Maspue/article/details/82875202
+
+linux IO多路复用(结合BIO、NIO)：IO多路复用，多路网络连接复用一个io线程
+  链接：https://github.com/justtreee/blog/issues/17
+  五种IO模型：https://blog.csdn.net/historyasamirror/article/details/5778378
