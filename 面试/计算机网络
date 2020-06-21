@@ -1,7 +1,23 @@
+一、
 1.在浏览器的url栏里输入一个https的请求会发生什么？
   链接：https://segmentfault.com/a/1190000012092552
+  DNS的两种查询模式：https://blog.51cto.com/hover/118478
   SKK/计算机网络
 2.TCP连接的三次握手、四次挥手？
   SKK/计算机网络
   
 3.get/post区别：https://blog.csdn.net/qq_38182125/article/details/89071899?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase
+
+二、
+1.参考
+1.1.JAVA核心知识点整理
+1.2.JAVAGUIDDE面试突击版
+  3.1.5.流量控制、拥塞控制：https://blog.csdn.net/yechaodechuntian/article/details/25429143
+  3.1.12.URI和URL的区别：(URL是URI的子集)https://www.zhihu.com/question/21950864/answer/154309494
+1.3.JAVA面试突击
+1.4.skk
+  wifi属于哪一层：
+    物理层，物理层的作用就是通过物理手段把电脑连接起来，它主要规定了网络的一些电气特性，作用是负责传送0和1的电信号，通过物理手段
+将设备连接起来组网，物理手段就是光缆、电缆、双绞线、无线电波（WiFi）等
+    链路层，WLAN，全称Wireless LAN, 无线局域网，通俗点讲就是WiFi
+   ICMP(Internet Control Message Protocol)：https://www.cnblogs.com/vamei/archive/2012/12/05/2801991.html
