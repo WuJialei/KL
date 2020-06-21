@@ -21,3 +21,13 @@
 将设备连接起来组网，物理手段就是光缆、电缆、双绞线、无线电波（WiFi）等
     链路层，WLAN，全称Wireless LAN, 无线局域网，通俗点讲就是WiFi
    ICMP(Internet Control Message Protocol)：https://www.cnblogs.com/vamei/archive/2012/12/05/2801991.html
+
+三、TCP/IP
+1.tcp三次握手/四次挥手：https://blog.csdn.net/qzcsu/article/details/72861891#commentBox
+                    -：https://blog.csdn.net/qq_38950316/article/details/81087809
+2.tcp交互数据流捎带ACK：http://www.vants.org/?post=114
+3.tcp交互数据流Nagle算法：https://blog.csdn.net/wdscq1234/article/details/52432095
+4.tcp吞吐量计算：https://my.oschina.net/astute/blog/93132
+5.tcp超时重传：https://www.zhuxiaodong.net/2018/tcp-timeout-retransmission-instruction/
+6.tcp流量控制和拥塞控制：https://www.zhuxiaodong.net/2018/tcp-flow-congestion-control-instruction/
+           -：https://blog.csdn.net/yechaodechuntian/article/details/25429143
