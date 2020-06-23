@@ -80,3 +80,29 @@
           System.out.println(ret);
       }
   }
+  
+2.3.写一个函数，求平方根，函数参数为目标数字和精度
+  代码：
+  public class Main2 {
+
+      public double cntNums (double target, double g) {
+          double l = 0;
+          double r = target;
+          while (r-l > g) {
+              double mid = (l+r)/2;
+              if (mid * mid < target) {
+                  l = mid;
+              } else {
+                  r = mid;
+              }
+          }
+          return (l+r)/2;
+      }
+
+      public static void main(String[] args) {
+          Main2 main2 = new Main2();
+          int[] nums= {1, 3, 9, 1};
+          double ret = main2.cntNums(0.045, 0.001);
+          System.out.println(ret);
+      }
+  }
