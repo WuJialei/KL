@@ -1,3 +1,8 @@
+1.股票买卖问题
+股票只能买卖一次、两次、无数次、k次：k次，buy[k]表示到第k次买入的利润,sell[k]表示到第k次卖出的利润
+股票购买无数次但冷冻期、手续费问题：dp[i][0]表示到第i天不持有股票的利润，dp[i][1]表示到第i天持有股票的利润
+
+
 1.基础知识
 1.1.基础：https://juejin.im/post/5d1418a5e51d45108c59a57c#heading-2
 1.2.背包九讲：https://www.kancloud.cn/kancloud/pack/70125
