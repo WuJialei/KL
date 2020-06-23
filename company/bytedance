@@ -43,3 +43,40 @@
           System.out.println(ret);
       }
   }
+变体，先增后减数组的不重复数字个数
+  代码：
+  public class Main2 {
+
+      public int cntNums (int[] nums) {
+          if (nums == null || nums.length < 1) {
+              return 0;
+          }
+          int ans = 0;
+          int l = 0;
+          int r = nums.length-1;
+          int preDel = Integer.MAX_VALUE;
+          while (l <= r) {
+              if (nums[l] < nums[r]) {
+                  if (preDel != nums[l]) {
+                      ++ans;
+                      preDel = nums[l];
+                  }
+                  ++l;
+              } else {
+                  if (preDel != nums[r]) {
+                      ++ans;
+                      preDel = nums[r];
+                  }
+                  --r;
+              }
+          }
+          return ans;
+      }
+
+      public static void main(String[] args) {
+          Main2 main2 = new Main2();
+          int[] nums= {1, 3, 9, 1};
+          int ret = main2.cntNums(nums);
+          System.out.println(ret);
+      }
+  }
