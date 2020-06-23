@@ -221,4 +221,100 @@
           return ans;
       }
   }
+  
+2.7.链表翻转
+2.7.1.从m到n翻转（leetcode 92. Reverse Linked List II）
+  代码：
+  class Solution {
+      public ListNode reverseBetween(ListNode head, int m, int n) {
+          if (head == null || head.next == null) {
+              return head;
+          }
+          ListNode ans = new ListNode(-1);
+          ListNode ret = ans;
+          int cnt = 1;
+          while (head != null) {
+              if (cnt == m) {
+                  ListNode tmp1 = new ListNode(-1);
+                  // ListNode tmp2 = new ListNode(-1);
+                  while (cnt <= n && head != null) {
+                      ListNode cur = new ListNode(head.val);
+                      cur.next = tmp1.next;
+                      tmp1.next = cur;
+                      ++cnt;
+                      head = head.next;
+                  }
+                  ans.next = tmp1.next;
+                  while (ans.next != null) {
+                      ans = ans.next;
+                  }
+              } else {
+                  ans.next = new ListNode(head.val);
+                  ans = ans.next;
+                  head = head.next;
+                  ++cnt;
+              }
+          }
+          return ret.next;
+      }
+  }
+2.7.2.全部翻转（leetcode 206. Reverse Linked List）
+  代码：
+  class Solution {
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode ans = new ListNode(-1);
+        // ListNode ret = ans;
+        while (head != null) {
+            ListNode tmp = new ListNode(head.val);
+            tmp.next = ans.next;
+            ans.next = tmp;
+            head = head.next;
+        }
+        return ans.next;
+    }
+}
+2.7.3.隔k个翻转(leetcode 25. Reverse Nodes in k-Group)
+  代码：
+  class Solution {
+      public ListNode reverseKGroup(ListNode head, int k) {
+          if (head == null || head.next == null) {
+              return head;
+          }
+          ListNode ans = new ListNode(-1);
+          ListNode ret = ans;
+          while (head != null) {
+              int cnt = k;
+              ListNode node1 = head;
+              // ListNode node1 = head;
+              while (cnt > 0 && head != null) {
+                  head = head.next;
+                  --cnt;
+              }
+              if (cnt > 0) {
+                  ans.next = node1;
+                  break;
+              } else {
+                  head = node1;
+                  cnt = k;
+                  ListNode t1 = new ListNode(-1);
+                  ListNode t2 = t1;
+                  while (cnt > 0) {
+                      ListNode tmp = new ListNode(head.val);
+                      tmp.next = t1.next;
+                      t1.next = tmp;
+                      head = head.next;
+                      --cnt;
+                  }
+                  ans.next = t2.next;
+                  while (ans.next != null) {
+                      ans = ans.next;
+                  }
+              }
+          }
+          return ret.next;
+      }
+  }
 
