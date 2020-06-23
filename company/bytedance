@@ -317,4 +317,47 @@
           return ret.next;
       }
   }
+  
+2.8.反转字符串里的单词（leetcode 151. Reverse Words in a String）
+  代码：
+  class Solution {
+    
+      private String str;
+
+      public String reverse (int start) {
+          if (start >= str.length()) {
+              return "";
+          }
+          StringBuilder cur = new StringBuilder("");
+          int i = start;
+          for (; i < str.length(); ++i) {
+              if (str.charAt(i) != ' ') {
+                  cur.append(str.charAt(i));
+              } else {
+                  break;
+              }
+          }
+          for (; i < str.length(); ++i) {
+              if (str.charAt(i) != ' ') {
+                  break;
+              }
+          }
+          String next = reverse(i);
+          return next.length() == 0 ? cur.toString() : next + " " + cur.toString();
+      }
+
+      public String reverseWords(String s) {
+          if (s == null || s.length() < 1) {
+              return s;
+          }
+          str = s;
+          int i = 0;
+          for (; i < str.length(); ++i) {
+              if (str.charAt(i) != ' ') {
+                  break;
+              }
+          }
+          return reverse(i);
+      }
+  }
 
