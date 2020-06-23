@@ -1,0 +1,45 @@
+1.参考
+链接1：https://www.nowcoder.com/discuss/425581
+链接2：https://github.com/lizeyang18/byteDanceAlgorithm
+
+2.重点
+2.1.股票买卖
+2.2.排序数组，平方后，数组当中有多少不同的数字（相同算一个）
+  参考：https://blog.csdn.net/qq_28468707/article/details/103672590?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase
+  代码：
+  public class Main1 {
+
+      public int cntNums (int[] nums) {
+          int ans = 0;
+          if (nums == null || nums.length < 1) {
+              return 0;
+          }
+          int len = nums.length;
+          int l = 0;
+          int r = len - 1;
+          int preDel = Integer.MAX_VALUE;
+          while (l <= r) {
+              if (Math.abs(nums[l]) > Math.abs(nums[r])) {
+                  if (preDel != Math.abs(nums[l])) {
+                      ++ans;
+                      preDel = Math.abs(nums[l]);
+                  }
+                  ++l;
+              } else {
+                  if (preDel != Math.abs(nums[r])) {
+                      ++ans;
+                      preDel = Math.abs(nums[r]);
+                  }
+                  --r;
+              }
+          }
+          return ans;
+      }
+
+      public static void main(String[] args) {
+          int[] nums = {-5,-3,-1,1,1,2,5};
+          Main1 main1 = new Main1();
+          int ret = main1.cntNums(nums);
+          System.out.println(ret);
+      }
+  }
