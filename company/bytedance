@@ -165,3 +165,30 @@
           return ret.next;
       }
   }
+  
+2.5.未排序整数数组的最长连续序列长度（leetcode 128. Longest Consecutive Sequence）
+  代码：
+  class Solution {
+      public int longestConsecutive(int[] nums) {
+          if (nums == null || nums.length < 1) {
+              return 0;
+          }
+          int ans = 0;
+          HashSet<Integer> set = new HashSet<>();
+          for (int num : nums) {
+              set.add(num);
+          }
+          for (int num : nums) {
+              if (!set.contains(num-1)) {
+                  int curAns = 1;
+                  while (set.contains(num+1)) {
+                      ++curAns;
+                      ++num;
+                  }
+                  ans = Math.max(ans, curAns);
+              }
+          }
+          return ans;
+      }
+  }
+
