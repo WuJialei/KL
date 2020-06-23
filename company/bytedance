@@ -391,4 +391,27 @@
       }
   }
   
+2.10.递增的三元子序列（leetcode 334. Increasing Triplet Subsequence）
+  代码：
+  class Solution {
+      public boolean increasingTriplet(int[] nums) {
+          if (nums == null || nums.length < 3) {
+              return false;
+          }
+          // 保存两个最小值，看是否有第三个数大于这两个值
+          int firstMin = Integer.MAX_VALUE;
+          int secondMin = Integer.MAX_VALUE;
+          for (int num : nums) {
+              if (num <= firstMin) {
+                  firstMin = num;
+              } else if (num <= secondMin) {
+                  secondMin = num;
+              } else {
+                  return true;
+              }
+          }
+          return false;
+      }
+  }
+
 
