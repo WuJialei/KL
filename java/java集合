@@ -16,3 +16,4 @@ i++和++i问题：https://zhuanlan.zhihu.com/p/40645506
                                           原理(cas+sychronized)；get；put)
                                     skk
        7.3.HashSet的实现：https://www.jianshu.com/p/1ed5fa8e357b
+       7.4.HashMap图解：https://mp.weixin.qq.com/s/zt5YGJDwkE2Dv7Nvs2uqXQ
