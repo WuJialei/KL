@@ -591,5 +591,50 @@
           return ans;
       }
   }
+  
+2.15.多线程循环打印ABC
+  参考：https://paine1690.github.io/post/72391014.html
+  代码：
+  import java.util.*;
+  import java.util.concurrent.Executor;
+  import java.util.concurrent.ExecutorService;
+  import java.util.concurrent.Executors;
+
+  public class Main3 implements Runnable {
+
+      // 需要不同线程标识
+      private static int cnt = 0;
+      // 需要锁
+      private static Object lock = new Object();
+      private int name;
+
+      public Main3 (int v) {
+          name = v;
+      }
+
+      public void run(){
+          try {
+              while (true) {
+                  synchronized (lock) {
+                      while (cnt%3 != name) {
+                          lock.wait();
+                      }
+                      System.out.println((char)('A' + cnt%3));
+                      ++cnt;
+                      lock.notifyAll();
+                  }
+              }
+          } catch(Exception ex) {
+              ex.printStackTrace();
+          }
+
+      }
+      public static void main(String[] args) {
+          ExecutorService executorService = Executors.newFixedThreadPool(3);
+          executorService.execute(new Main3(0));
+          executorService.execute(new Main3(1));
+          executorService.execute(new Main3(2));
+      }
+  }
 
 
