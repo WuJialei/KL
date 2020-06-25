@@ -636,5 +636,39 @@
           executorService.execute(new Main3(2));
       }
   }
+  
+2.16.以log(m)+log(n)的时间复杂度完成矩阵搜索(leetcode 74. Search a 2D Matrix)
+  代码：
+  class Solution {
+      public boolean searchMatrix(int[][] matrix, int target) {
+          if (matrix == null || matrix.length < 1 || matrix[0].length < 1) {
+              return false;
+          }
+          int m = matrix.length;
+          int n = matrix[0].length;
+          int l = 0;
+          int r = m-1;
+          while (l < r) {
+              int mid = l + (r-l+1)/2;
+              if (matrix[mid][0] > target) {
+                  r = mid - 1;
+              } else {
+                  l = mid;
+              }
+          }
+          int row = l;
+          l = 0;
+          r = n-1;
+          while (l < r) {
+              int mid = l + (r-l+1)/2;
+              if (matrix[row][mid] > target) {
+                  r = mid - 1;
+              } else {
+                  l = mid;
+              }
+          }
+          return matrix[row][l] == target;
+      }
+  }
 
 
