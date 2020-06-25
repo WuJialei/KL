@@ -541,4 +541,55 @@
           return ans;
       }
   }
+  
+2.14.数组里的三个数的和是否是0（leetcode 15. 3Sum）
+  思路：数组排序；固定一头，剩下两个双指针；去重；
+  代码：
+  class Solution {
+    
+      public List<List<Integer>> threeSum(int[] nums) {
+          List<List<Integer>> ans = new ArrayList<>();
+          if (nums == null || nums.length < 3) {
+              return ans;
+          }
+          Arrays.sort(nums);
+          for (int i = 0; i <= nums.length - 3; ++i) {
+              if (nums[i] > 0) {
+                  break;
+              }
+              if (i > 0 && nums[i] == nums[i-1]) {
+                  continue;
+              }
+              int sum = nums[i];
+              int j = i+1;
+              int k = nums.length - 1;
+              while (j < k) {
+                  int tmp = nums[j] + nums[k];
+                  if (tmp + sum == 0) {
+                      List<Integer> t = new ArrayList<>();
+                      t.add(nums[i]);
+                      t.add(nums[j]);
+                      t.add(nums[k]);
+                      ans.add(t);
+                      while (j < k && nums[j] == nums[++j]) {
+                          // ++j;
+                      }
+                      while (j < k && nums[k] == nums[--k]) {
+                          // --k;
+                      }
+                  } else if (tmp + sum < 0) {
+                      while (j < k && nums[j] == nums[++j]) {
+                          // ++j;
+                      }
+                  } else {
+                      while (j < k && nums[k] == nums[--k]) {
+                          // --k;
+                      }
+                  }
+              }
+          }
+          return ans;
+      }
+  }
+
 
