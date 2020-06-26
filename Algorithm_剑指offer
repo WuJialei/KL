@@ -30,7 +30,38 @@
           return ans;
       }
   }
-
+5.数字翻译成字符串（46）
+  代码：
+  class Solution {
+      public int translateNum(int num) {
+          // dp[i] = dp[i+1] + ?dp[i+2]
+          if (num < 0) {
+              return 0;
+          }
+          String str = String.valueOf(num);
+          int a = 1;
+          int b = 1;
+          for (int i = str.length() - 2; i >= 0; --i) {
+              if (str.charAt(i) == '0') {
+                  b = a;
+              } else {
+                  String tmp = str.substring(i, i+2);
+                  if (Integer.parseInt(tmp) <= 25) {
+                      int c = a + b;
+                      b = a;
+                      a = c;
+                  } else {
+                      b = a;
+                  }
+              }      
+          }
+          return a;
+      }
+  }
+  
+  
+  
+  
 1.二叉树的下一个节点（8）
   代码：
   /*
