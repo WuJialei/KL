@@ -788,5 +788,55 @@
           System.out.println(find());
       }
   }
+  
+2.19.一辆公交车，有m站，最多坐n人，输入一路上票的信息（即上车下车站），输出会不会超载
+  代码：
+  import java.util.*;
+
+  public class Main5 {
+
+      private static int[][] nums;
+      private static int n;
+
+      private static boolean judge () {
+          Arrays.sort(
+              nums,
+              (a, b) -> {
+                  if (a[0] == b[0]) {
+                      return a[1] - b[1];
+                  } else {
+                      return a[0] - b[0];
+                  }
+              }
+          );
+          HashMap<Integer, Integer> map = new HashMap<>();
+          for (int[] num : nums) {
+              for (int i = num[0]; i <= num[1]; ++i) {
+                  if (map.containsKey(i)) {
+                      if (map.get(i) + 1 > n) {
+                          return false;
+                      } else {
+                          map.put(i, map.get(i)+1);
+                      }
+                  } else {
+                      map.put(i, 1);
+                  }
+              }
+          }
+          return true;
+      }
+
+      public static void main(String[] args) {
+          int[][] arrays = {{1,5},{2,3},{2,4},{2,5},{4,5},{3,4},{1,2}};
+          nums = arrays;
+          n = 5;
+          if (judge()) {
+              System.out.println("True.");
+          } else {
+              System.out.println("False.");
+          }
+
+      }
+  }
 
 
