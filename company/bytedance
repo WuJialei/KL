@@ -867,5 +867,91 @@
           }
       }
   }
+  
+2.21.用链表实现栈
+  代码：
+  class MyStack {
 
+      private LinkedList<Integer> queue;
+      private int len;
+
+      /** Initialize your data structure here. */
+      public MyStack() {
+          queue = new LinkedList<>();
+          len = 0;
+      }
+
+      /** Push element x onto stack. */
+      public void push(int x) {
+          queue.add(x);
+          ++len;
+      }
+
+      /** Removes the element on top of the stack and returns that element. */
+      public int pop() {
+          if (empty()) {
+              return -1;
+          }
+          int ans = queue.remove(len-1);
+          --len;
+          return ans;
+      }
+
+      /** Get the top element. */
+      public int top() {
+          if (empty()) {
+              return -1;
+          }
+          int ans = queue.get(len-1);
+          return ans;
+      }
+
+      /** Returns whether the stack is empty. */
+      public boolean empty() {
+          return len == 0;
+      }
+  }
+相关，队列实现栈（leetcode 225. Implement Stack using Queues）
+  思路：
+  // 保持inQueue为空，元素都在outQueue
+  // 每次inQueue入队列，然后inQueue屁股后面加所有的outQueue
+  // 再把所有的inQueue输入到outQueue，类似于头插法
+  代码：
+  class MyStack {
+
+      private Queue<Integer> queue1;
+      private Queue<Integer> queue2;
+
+      /** Initialize your data structure here. */
+      public MyStack() {
+          queue1 = new LinkedList<>();
+          queue2 = new LinkedList<>();
+      }
+
+      /** Push element x onto stack. */
+      public void push(int x) {
+          queue1.offer(x);
+          while (!queue2.isEmpty()) {
+              queue1.offer(queue2.poll());
+          }
+          while (!queue1.isEmpty()) {
+              queue2.offer(queue1.poll());
+          }
+      }
+
+      /** Removes the element on top of the stack and returns that element. */
+      public int pop() {
+          return queue2.poll();
+      }
+
+      /** Get the top element. */
+      public int top() {
+          return queue2.peek();
+      }
+
+      /** Returns whether the stack is empty. */
+      public boolean empty() {
+          return queue2.isEmpty();
+      }
+  }
 
