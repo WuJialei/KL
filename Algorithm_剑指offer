@@ -2,6 +2,34 @@
 1.删除链表中重复的节点(18)
 2.序列化二叉树（37）
 3.数据流中的中位数（41）
+4.整数中1出现的次数（43）
+  代码：
+  public class Solution {
+      public int NumberOf1Between1AndN_Solution(int n) {
+          if (n < 1) {
+              return 0;
+          }
+          String str = String.valueOf(n);
+          int ans = 0;
+          int m = 1;
+          for (int i = str.length() - 1; i >= 0; --i) {
+              char cur = str.charAt(i);
+              String high = i == 0 ? "0" : str.substring(0, i);
+              String low = i == str.length() - 1 ? "0" : str.substring(i+1);
+              int h = Integer.parseInt(high);
+              int l = Integer.parseInt(low);
+              if (cur == '0') {
+                  ans += h * m;
+              } else if (cur == '1') {
+                  ans += h * m + l + 1;
+              } else {
+                   ans += (h + 1)* m;
+              }
+              m *= 10;
+          }
+          return ans;
+      }
+  }
 
 1.二叉树的下一个节点（8）
   代码：
