@@ -707,5 +707,86 @@
           return ans;
       }
   }
+  
+2.18.搜索旋转排序数组的目标数字位置(leetcode 33. Search in Rotated Sorted Array)
+  思路：找到旋转位置然后二分
+  代码：
+  class Solution {
+      public int search(int[] nums, int target) {
+          if (nums == null || nums.length < 1) {
+              return -1;
+          }
+          if (nums.length == 1) {
+              return nums[0] == target ? 0 : -1;
+          }
+          int len = nums.length;
+          int index = len - 1;
+          while (index > 0) {
+              if (nums[index-1] > nums[index]) {
+                  break;
+              }
+              --index;
+          }
+          if (index == 0 || nums[0] > target) {
+              int l = index;
+              int r = len - 1;
+              while (l < r) {
+                  int mid = l + (r-l)/2;
+                  if (nums[mid] < target) {
+                      l = mid + 1;
+                  } else {
+                      r = mid;
+                  }
+              }
+              return nums[l] == target ? l : -1;
+          } else {
+              int l = 0;
+              int r = index - 1;
+              while (l < r) {
+                  int mid = l + (r-l)/2;
+                  if (nums[mid] < target) {
+                      l = mid + 1;
+                  } else {
+                      r = mid;
+                  }
+              }
+              return nums[l] == target ? l : -1;
+          }
+      }
+  }
+相关一个有序数组，从随即一位截断，把前段放在后边，寻找中位数
+  代码：
+  public class Main4 {
+
+      private static int[] nums;
+
+      private static int find(){
+          if (nums == null || nums.length < 1) {
+              return 0;
+          }
+          int len = nums.length;
+          int index = len - 1;
+          int cnt = 0;
+          while (index > 0) {
+              if (nums[index-1] > nums[index]) {
+                  break;
+              }
+              --index;
+              ++cnt;
+          }
+          int mid = len/2;
+          if (cnt + 1 <= len/2) {
+              return nums[mid - cnt - 1];
+          } else {
+              return nums[index + mid];
+          }
+      }
+
+      public static void main(String[] args) {
+          int[] arrays = {4, 5, 6, 7, -2, -1, 1, 2, 3};
+          nums = arrays;
+          System.out.println(find());
+      }
+  }
 
 
