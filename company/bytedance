@@ -670,5 +670,42 @@
           return matrix[row][l] == target;
       }
   }
+  
+2.17.剑指 Offer 48. 最长不含重复字符的子字符串
+  代码：
+  class Solution {
+      public int lengthOfLongestSubstring(String s) {
+          if (s == null || s.length() < 1) {
+              return 0;
+          }
+          HashMap<Character, Integer> map = new HashMap<>();
+          int ans = 0;
+          // dp[i]表示以第i个字符接受的不重复字符串长度
+          // 判断当前字符是否出现过，未出现过，dp[i] = dp[i-1] + 1
+          // 出现过，比较上次出现的位置lastIndex是否在dp[i-1]的范围内，即(i-1)-lastIndex + 1与dp[i-1]的比较
+          int len = s.length();
+          int[] dp = new int[len];
+          for (int i = 0; i < s.length(); ++i) {
+              char cur = s.charAt(i);
+              if (map.containsKey(cur)) {
+                  int lastIndex = map.get(cur);
+                  if (dp[i-1] < i - lastIndex) {
+                      dp[i] = dp[i-1] + 1;
+                  } else {
+                      dp[i] = i - lastIndex;
+                  }
+              } else {
+                  if (i == 0) {
+                      dp[i] = 1;
+                  } else {
+                      dp[i] = dp[i-1] + 1;
+                  }
+              }
+              map.put(cur, i);
+              ans = Math.max(ans, dp[i]);
+          }
+          return ans;
+      }
+  }
 
 
