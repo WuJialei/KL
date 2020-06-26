@@ -838,5 +838,34 @@
 
       }
   }
+  
+2.20.求完全二叉树的节点数（leetcode 222. Count Complete Tree Nodes）
+  代码：
+  class Solution {
+    
+      public int height (TreeNode node) {
+          // 完全二叉树求树高一直求左节点即可
+          if (node == null) {
+              return 0;
+          }
+          return 1 + height(node.left);
+      }
+
+      public int countNodes(TreeNode root) {
+          if (root == null) {
+              return 0;
+          }
+          // 复杂度O(log(n)^2)，因为查找节点取一半即可，求节点的高度也是log(n)
+          int rootH = height(root);
+          int rightH = height(root.right);
+          if (rootH == rightH + 1) {
+              // 左右子树高度相同，说明左子树是满二叉树，总节点数等于左子树节点+右子树节点+根节点1，左子树节点可由公式得到
+              return (1 << rightH) - 1 + countNodes(root.right) + 1;
+          } else {
+              // 左右子树高度相同，说明右子树是满二叉树，总节点数等于左子树节点+右子树节点+根节点1，右子树节点可由公式得到
+              return (1 << rightH) - 1 + countNodes(root.left) + 1;
+          }
+      }
+  }
 
 
