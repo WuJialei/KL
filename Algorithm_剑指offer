@@ -60,6 +60,7 @@
   }
 6.丑数（49）
 7.滑动窗口的最大值(59-I)
+8.n个筛子的点数（60）
   
   
   
@@ -1082,20 +1083,36 @@
   代码：
   class Solution {
       public double[] twoSum(int n) {
-          // dp[n, s] = dp[n-1, s-1] + dp[n-1, s-2] + ... + dp[n-1, s-6]
-          // dp[n, s]表示前n个筛子的值为s的情况数量
-          int[][] dp = new int[n+1][6*n+1];
+          if (n < 1) {
+              return new double[0];
+          }
+          // dp[i][s]表示前i个筛子和为s的数目
+          // dp[i][s] = dp[i-1][s-1] + ... + dp[i-1][s-6] 
+          int[][] dp = new int[n+1][6*n + 1];
           for (int i = 1; i <= 6; ++i) {
               dp[1][i] = 1;
           }
           for (int i = 2; i <= n; ++i) {
-              //int index = i & 1;
-              for(int s=i;s<=6*i;s++){
-                  //求dp[i][s]
-                  for(int d=1;d<=6;d++){
-                      if(s-d<i-1)break;//为0了
-                      dp[i][s]+=dp[i-1][s-d];
+              for (int s = i; s <= 6*i; ++s) {
+                  int sum = 0;
+                  int cnt = 1;
+                  while (s - cnt >= 0 && cnt <= 6) {
+                      sum += dp[i-1][s-cnt];
+                      ++cnt;
                   }
+                  dp[i][s] = sum;
               }
           }
-          double[] 
+          int tmp = n;
+          double ans = 1.0;
+          while (tmp > 0) {
+              ans /= 6;
+              --tmp;
+          }
+          double[] ret = new double[6*n - n + 1];
+          for (int i = 0; i < ret.length; ++i) {
+              ret[i] = ans * dp[n][i+n];
+          }
+          return ret;
+      }
+  }
