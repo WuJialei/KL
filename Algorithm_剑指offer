@@ -63,6 +63,43 @@
 8.n个筛子的点数（60）
 9.正则表达式的匹配（19）
 10.复杂链表的复制（35）
+11.数字序列中的某一位数字（44）
+  参考：https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/solution/mian-shi-ti-44-shu-zi-xu-lie-zhong-mou-yi-wei-de-6/
+  代码：
+  class Solution {
+      // public int findNthDigit(int n) {
+      //     if (n <= 0) {
+      //         return 0;
+      //     }
+      //     int bit = 1;
+      //     int start = 1;
+      //     int cap = 9;
+      //     while (n > cap) {
+      //         n -= bit * start * 9;
+      //         ++bit;
+      //         cap *= 10;
+      //         start *= 10;
+      //     }
+      //     int cnt = (n-1)/bit;
+      //     int mod = (n-1) % bit;
+      //     int num = start + cnt;
+      //     String str = String.valueOf(num);
+      //     return (int)(str.charAt(mod) - '0');
+      // }
+      public int findNthDigit(int n) {
+          int digit = 1;
+          long start = 1;
+          long count = 9;
+          while (n > count) { // 1.
+              n -= count;
+              digit += 1;
+              start *= 10;
+              count = digit * start * 9;
+          }
+          long num = start + (n - 1) / digit; // 2.
+          return Long.toString(num).charAt((n - 1) % digit) - '0'; // 3.
+      }
+  }
   
   
   
