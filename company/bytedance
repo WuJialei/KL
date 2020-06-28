@@ -1073,4 +1073,50 @@
 
       }
   }
+  
+2.24.二叉树右视图(leetcode )
+  思路：O(log n)解法，递归剪枝
+  代码：199. Binary Tree Right Side View
+  class Solution {
+    
+      List<Integer> ans;
+      int totalHeight;
+      int curHeight;
+
+      public int getH(TreeNode node) {
+          if (node == null) {
+              return 0;
+          }
+          if (node.left == null && node.right == null) {
+              return 1;
+          }
+          return Math.max(getH(node.left), getH(node.right)) + 1;
+      }
+
+      public void dfs (TreeNode node, int h) {
+          if (node == null) {
+              return;
+          }
+          if (curHeight >= totalHeight) {
+              return;
+          }
+          if (h == curHeight) {
+              ans.add(node.val);
+              ++curHeight;
+          }
+          dfs(node.right, h+1);
+          dfs(node.left, h+1);
+      }
+
+      public List<Integer> rightSideView(TreeNode root) {
+          ans = new ArrayList<>();
+          if (root == null) {
+              return ans;
+          }
+          totalHeight = getH(root);
+          curHeight = 0;
+          dfs(root, 0);
+          return ans;
+      }
+  }
 
