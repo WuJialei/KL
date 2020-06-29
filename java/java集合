@@ -8,6 +8,8 @@ i++和++i问题：https://zhuanlan.zhihu.com/p/40645506
 --------------5.java集合源码分析：https://juejin.im/post/5afbff9451882542877353dd#heading-2
 --------------6.skk_java集合
 --------------7.源码解读
+       HashMap：https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247484139&idx=1&sn=bb73ac07081edabeaa199d973c3cc2b0&chksm=ebd743eadca0cafc532f298b6ab98b08205e87e37af6a6a2d33f5f2acaae245057fa01bd93f4&scene=21###wechat_redirect
+       ConcurrentHashMap：https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247484161&idx=1&sn=6f52fb1f714f3ffd2f96a5ee4ebab146&chksm=ebd74200dca0cb16288db11f566cb53cafc580e08fe1c570e0200058e78676f527c014ffef41&scene=21###wechat_redirect
        7.1.HashMap源码解读：skk  + https://www.cnblogs.com/chengxiao/p/6059914.html(结构；put、get、扩容过程；1.7、1.8比较；)
               hashmap线程不安全：(1.put冲突，覆盖；2.1.7头插法扩容形成死循环，线程1，a->b，线程2，a->b，线程1a完成，b开始时cpu使用时间到，线程2开始，
               并完成扩容，此时实际是b->a；线程1接着执行，b之后本来是空，但现在是a，形成死循环；)https://www.jianshu.com/p/e2f75c8cce01
