@@ -716,42 +716,46 @@
           if (nums == null || nums.length < 1) {
               return -1;
           }
-          if (nums.length == 1) {
-              return nums[0] == target ? 0 : -1;
-          }
-          int len = nums.length;
-          int index = len - 1;
-          while (index > 0) {
-              if (nums[index-1] > nums[index]) {
-                  break;
+          int l = 0;
+          int r = nums.length - 1;
+          int index = -1;
+          while (l < r) {
+              int mid = l + (r-l)/2;
+              if (nums[mid] > nums[r]) {
+                  l = mid + 1;
+              } else {
+                  r = mid;
               }
-              --index;
           }
-          if (index == 0 || nums[0] > target) {
-              int l = index;
-              int r = len - 1;
+          index = l;
+          if (nums[index] == target) {
+              return index;
+          } else if (nums[0] > target || index == 0) {
+              l = index;
+              r = nums.length - 1;
               while (l < r) {
                   int mid = l + (r-l)/2;
-                  if (nums[mid] < target) {
-                      l = mid + 1;
-                  } else {
+                  if (nums[mid] >= target) {
                       r = mid;
+                  } else {
+                      l = mid + 1;
                   }
               }
               return nums[l] == target ? l : -1;
           } else {
-              int l = 0;
-              int r = index - 1;
+              l = 0;
+              r = index - 1;
               while (l < r) {
                   int mid = l + (r-l)/2;
-                  if (nums[mid] < target) {
-                      l = mid + 1;
-                  } else {
+                  if (nums[mid] >= target) {
                       r = mid;
+                  } else {
+                      l = mid + 1;
                   }
               }
               return nums[l] == target ? l : -1;
           }
+
       }
   }
 相关一个有序数组，从随即一位截断，把前段放在后边，寻找中位数
