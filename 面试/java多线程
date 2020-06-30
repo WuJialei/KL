@@ -16,7 +16,7 @@
   SKK/并发
   
 4.基础
-Java 内存模型-同步八种操作：https://blog.csdn.net/timchen525/article/details/80412699
+Java 内存模型-同步八种操作：https://blog.csdn.net/timchen525/article/details/80412699(锁读再用)
 java 多线程同步：https://juejin.im/post/5ad16f1c6fb9a028b77b3dd8#heading-0
 多进程同步、通信：https://www.geekerstar.com/36.html
 java多线程通信：https://juejin.im/post/5d595558e51d4561ac7bccc4
