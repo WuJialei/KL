@@ -27,3 +27,6 @@ i++和++i问题：https://zhuanlan.zhihu.com/p/40645506
 
 ***重：关于HashMap的提升知识点：
        - ConcurrentHashMap1.8 - 扩容详解：https://blog.csdn.net/ZOKEKAI/article/details/90051567
+       - 深入浅出ConcurrentHashMap1.8:https://www.jianshu.com/p/c0642afe03e0
+
+
