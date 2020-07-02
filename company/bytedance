@@ -1436,4 +1436,55 @@ leetcode bytedance 专题：
           return l;
       }
   }
+  
+8.UTF-8 编码验证(leetcode 393)
+  代码：
+  class Solution {
+    
+      public boolean judge(int[] nums) {
+          boolean flag = false;
+          switch (nums.length) {
+              case 1:
+                  flag =  nums[0] >= 0 && nums[0] <= 127;
+                  break;
+              case 2:
+                  flag =  nums[0] >= 192 && nums[0] <= 223
+                      && nums[1] >= 128 && nums[1] <= 191;
+                  break;
+              case 3:
+                  flag =  nums[0] >= 224 && nums[0] <= 239
+                  && nums[1] >= 128 && nums[1] <= 191
+                  && nums[2] >= 128 && nums[2] <= 191;
+                  break;
+              case 4:
+                  flag =  nums[0] >= 240 && nums[0] <= 247
+                  && nums[1] >= 128 && nums[1] <= 191
+                  && nums[2] >= 128 && nums[2] <= 191
+                  && nums[3] >= 128 && nums[3] <= 191;
+                  break;
+              default:
+                  flag = true;
+                  break;
+          }
+          return flag;
+      }
+
+      public boolean validUtf8(int[] data) {
+          if (data == null || data.length < 1) {
+              return false;
+          }
+          int len = data.length;
+          boolean[] dp = new boolean[len+1];
+          dp[0] = true;
+          for (int i = 1; i <= len; ++i) {
+              for (int j = 1; i-j >= 0 && j <= 4; ++j) {
+                  if (dp[i-j] && judge(Arrays.copyOfRange(data, i-j, i))) {
+                      dp[i] = true;
+                      break;
+                  }
+              }
+          }
+          return dp[len];
+      }
+  }
 
