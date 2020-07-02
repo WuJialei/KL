@@ -1206,4 +1206,42 @@ leetcode bytedance 专题：
           return i == ans.length() ? "0" : ans.substring(i, ans.length());
       }
   }
+  
+3.简化路径(leetcode 71)
+  代码：
+  class Solution {
+      public String simplifyPath(String path) {
+          /*
+          1.此题主要考察的是栈,所以定义一个辅助栈;
+          2.先把字符串以"/"为分隔符分割成数组,此时数组有"路径"、""、"."、".."这四种情况;
+          3.遍历数组,当s[i].equals("..")并且栈不空时pop,当!s[i].equals("") && !s[i].equals(".") && !s[i].equals(".."),即s[i]是路径入栈;
+          4.栈空,返回"/",栈非空,用StringBuffer做一个连接返回即可;
+          5完结。
+          */
+          if (path == null || path.length() < 1) {
+              return "";
+          }
+          String[] strs = path.split("/");
+          Stack<String> stack = new Stack<>();
+          for (String str : strs) {
+              if (str.equals("..")) {
+                  if (!stack.isEmpty()) {
+                      stack.pop();
+                  }
+              } else {
+                  if (!str.equals("") && !str.equals(".")) {
+                      stack.push(str);
+                  }
+              }
+          }
+          if (stack.isEmpty()) {
+              return "/";
+          }
+          StringBuilder sb = new StringBuilder("");
+          for (String str : stack) {
+              sb.append("/").append(str);
+          }
+          return sb.toString();
+      }
+  }
 
