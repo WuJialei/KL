@@ -1591,5 +1591,59 @@ leetcode bytedance 专题：
           return ans;
       }
   }
+  
+13.零钱兑换
+13.1.兑换固定金额的最少纸币数（leetcode 322）
+  代码：
+  class Solution {
+      public int coinChange(int[] coins, int amount) {
+          if (coins == null || coins.length < 1 || amount < 1) {
+              return 0;
+          }
+          int[] dp = new int[amount+1];
+          Arrays.fill(dp, Integer.MAX_VALUE/2);
+          for (int coin : coins) {
+              if (coin <= amount) {
+                  dp[coin] = 1;
+              }
+          }
+          dp[0] = 0;
+          Arrays.sort(coins);
+          for (int i = 1; i <= amount; ++i) {
+              for (int coin : coins) {
+                  if (i < coin) {
+                      break;
+                  }
+                  dp[i] = Math.min(dp[i], 1+dp[i-coin]);
+              }
+          }
+          return dp[amount] >= Integer.MAX_VALUE/2 ? -1 : dp[amount];
+      }
+  }
+13.2.兑换固定金额的方法总数（leetcode 518）
+  代码：
+  class Solution {
+      public int change(int amount, int[] coins) {
+          // dp[i][j] 表示前i个零钱凑成金额j的组合数
+          // dp[i][j] = dp[i-1][j] + dp[i][j-coins[i]]
+          if (amount == 0) {
+              return 1;
+          }
+          if (coins == null || coins.length < 1 || amount < 0) {
+              return 0;
+          }
+          int m = coins.length;
+          int n = amount;
+          Arrays.sort(coins);
+          int[][] dp = new int[m+1][n+1];
+          for (int i = 1; i <= m; ++i) {
+              dp[i][0] = 1;
+              for (int j = 1; j <= n; ++j) {
+                  dp[i][j] = dp[i-1][j] + (j >= coins[i-1] ? dp[i][j-coins[i-1]]: 0);
+              }
+          }
+          return dp[m][n];
+      }
+  }
 
 
