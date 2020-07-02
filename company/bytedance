@@ -1244,4 +1244,40 @@ leetcode bytedance 专题：
           return sb.toString();
       }
   }
+  
+4.复原IP地址（leetcode 93）
+  代码：
+  class Solution {
+    
+      private List<String> ans;
+      private String str;
+
+      public void dfs (int index, ArrayList<String> list) {
+          if (list.size() >= 4) {
+              if (index >= str.length()) {
+                  ans.add(String.join(".", list));
+              }
+              return;
+          }
+          for (int i = index + 1; i <= index + 3 && i <= str.length(); ++i) {
+              String cur = str.substring(index, i);
+              if ((cur.startsWith("0") && cur.length() > 1) || (Integer.parseInt(cur) > 255)) {
+                  continue;
+              }
+              list.add(cur);
+              dfs(i, list);
+              list.remove(list.size()-1);
+          }
+      }
+
+      public List<String> restoreIpAddresses(String s) {
+          ans = new ArrayList<>();
+          if (s == null || s.length() < 4 || s.length() > 12) {
+              return ans;
+          }
+          str = s;
+          dfs(0, new ArrayList<String>());
+          return ans;
+      }
+  }
 
