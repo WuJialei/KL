@@ -1,0 +1,4 @@
+1.kafka重复消费问题(从producer、consumer、和flink结合三种角度考虑)
+  - Flink实战： 结合Kafka构建端到端的Exactly-Once处理程序：https://my.oschina.net/u/992559/blog/1821399#comments
+  - Flink Task重启之后重复消费Kafka消息问题解决：https://blog.csdn.net/qq_35939417/article/details/105586436
+  - Kafka重复消费的问题：http://qimingyu.com/2018/06/30/Kafka%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9%E7%9A%84%E9%97%AE%E9%A2%98/
