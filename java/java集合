@@ -19,3 +19,11 @@ i++和++i问题：https://zhuanlan.zhihu.com/p/40645506
                                     skk
        7.3.HashSet的实现：https://www.jianshu.com/p/1ed5fa8e357b
        7.4.HashMap图解：https://mp.weixin.qq.com/s/zt5YGJDwkE2Dv7Nvs2uqXQ
+
+***重：关于HashMap的提升知识点：
+       - 阿里P8架构师谈：深入探讨HashMap的底层结构、原理、扩容机制：https://youzhixueyuan.com/the-underlying-structure-and-principle-of-hashmap.html
+       - 阿里面试题：说说HashMap的扩容过程？：https://www.cnblogs.com/hujinshui/p/11043114.html
+       - 面试官："准备用HashMap存1w条数据，构造时传10000还会触发扩容吗？"：https://juejin.im/post/5db92860e51d4529ee588406#heading-0
+
+***重：关于HashMap的提升知识点：
+       - ConcurrentHashMap1.8 - 扩容详解：https://blog.csdn.net/ZOKEKAI/article/details/90051567
