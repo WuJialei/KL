@@ -1280,4 +1280,76 @@ leetcode bytedance 专题：
           return ans;
       }
   }
+  
+5.第k个排列(leetcode 60)
+  代码：
+  class Solution {
+    
+      private boolean[] visited;
+      private int len;
+      private int total;
+      private List<String> ans;
+
+      public void dfs (List<Integer> list) {
+          if (ans.size() > total) {
+              return;
+          }
+          if (list.size() == len) {
+              StringBuilder sb = new StringBuilder("");
+              for (int num : list) {
+                  sb.append(num);
+              }
+              ans.add(sb.toString());
+              return;
+          }
+          for (int i = 1; i <= len; ++i) {
+              if (!visited[i]) {
+                  visited[i] = true;
+                  list.add(i);
+                  dfs(list);
+                  list.remove(list.size()-1);
+                  visited[i] = false;
+              }
+
+          }
+      }
+
+      public int count(int num) {
+          if (num == 1) {
+              return 1;
+          }
+          int ret = 1;
+          for (int i = 1; i <= num; ++i) {
+              ret *= i;
+          }
+          return ret;
+      }
+
+      public String getPermutation(int n, int k) {
+          if (n < 1) {
+              return null;
+          }
+          if (n == 1) {
+              if (k == 1) {
+                 return "1"; 
+              } else {
+                  return null;
+              }
+          }
+          visited = new boolean[n+1];
+          len = n;
+          int tmp = count(n-1);
+          int mod = k % tmp;
+          int cnt = k / tmp;
+          total = mod == 0 ? tmp: mod;
+          int start = mod == 0 ? cnt : 1+cnt;
+          ans = new ArrayList<>();
+          List<Integer> list = new ArrayList<>();
+          list.add(start);
+          visited[start] = true;
+          dfs(list);
+          //Collections.sort(ans);
+          return ans.get(total -1);
+      }
+  }
 
