@@ -1123,4 +1123,45 @@
           return ans;
       }
   }
+  
+leetcode bytedance 专题：
+1.字符串的排列（leetcode 567）
+  思路：滑动窗口+字符数组记录个数，含排列等价于窗口内字符的种类和个数相等
+  代码：
+  class Solution {
+    
+      public boolean judge(int[] nums1, int[] nums2) {
+          for (int i = 0; i < nums1.length; ++i) {
+              if (nums1[i] != nums2[i]) {
+                  return false;
+              }
+          }
+          return true;
+      }
+
+      public boolean checkInclusion(String s1, String s2) {
+          if (s1 == null || s2 == null || s1.length() > s2.length()) {
+              return false;
+          }
+          int[] cnt1 = new int[26];
+          int[] cnt2 = new int[26];
+          int i = 0;
+          for (; i < s1.length(); ++i) {
+              ++cnt1[s1.charAt(i) - 'a'];
+              ++cnt2[s2.charAt(i) - 'a'];
+          }
+          if (judge(cnt1, cnt2)) {
+              return true;
+          }
+          while (i < s2.length()) {
+              --cnt2[s2.charAt(i-s1.length()) - 'a'];
+              ++cnt2[s2.charAt(i) - 'a'];
+              if (judge(cnt1, cnt2)) {
+                  return true;
+              }
+              ++i;
+          }
+          return false;
+      }
+  }
 
