@@ -255,3 +255,78 @@
           }
       }
   }
+
+8.旋转图像（leetcode 48）
+  代码：
+  class Solution {
+      public void rotate(int[][] matrix) {
+          // 上下对折，再y=-x对折
+          // 如果是逆时针旋转90度，则是上下对折，再y=x对折
+          if (matrix == null || matrix.length < 1 || matrix[0].length < 1) {
+              return;
+          }
+          int n = matrix.length;
+          int low = 0;
+          int high = n-1;
+          while (low < high) {
+              for (int i = 0; i < n; ++i) {
+                  int tmp = matrix[low][i];
+                  matrix[low][i] = matrix[high][i];
+                  matrix[high][i] = tmp;
+              }
+              ++low;
+              --high;
+          }
+          for (int i = 0; i < n; ++i) {
+              for (int j = 0; j < i; ++j) {
+                  int tmp = matrix[i][j];
+                  matrix[i][j] = matrix[j][i];
+                  matrix[j][i] = tmp;
+              }
+          }
+      }
+  }
+  
+9.螺旋矩阵（leetcode 54）
+  代码：
+  class Solution {
+      public List<Integer> spiralOrder(int[][] matrix) {
+          List<Integer> ans = new ArrayList<>();
+          if (matrix == null || matrix.length < 1 || matrix[0].length < 1) {
+              return ans;
+          }
+          int m = matrix.length;
+          int n = matrix[0].length;
+          int left = 0;
+          int right = n-1;
+          int low = 0;
+          int high = m-1;
+          int cnt = 0;
+          // 注意cnt的控制
+          while (cnt < m*n) {
+              for (int i = left; i <= right && cnt < m*n; ++i) {
+                  ans.add(matrix[low][i]);
+                  ++cnt;
+              }
+              ++low;
+              for (int i = low; i <= high && cnt < m*n; ++i) {
+                  ans.add(matrix[i][right]);
+                  ++cnt;
+              }
+              --right;
+              for (int i = right; i >= left && cnt < m*n; --i) {
+                  ans.add(matrix[high][i]);
+                  ++cnt;
+              }
+              --high;
+              for (int i = high; i >= low && cnt < m*n; --i) {
+                  ans.add(matrix[i][left]);
+                  ++cnt;
+              }
+              ++left;
+
+          }
+          return ans;
+      }
+  }
+
