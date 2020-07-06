@@ -164,3 +164,33 @@
           return ans;
       }
   }
+
+6.接雨水（leetcode 42. Trapping Rain Water）
+  代码：
+  class Solution {
+      public int trap(int[] height) {
+          if (height == null || height.length < 1) {
+              return 0;
+          }
+          int len = height.length;
+          // leftH[i]表示第i列左边最高高度，不包括第i列的高度
+          // rightH[i]表示第i列右边最高高度，不包括第i列的高度
+          // 根据木板效应，装水取决于最短木板，因此比较最短木板与当前水位看是否能够装水
+          int[] left = new int[len];
+          int[] right = new int[len];
+          for (int i = 1; i < len; ++i) {
+              left[i] = Math.max(height[i-1], left[i-1]);
+          }
+          for (int i = len-2; i >= 0; --i) {
+              right[i] = Math.max(height[i+1], right[i+1]);
+          }
+          int ans = 0;
+          for (int i = 1; i < len-1; ++i) {
+              int tmp = Math.min(left[i], right[i]);
+              if (tmp > height[i]) {
+                  ans += tmp - height[i];
+              }
+          }
+          return ans;
+      }
+  }
