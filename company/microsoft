@@ -58,3 +58,34 @@
           return sign * ans;
       }
   }
+
+3.翻转字符串里的单词 II（leetcode 186）
+  代码：
+  class Solution {
+    
+      public void reverse(char[] s, int start, int end) {
+          while (start < end) {
+              char c = s[start];
+              s[start] = s[end];
+              s[end] = c;
+              ++start;
+              --end;
+          }
+      }
+
+      public void reverseWords(char[] s) {
+          if (s == null || s.length < 1) {
+              return;
+          }
+          // 两次翻转，先全翻转，后每个单词翻转
+          reverse(s, 0, s.length-1);
+          int start = 0;
+          for (int i = 0; i < s.length; ++i) {
+              if (s[i] == ' ') {
+                  reverse(s, start, i-1);
+                  start = i+1;
+              } 
+          }
+          reverse(s, start, s.length-1);
+      }
+  }
