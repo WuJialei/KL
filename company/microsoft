@@ -15,3 +15,46 @@
           return new int[0];
       }
   }
+  
+2.字符串转换整数 (leetcode 8)
+  代码：
+  class Solution {
+      public int myAtoi(String str) {
+          if (str == null || str.length() < 1) {
+              return 0;
+          }
+          str = str.trim();
+          if (str.length() < 1) {
+              return 0;
+          }
+          int sign = 1;
+          int index = 0;
+          if (str.charAt(index) == '-') {
+              sign = -1;
+              ++index;
+          } else if (str.charAt(index) == '+') {
+              ++index;
+          } else if (str.charAt(index) < '0' || str.charAt(index) > '9') {
+              return 0;
+          }
+          while (index < str.length() && str.charAt(index) == '0') {
+              ++index;
+              if (index == str.length()) {
+                  return 0;
+              }
+          }
+          String tmp = str.substring(index, str.length());
+          int ans = 0;
+          for (int i = 0; i < tmp.length(); ++i) {
+              int cur = tmp.charAt(i) - '0';
+              if (cur < 0 || cur > 9) {
+                  break;
+              }
+              if (ans > Integer.MAX_VALUE/10 || (ans == Integer.MAX_VALUE/10 && cur > Integer.MAX_VALUE%10)) {
+                  return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+              }
+              ans = ans * 10 + cur;
+          }
+          return sign * ans;
+      }
+  }
