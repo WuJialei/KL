@@ -424,4 +424,52 @@
           return reverse(ans);
       }
   }
+  
+11.复制带随机指针的链表(leetcode 138)
+  代码：
+  /*
+  // Definition for a Node.
+  class Node {
+      int val;
+      Node next;
+      Node random;
 
+      public Node(int val) {
+          this.val = val;
+          this.next = null;
+          this.random = null;
+      }
+  }
+  */
+
+  class Solution {
+      public Node copyRandomList(Node head) {
+          if (head == null) {
+              return head;
+          }
+          Node ans = head;
+          while (ans != null) {
+              Node tmp = new Node(ans.val);
+              tmp.next = ans.next;
+              ans.next = tmp;
+              ans = tmp.next;
+          }
+          ans = head;
+          while (ans != null) {
+              if (ans.random != null) {
+                  ans.next.random = ans.random.next;
+              }
+              ans = ans.next.next;
+          }
+          Node oldN = head;
+          Node newN = head.next;
+          ans = newN;
+          while (oldN != null) {
+              oldN.next = oldN.next.next;
+              newN.next = newN.next == null ? null : newN.next.next;
+              oldN = oldN.next;
+              newN = newN.next;
+          }
+          return ans;
+      }
+  }
