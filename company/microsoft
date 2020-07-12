@@ -513,3 +513,40 @@
           return root;
       }
   }
+变体：填充每个节点的下一个右侧节点指针 II（leetcode 117）
+  代码：
+  class Solution {
+    
+      public Node getNext(Node node) {
+          if (node == null) {
+              return node;
+          }
+          while (node.next != null) {
+              if (node.next.left != null) {
+                  return node.next.left;
+              }
+              if (node.next.right != null) {
+                  return node.next.right;
+              }
+              node = node.next;
+          }
+          return null;
+      }
+
+      public Node connect(Node root) {
+          if (root == null) {
+              return root;
+          }
+          if (root.left != null && root.right != null) {
+              root.left.next = root.right;
+              root.right.next = getNext(root);
+          } else if (root.left != null) {
+              root.left.next = getNext(root);
+          } else if (root.right != null){
+              root.right.next = getNext(root);
+          }
+          connect(root.right);
+          connect(root.left);
+          return root;
+      }
+  }
