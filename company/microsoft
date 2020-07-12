@@ -550,3 +550,40 @@
           return root;
       }
   }
+  
+14.岛屿数量(leetcode 200)
+  代码：
+  class Solution {
+    
+      //private char[][] array;
+      private int[] dx = {-1, 0, 1, 0};
+      private int[] dy = {0, 1, 0, -1};
+
+      public void dfs (char[][] array, int x, int y) {
+          if (x < 0 || x >= array.length || y < 0 || y >= array[0].length || array[x][y] == '0') {
+              return;
+          }
+          array[x][y] = '0';
+          for (int i = 0; i < dx.length; ++i) {
+              dfs(array, x+dx[i], y+dy[i]);
+          }
+      }
+
+      public int numIslands(char[][] grid) {
+          if (grid == null || grid.length < 1 || grid[0].length < 1) {
+              return 0;
+          }
+          char[][] array = grid;
+          int ans = 0;
+          for (int i = 0; i < array.length; ++i) {
+              for (int j = 0; j < array[0].length; ++j) {
+                  if (array[i][j] == '1') {
+                      ++ans;
+                      //array[i][j] = '0';
+                      dfs(array, i, j);
+                  }
+              }
+          }
+          return ans;
+      }
+  }
