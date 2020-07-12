@@ -587,3 +587,34 @@
           return ans;
       }
   }
+  
+15.克隆图（leetcode 133）
+  代码：
+  class Solution {
+    
+      HashMap<Node, Node> map;
+
+      public Node dfs (Node node) {
+          if (node == null) {
+              return node;
+          }
+          Node dst = new Node(node.val);
+          if (map.containsKey(node)) {
+              return map.get(node);
+          }
+          map.put(node, dst);
+          for (Node nei : node.neighbors) {
+              map.get(node).neighbors.add(dfs(nei));
+          }
+          return map.get(node);
+      }
+
+      public Node cloneGraph(Node node) {
+          if (node == null) {
+              return null;
+          }
+          map = new HashMap<>();
+          dfs(node);
+          return map.get(node);
+      }
+  }
