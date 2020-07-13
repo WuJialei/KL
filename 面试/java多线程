@@ -6,6 +6,7 @@
   ThreadLocal：https://blog.csdn.net/zzg1229059735/article/details/82715741?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase
              ：https://juejin.im/post/5c948d3b6fb9a070ba314002#heading-1
   volatile：https://mp.weixin.qq.com/s/XIQC6xV87_UAhOd5o3ERWQ
+  如何正确的终止一个线程:https://juejin.im/post/5cfe72266fb9a07ef06f8959
   SKK/并发
 3.java锁
   链接1：https://www.jianshu.com/p/e674ee68fd3f
