@@ -746,3 +746,38 @@
           return dp[m][n];
       }
   }
+  
+18.最长递增子序列(leetcode 300)
+  思路：O(nlog(n))，二分，参考：https://www.cnblogs.com/grandyang/p/4938187.html
+  代码：
+  class Solution {
+      public int lengthOfLIS(int[] nums) {
+          if (nums == null || nums.length < 1) {
+              return 0;
+          }
+          ArrayList<Integer> dp = new ArrayList<>();
+          for (int num : nums) {
+              if (dp.size() < 1) {
+                  dp.add(num);
+              } else if (num <= dp.get(0)) {
+                  dp.set(0, num);
+              } else if (num > dp.get(dp.size()-1)) {
+                  dp.add(num);
+              } else {
+                  int l = 0;
+                  int r = dp.size() - 1;
+                  while (l < r) {
+                      int mid = l + (r - l)/2;
+                      if (num <= dp.get(mid)) {
+                          r = mid;
+                      } else {
+                          l = mid + 1;
+                      }
+                  }
+                  dp.set(l, num);
+              }
+
+          }
+          return dp.size();
+      }
+  }
