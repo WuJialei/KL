@@ -781,3 +781,65 @@
           return dp.size();
       }
   }
+
+19.颜色分类(leetcode 75)
+  代码：
+  class Solution {
+    
+      public void swap (int[] nums, int i, int j) {
+          int tmp = nums[i];
+          nums[i] = nums[j];
+          nums[j] = tmp;
+      }
+
+      public void sortColors(int[] nums) {
+          if (nums == null || nums.length < 1) {
+              return;
+          }
+          int p0 = 0;
+          int p2 = nums.length - 1;
+          int cur = 0;
+          // 因为curr左边的值已经扫描过了，所以curr要++继续扫描下一位，而与p2交换的值，curr未扫描，要停下来扫描一下，所以curr不用++
+          while (cur <= p2) {
+              if (nums[cur] == 0) {
+                  swap(nums, p0, cur);
+                  ++p0;
+                  ++cur;
+              } else if (nums[cur] == 2) {
+                  swap(nums, cur, p2);
+                  --p2;
+              } else {
+                  ++cur;
+              }
+          }
+          // int i = 0;
+          // int j = nums.length - 1;
+          // while (i < j) {
+          //     while (i < j && nums[i] == 0) {
+          //         ++i;
+          //     }
+          //     while (i < j && nums[j] != 0) {
+          //         --j;
+          //     }
+          //     if (i < j && nums[i] != 0 && nums[j] == 0) {
+          //         swap(nums, i, j);
+          //         ++i;
+          //         --j;
+          //     }
+          // }
+          // j = nums.length - 1;
+          // while (i < j) {
+          //     while (i < j && nums[i] != 2) {
+          //         ++i;
+          //     }
+          //     while (i < j && nums[j] == 2) {
+          //         --j;
+          //     }
+          //     if (i < j && nums[i] == 2 && nums[j] != 2) {
+          //         swap(nums, i, j);
+          //         ++i;
+          //         --j;
+          //     }
+          // }
+      }
+  }
