@@ -970,3 +970,59 @@
           }
       }
   }
+  
+22.二叉树的序列化与反序列化（leetcode 297）
+  思路：不能设置全局变量；前序+队列
+  代码：
+  /**
+   * Definition for a binary tree node.
+   * public class TreeNode {
+   *     int val;
+   *     TreeNode left;
+   *     TreeNode right;
+   *     TreeNode(int x) { val = x; }
+   * }
+   */
+  public class Codec {
+
+      // Encodes a tree to a single string.
+      public String serialize(TreeNode root) {
+          // 先序
+          StringBuilder sb = new StringBuilder("");
+          if (root == null) {
+              return "#";
+          }
+          sb.append(String.valueOf(root.val)).append(",").append(serialize(root.left))
+              .append(",").append(serialize(root.right));
+          return sb.toString();
+      }
+
+      // Decodes your encoded data to tree.
+      public TreeNode deserialize(String data) {
+          String[] strs = data.split(",");
+          Queue<String> queue = new LinkedList<>();
+          for (String str : strs) {
+              queue.offer(str);
+          }
+          return method(queue);
+      }
+
+      public TreeNode method(Queue<String> queue) {
+          if (queue.isEmpty()) {
+              return null;
+          }
+          String cur = queue.poll();
+          if (cur.equals("#")) {
+              return null;
+          }
+          TreeNode node = new TreeNode(Integer.parseInt(cur));
+          node.left = method(queue);
+          node.right = method(queue);
+          return node;
+      }
+
+  }
+
+  // Your Codec object will be instantiated and called as such:
+  // Codec codec = new Codec();
+  // codec.deserialize(codec.serialize(root));
