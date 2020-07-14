@@ -1026,3 +1026,74 @@
   // Your Codec object will be instantiated and called as such:
   // Codec codec = new Codec();
   // codec.deserialize(codec.serialize(root));
+  
+23.整数转换英文表示(leetcode 273)
+  参考：https://blog.csdn.net/a1439775520/article/details/104658345
+  代码：
+  class Solution {
+    
+      private  final String[] z0to19 = {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
+                                          "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
+                                             "Seventeen", "Eighteen", "Nineteen"};
+      private  final String[] z20to90 = {"Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+      private  final int billion = 10_0000_0000;
+      private  final int million = 100_0000;
+      private  final int thousnd = 1000;
+      private  final int hundred = 100;
+
+      public String numberToWords(int num) {
+          StringBuilder sb = new StringBuilder("");
+          if (num == 0) {
+              return "Zero";
+          }
+          if (num >= billion) {
+              if (sb.toString().length() != 0) {
+                  sb.append(" ");
+              }
+              sb.append(numberToWords(num/billion)).append(" Billion");
+              num %= billion;
+          }
+          if (num >= million) {
+              if (sb.toString().length() != 0) {
+                  sb.append(" ");
+              }
+              sb.append(numberToWords(num/million)).append(" Million");
+              num %= million;
+          }
+          if (num >= thousnd) {
+              if (sb.toString().length() != 0) {
+                  sb.append(" ");
+              }
+              sb.append(numberToWords(num/thousnd)).append(" Thousand");
+              num %= thousnd;
+          }
+          if (num >= hundred) {
+              if (sb.toString().length() != 0) {
+                  sb.append(" ");
+              }
+              sb.append(numberToWords(num/hundred)).append(" Hundred");
+              num %= hundred;
+          }
+          if (num < 20) {
+              if (num != 0) {
+                  if (sb.toString().length() != 0) {
+                      sb.append(" ");
+                  }
+                  sb.append(z0to19[num]);
+              }
+
+          } else {
+              if (sb.toString().length() != 0) {
+                  sb.append(" ");
+              }
+              sb.append(z20to90[(num/10) - 2]);
+              if (num%10 != 0) {
+                  if (sb.toString().length() != 0) {
+                      sb.append(" ");
+                  }
+                  sb.append(z0to19[num%10]);
+              }
+          }
+          return sb.toString();
+      }
+  }
