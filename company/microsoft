@@ -888,3 +888,40 @@
           // return nums[l] < nums[0] ? nums[l] : nums[0];
       }
   }
+变体，搜索旋转排序数组(不含重复元素， leetcode 33)
+  代码：
+  class Solution {
+      public int search(int[] nums, int target) {
+          if (nums == null || nums.length < 1) {
+              return -1;
+          }
+          int l = 0;
+          int r = nums.length - 1;
+          while (l < r) {
+              int mid = l + (r-l)/2;
+              if (nums[mid] > nums[r]) {
+                  l = mid + 1;
+              } else {
+                  r = mid;
+              }
+          }
+          int index = l;
+          l = 0;
+          r = nums.length - 1;
+          if (index == 0 || target < nums[l]) {
+              l = index;
+
+          } else {
+              r = index-1;
+          }
+          while (l < r) {
+              int mid  = l + (r-l+1)/2;
+              if (nums[mid] > target) {
+                  r = mid - 1;
+              } else {
+                  l = mid;
+              }
+          }
+          return nums[l] == target ? l : -1;
+      }
+  }
