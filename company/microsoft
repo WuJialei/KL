@@ -843,3 +843,48 @@
           // }
       }
   }
+  
+20.寻找旋转排序数组中的最小值(leetcode 153)
+  代码：
+  class Solution {
+      public int findMin(int[] nums) {
+          if (nums == null || nums.length < 1) {
+              return -1;
+          }
+          int l = 0;
+          int r = nums.length - 1;
+          while (l < r) {
+              int mid = l + (r - l)/2;
+              if (nums[mid] > nums[r]) {
+                  l = mid + 1;
+              } else {
+                  r = mid;
+              }
+          }
+          return nums[l];
+          // return nums[l] < nums[0] ? nums[l] : nums[0];
+      }
+  }
+变体，有重复元素存在（leetcode 154）
+  代码：
+  class Solution {
+      public int findMin(int[] nums) {
+          if (nums == null || nums.length < 1) {
+              return -1;
+          }
+          int l = 0;
+          int r = nums.length - 1;
+          while (l < r) {
+              int mid = l + (r - l)/2;
+              if (nums[mid] > nums[r]) {
+                  l = mid + 1;
+              } else if (nums[mid] == nums[r]) {
+                  --r;
+              } else {
+                  r = mid;
+              }
+          }
+          return nums[l];
+          // return nums[l] < nums[0] ? nums[l] : nums[0];
+      }
+  }
