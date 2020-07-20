@@ -32,3 +32,5 @@
 5.tcp超时重传：https://www.zhuxiaodong.net/2018/tcp-timeout-retransmission-instruction/
 6.tcp流量控制和拥塞控制：https://www.zhuxiaodong.net/2018/tcp-flow-congestion-control-instruction/
            -：https://blog.csdn.net/yechaodechuntian/article/details/25429143
+7.深入理解Http请求、DNS劫持与解析：https://juejin.im/post/59ba146c6fb9a00a4636d8b6#heading-1
+  DNS 劫持 和 DNS 污染：https://www.cnblogs.com/mafeng/p/10509415.html
