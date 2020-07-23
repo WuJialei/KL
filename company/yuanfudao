@@ -160,3 +160,39 @@
           }
       }
   }
+  
+2.5.leetcode 剑指 Offer 36. 二叉搜索树与双向链表
+代码：
+  class Solution {
+
+      private Node head;
+      private Node last;
+
+      public Node treeToDoublyList(Node root) {
+          if (root == null) {
+              return null;
+          }
+          dfs(root);
+          head.left = last;
+          last.right = head;
+          return head;
+      }
+
+      public void dfs (Node node) {
+          if (node == null) {
+              return;
+          }
+          // inorder
+          dfs(node.left);
+          if (last != null) {
+              last.right = node;
+          } else {
+              head = node;
+          }
+          node.left = last;
+          last = node;
+          dfs(node.right);
+
+      }
+
+  }
