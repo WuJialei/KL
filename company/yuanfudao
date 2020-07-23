@@ -196,3 +196,54 @@
       }
 
   }
+  
+2.6.leetcode 98. 验证二叉搜索树
+代码：
+  /*
+  class Solution {
+    
+      TreeNode pre;
+
+      public boolean isValidBST(TreeNode root) {
+          if (root == null) {
+              return true;
+          }
+          if (!isValidBST(root.left)) {
+              return false;
+          }
+          if (pre != null && pre.val >= root.val) {
+              return false;
+          }
+          pre = root;
+          return isValidBST(root.right);
+      }
+  }
+  */
+  class Solution {
+
+      public boolean dfs (TreeNode node, int val, int flag) {
+          if (node == null) {
+              return true;
+          }
+          if (flag == 0) {
+              if (node.val >= val) {
+                  return false;
+              }
+          } else {
+              if (node.val <= val) {
+                  return false;
+              }
+          }
+          return dfs(node.left, val, flag) && dfs(node.right, val, flag);
+      }
+
+      public boolean isValidBST(TreeNode root) {
+          if (root == null) {
+              return true;
+          }
+          if (!dfs(root.left, root.val, 0) || !dfs(root.right, root.val, 1)) {
+              return false;
+          }
+          return isValidBST(root.left) && isValidBST(root.right);
+      }
+  }
