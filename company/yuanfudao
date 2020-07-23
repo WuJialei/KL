@@ -396,4 +396,30 @@
           return ans;
       }
   }
+  
+2.11.leetcode 124. 二叉树中的最大路径和
+代码：
+  class Solution {
 
+      private int ans;
+
+      public int dfs (TreeNode node) {
+          if (node == null) {
+              return 0;
+          }
+          int l = Math.max(0, dfs(node.left));
+          int r = Math.max(0, dfs(node.right));
+          ans = Math.max(ans, l+r+node.val);
+          return node.val + Math.max(l, r);
+      }
+
+      public int maxPathSum(TreeNode root) {
+          ans = Integer.MIN_VALUE;
+          if (root == null) {
+              return 0;
+          }
+          // dfs()函数返回函数单向最大
+          dfs(root);
+          return ans;
+      }
+  }
