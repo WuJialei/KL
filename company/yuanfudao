@@ -294,3 +294,39 @@
           return find(nums, 0, nums.length-1, nums.length-k);
       }
   }
+  
+2.8.562. 矩阵中最长的连续1线段
+代码：
+  class Solution {
+
+      private int[][] direction = {{0, -1}, {-1, 0}, {-1, -1}, {-1, 1}};
+
+      public int longestLine(int[][] M) {
+          if (M == null || M.length < 1 || M[0].length < 1) {
+              return 0;
+          }
+          int m = M.length;
+          int n = M[0].length;
+          int[][][] dp = new int[m][n][4];
+          int ans = 0;
+          for (int i = 0; i < m; ++i) {
+              for (int j = 0; j < n; ++j) {
+                  if (M[i][j] == 1) {
+                      for (int k = 0; k < 4; ++k) {
+                          dp[i][j][k] = 1;
+                          ans = Math.max(ans, dp[i][j][k]);
+                          int x = i + direction[k][0];
+                          int y = j + direction[k][1];
+                          if (x < 0 || x >= m || y < 0 || y >= n) {
+                              continue;
+                          }
+                          dp[i][j][k] += dp[x][y][k];
+                          ans = Math.max(ans, dp[i][j][k]);
+                      }
+                  }
+              }
+          }
+          return ans;
+      }
+  }
+
