@@ -247,3 +247,50 @@
           return isValidBST(root.left) && isValidBST(root.right);
       }
   }
+  
+2.7.leetcode 215. 数组中的第K个最大元素
+代码：
+  class Solution {
+
+      public int find (int[] nums, int left, int right, int k) {
+          if (left >= right) {
+              if (left == k) {
+                  return nums[k];
+              }
+              return -1;
+          }
+          int l = left;
+          int r = right;
+          int midVal = nums[l];
+          while (l < r) {
+              while (l < r && nums[r] >= midVal) {
+                  --r;
+              }
+              while (l < r && nums[l] <= midVal) {
+                  ++l;
+              }
+              if (l < r) {
+                  int tmp = nums[l];
+                  nums[l] = nums[r];
+                  nums[r] = tmp;
+              }
+          }
+          int tmp = nums[l];
+          nums[left] = tmp;
+          nums[l] = midVal;
+          if (l == k) {
+              return nums[l];
+          } else if (l < k) {
+              return find(nums, l+1, right, k);
+          } else {
+              return find(nums, left, l-1, k);
+          }
+      } 
+
+      public int findKthLargest(int[] nums, int k) {
+          if (nums == null || k < 1 || nums.length < k) {
+              return -1;
+          }
+          return find(nums, 0, nums.length-1, nums.length-k);
+      }
+  }
