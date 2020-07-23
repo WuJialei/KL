@@ -37,3 +37,34 @@
       }
 
   }
+  
+2.2.leetcode 1. 两数之和
+代码：
+  class Solution {
+      public int[] twoSum(int[] nums, int target) {
+          if (nums == null || nums.length < 2) {
+              return new int[0];
+          }
+          HashMap<Integer, List<Integer>> map = new HashMap<>();
+          for (int i = 0; i < nums.length; ++i) {
+              if (!map.containsKey(nums[i])) {
+                  map.put(nums[i], new ArrayList<>());
+              }
+              map.get(nums[i]).add(i);
+          }
+          for (int i = 0; i < nums.length; ++i) {
+              int val = nums[i];
+              if (map.containsKey(target - val)) {
+                  for (int index : map.get(target-val)) {
+                      if (index != i) {
+                          return new int[]{i, index};
+                      }
+                  }
+              }
+          }
+          return new int[0];
+          // int[] ans = {left, right};
+          // return ans;
+
+      }
+  }
