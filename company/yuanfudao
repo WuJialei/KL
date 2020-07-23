@@ -1,1 +1,39 @@
 1.参考：https://www.nowcoder.com/discuss/240129
+2.具体
+2.1.leetcode 189. 旋转数组
+代码：
+  class Solution {
+      public void rotate(int[] nums, int k) {
+          if (nums == null || nums.length < 1 || k <= 0) {
+              return;
+          }
+          k = k % nums.length;
+          /*
+          while (k > 0) {
+              int tmp = nums[nums.length-1];
+              for (int i = nums.length-2; i >= 0; --i) {
+                  nums[i+1] = nums[i];
+              }
+              nums[0] = tmp;
+              --k;
+          }
+          */
+          reverse(nums, 0, nums.length-1);
+          reverse(nums, 0, k-1);
+          reverse(nums, k, nums.length-1);
+      }
+
+      public void reverse(int[] nums, int start, int end) {
+          if (start >= end) {
+              return;
+          }
+          while (start < end) {
+              int tmp = nums[start];
+              nums[start] = nums[end];
+              nums[end] = tmp;
+              ++start;
+              --end;
+          }
+      }
+
+  }
