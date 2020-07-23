@@ -423,3 +423,35 @@
           return ans;
       }
   }
+  
+2.12.leetcode 450. 删除二叉搜索树中的节点
+思路：https://leetcode-cn.com/problems/delete-node-in-a-bst/solution/450-shan-chu-er-cha-sou-suo-shu-zhong-de-jie-dia-6/
+代码：
+  class Solution {
+      public TreeNode deleteNode(TreeNode root, int key) {
+          if (root == null) {
+              return null;
+          }
+          if (key < root.val) {
+              root.left = deleteNode(root.left, key);
+              return root;
+          } else if (key > root.val) {
+              root.right = deleteNode(root.right, key);
+              return root;
+          } else {
+              if (root.left == null) {
+                  return root.right;
+              } else if (root.right == null) {
+                  return root.left;
+              } else {
+                  TreeNode node = root.right;
+                  while (node.left != null) {
+                      node = node.left;
+                  }
+                  node.left = root.left;
+                  return root.right;
+              }
+          }
+      }
+  }
+
