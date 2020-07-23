@@ -117,3 +117,46 @@
           return stack.isEmpty();
       }
   }
+  
+2.4.leetcode 222. 完全二叉树的节点个数
+代码：
+  class Solution {
+
+      public int cntNum(int k) {
+          if (k == 0) {
+              return 1;
+          }
+          if (k == 1) {
+              return 2;
+          }
+          int val = cntNum(k/2);
+          if (k%2 == 0) {
+              return val * val;
+          } else {
+              return val * val * 2;
+          }
+
+      }
+
+      public int height (TreeNode node) {
+          if (node == null) {
+              return 0;
+          }
+          return 1 + Math.max(height(node.left), height(node.right));
+      }
+
+      public int countNodes(TreeNode root) {
+          if (root == null) {
+              return 0;
+          }
+          int lH = height(root.left);
+          int rH= height(root.right);
+          if (lH > rH) {
+              // return countNodes(root.left) + cntNum(rH);
+              return countNodes(root.left) + (1 << rH);
+          } else {
+              // return countNodes(root.right) + cntNum(lH);
+              return countNodes(root.right) + (1 << lH);
+          }
+      }
+  }
