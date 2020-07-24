@@ -545,6 +545,33 @@
           return ans;
       }
   }
+  
+2.15.leetcode 316. 去除重复字母
+思路：https://leetcode-cn.com/problems/remove-duplicate-letters/solution/java-zhan-shi-xian-by-5jiong-jie/
+代码：
+  class Solution {
+      public String removeDuplicateLetters(String s) {
+          if (s == null || s.length() < 1) {
+              return s;
+          }
+          Stack<Character> stack = new Stack<>();
+          for (int i = 0; i < s.length(); ++i) {
+              char cur = s.charAt(i);
+              if (stack.contains(cur)) {
+                  continue;
+              }
+              while (!stack.isEmpty() && stack.peek() > cur && s.indexOf(stack.peek(), i) != -1) {
+                  stack.pop();
+              }
+              stack.push(cur);
+          }
+          StringBuilder sb = new StringBuilder("");
+          for (int i = 0; i < stack.size(); ++i) {
+              sb.append(stack.get(i));
+          }
+          return sb.toString();
+      }
+  }
 
 
 
