@@ -653,5 +653,51 @@
           return true;
       }
   }
+  
+2.19.leetcode 239. 滑动窗口最大值
+代码：
+  class Solution {
+      public int[] maxSlidingWindow(int[] nums, int k) {
+          if (nums == null || nums.length < k) {
+              return new int[0];
+          }
+          // 基于双向队列实现一个单调递减队列
+          Deque<Integer> queue = new ArrayDeque<>();
+          int len = nums.length;
+          int cnt = 0;
+          int[] ans = new int[len-k+1];
+          for (int i = 0; i < len; ++i) {
+              if (i >= k) {
+                  if (queue.peekFirst() == nums[i-k]) {
+                      queue.pollFirst();
+                  }
+              }
+              while (!queue.isEmpty() && queue.peekLast() < nums[i]) {
+                  queue.pollLast();
+              }
+              queue.offerLast(nums[i]);
+              if (i >= k-1) {
+                  ans[cnt++] = queue.peekFirst();
+              }
+          }
+          return ans;
+          // PriorityQueue<Integer> queue = new PriorityQueue<>(
+          //     (a, b) -> b - a
+          // );
+          // int[] ans = new int[nums.length - k + 1];
+          // int cnt = 0;
+          // for (int i = 0; i < nums.length; ++i) {
+          //     if (queue.size() < k) {
+          //         queue.offer(nums[i]);
+          //     } else {
+          //         ans[cnt++] = queue.peek();
+          //         queue.remove(nums[i-k]);
+          //         queue.offer(nums[i]);
+          //     }
+          // }
+          // ans[cnt++] = queue.peek();
+          // return ans;
+      }
+  }
 
 
