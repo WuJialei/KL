@@ -699,5 +699,37 @@
           // return ans;
       }
   }
+  
+2.20.leetcode 99. 恢复二叉搜索树
+代码：
+  class Solution {
+
+      private TreeNode first;
+      private TreeNode second;
+      private TreeNode pre = new TreeNode(Integer.MIN_VALUE);
+
+      public void inOrder(TreeNode node) {
+          if (node == null) {
+              return;
+          }
+          inOrder(node.left);
+          if (first == null && pre.val > node.val) {
+              first = pre;
+          }
+          if (first != null && pre.val > node.val) {
+              second = node;
+          }
+          pre = node;
+          inOrder(node.right);
+      }
+
+      public void recoverTree(TreeNode root) {
+          // 二叉搜索树中序遍历有序
+          inOrder(root);
+          int tmp = first.val;
+          first.val = second.val;
+          second.val = tmp;
+      }
+  }
 
 
