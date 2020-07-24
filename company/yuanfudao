@@ -518,5 +518,33 @@
           return ans;
       }
   }
+  
+2.14.leetcode 658. 找到 K 个最接近的元素
+思路：https://leetcode-cn.com/problems/find-k-closest-elements/solution/pai-chu-fa-shuang-zhi-zhen-er-fen-fa-python-dai-ma/
+代码：
+  class Solution {
+      public List<Integer> findClosestElements(int[] arr, int k, int x) {
+          List<Integer> ans = new ArrayList<>();
+          if (arr == null || arr.length < k) {
+              return ans;
+          }
+          int l = 0;
+          int r = arr.length - k;
+          while (l < r) {
+              int mid = l + (r - l)/2;
+              // if (Math.abs(x - arr[mid]) > Math.abs(x - arr[mid+k])) {
+              if (x - arr[mid] > arr[mid+k] - x) {
+                  l = mid + 1;
+              } else {
+                  r = mid;
+              }
+          }
+          for (int i = l; i < l + k; ++i) {
+              ans.add(arr[i]);
+          }
+          return ans;
+      }
+  }
+
 
 
