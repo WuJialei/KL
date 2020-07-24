@@ -622,5 +622,36 @@
           return ans;
       }
   }
+  
+2.18.leetcode 958. 二叉树的完全性检验
+代码：
+  class Solution {
+      public boolean isCompleteTree(TreeNode root) {
+          if (root == null) {
+              return true;
+          }
+          Queue<TreeNode> queue = new LinkedList<>();
+          queue.offer(root);
+          // null是否是第一次出现
+          boolean first = false;
+          while (!queue.isEmpty()) {
+              int cnt = queue.size();
+              while (cnt > 0) {
+                  TreeNode node = queue.poll();
+                  if (node != null) {
+                      if (first) {
+                          return false;
+                      }
+                      queue.offer(node.left);
+                      queue.offer(node.right);
+                  } else {
+                      first = true;
+                  }
+                  --cnt;
+              }
+          }
+          return true;
+      }
+  }
 
 
