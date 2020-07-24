@@ -573,5 +573,34 @@
       }
   }
 
+2.16.leetcode 剑指 Offer 22. 链表中倒数第k个节点
+代码：
+  class Solution {
+      public ListNode getKthFromEnd(ListNode head, int k) {
+          if (head == null || k < 1) {
+              return null;
+          }
+          ListNode fast = head;
+          ListNode slow = head;
+          int cnt = k;
+          while (cnt > 0 && fast != null) {
+              fast = fast.next;
+              --cnt;
+          }
+          if (fast == null) {
+              if (cnt == 0) {
+                  return slow;
+              } else{
+                  return null;
+              }
+          }
+          while (fast != null) {
+              slow = slow.next;
+              fast = fast.next;
+          }
+          return slow;
+      }
+  }
+
 
 
