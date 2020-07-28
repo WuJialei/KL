@@ -981,6 +981,50 @@
   }
   
 2.23.LRU（leetcode 146. LRU Cache）
+  使用现成的LinkedList作为双向链表
+  class LRUCache {
+
+      private HashMap<Integer, Integer> map;
+      private LinkedList<Integer> list;
+      private int val;
+      private int cnt;
+
+      public LRUCache(int capacity) {
+          map = new HashMap<>();
+          list = new LinkedList<>();
+          val = capacity;
+          cnt = 0;
+      }
+
+      public int get(int key) {
+          if (map.containsKey(key)) {
+              list.remove(new Integer(key));
+              list.addFirst(key);
+              return map.get(key);
+          } else {
+              return -1;
+          }
+      }
+
+      public void put(int key, int value) {
+          if (map.containsKey(key)) {
+              list.remove(new Integer(key));
+              list.addFirst(key);
+              map.put(key, value);
+          } else {
+              if (cnt == val) {
+                  int del = list.removeLast();
+                  map.remove(del);
+                  list.addFirst(key);
+                  map.put(key, value);
+              } else {
+                  list.addFirst(key);
+                  map.put(key, value);
+                  ++cnt;
+              }
+          }
+      }
+  }
   代码：
   class LRUCache {
 
