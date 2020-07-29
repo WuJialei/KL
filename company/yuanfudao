@@ -732,4 +732,39 @@
       }
   }
 
+2.21.leetcode 199. 二叉树的右视图
+代码：
+  class Solution {
+
+      private int totalHeight;
+      private int curHeight;
+      private List<Integer> ans;
+
+      public int getHeight (TreeNode node) {
+          if (node == null) {
+              return 0;
+          }
+          return 1 + Math.max(getHeight(node.left), getHeight(node.right));
+      }
+
+      public void dfs (TreeNode node, int height) {
+          if (node == null || height > totalHeight) {
+              return;
+          }
+          if (height >= curHeight) {
+              ans.add(node.val);
+              curHeight++;
+          }
+          dfs(node.right, height + 1);
+          dfs(node.left, height + 1);
+      }
+
+      public List<Integer> rightSideView(TreeNode root) {
+          curHeight = 0;
+          totalHeight = getHeight(root);
+          ans = new ArrayList<Integer>();
+          dfs(root, curHeight);
+          return ans;
+      }
+  }
 
