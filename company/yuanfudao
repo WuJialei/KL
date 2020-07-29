@@ -834,4 +834,44 @@
           // return Math.max(a, b);
       }
   }
+  
+2.24 leetcode 剑指 Offer 54. 二叉搜索树的第k大节点
+代码：
+  /**
+   * Definition for a binary tree node.
+   * public class TreeNode {
+   *     int val;
+   *     TreeNode left;
+   *     TreeNode right;
+   *     TreeNode(int x) { val = x; }
+   * }
+   */
+  class Solution {
+
+      private int k;
+      private int ans;
+
+      public void dfs (TreeNode root) {
+          if (root == null || k <= 0) {
+              return;
+          }
+          dfs(root.right);
+          if (k <= 0) {
+              return;
+          }
+          ans = root.val;
+          --k;
+          if (k <= 0) {
+              return;
+          }
+          dfs(root.left);
+      }
+
+      public int kthLargest(TreeNode root, int k) {
+          this.k = k;
+          ans = -1;
+          dfs(root);
+          return ans;
+      }
+  }
 
