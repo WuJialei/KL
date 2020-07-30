@@ -1019,3 +1019,44 @@
           return ans;
       }
   }
+  
+2.28 leetcode 234. 回文链表
+代码：
+  class Solution {
+      public boolean isPalindrome(ListNode head) {
+          if (head == null || head.next == null) {
+              return true;
+          }
+          if (head.next.next == null) {
+              return head.val == head.next.val;
+          }
+          // O(n)时间复杂度，O(1)空间复杂度解决，需要将前半部分链表翻转然后比较
+          ListNode slow = head;
+          ListNode fast = head.next;
+          ListNode pre = new ListNode(-1);
+          while (fast != null && fast.next != null) {
+              ListNode tmp = new ListNode(slow.val);
+              tmp.next = pre.next;
+              pre.next = tmp;
+              slow = slow.next;
+              fast = fast.next.next;
+          }
+          if (fast == null) {
+              slow = slow.next;
+          } else {
+              ListNode tmp = new ListNode(slow.val);
+              tmp.next = pre.next;
+              pre.next = tmp;
+              slow = slow.next;
+          }
+          pre = pre.next;
+          while (slow != null) {
+              if (slow.val != pre.val) {
+                  return false;
+              }
+              slow = slow.next;
+              pre = pre.next;
+          }
+          return true;
+      }
+  }
