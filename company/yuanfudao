@@ -1167,3 +1167,43 @@
           return ans;
       }
   }
+
+2.32 leetcode 847. 访问所有节点的最短路径
+参考：https://leetcode-cn.com/problems/shortest-path-visiting-all-nodes/solution/java-7ms-jian-ji-yi-dong-ban-by-zxcodestudy/
+代码：
+  class Solution {
+      public int shortestPathLength(int[][] graph) {
+          if (graph == null || graph.length < 1) {
+              return 0;
+          }
+          int len = graph.length;
+          boolean[][] visited = new boolean[len][1 << len];
+          Queue<int[]> queue = new LinkedList<>();
+          for (int i = 0; i < len; ++i) {
+              queue.offer(new int[]{i, 1 << i});
+              visited[i][1<<i] = true;
+          }
+          int finalState = (1 << len)- 1;
+          int ans = 0;
+          while (!queue.isEmpty()) {
+              int cnt = queue.size();
+              while (cnt > 0) {
+                  int[] cur = queue.poll();
+                  for (int next : graph[cur[0]]) {
+                      int state = cur[1] | (1<<next);
+                      if (state == finalState) {
+                          return ans + 1;
+                      }
+                      if (visited[next][state]) {
+                          continue;
+                      }
+                      visited[next][state] = true;
+                      queue.offer(new int[]{next, state});
+                  }
+                  --cnt;
+              }
+              ++ans;
+          }
+          return 0;
+      }
+  }
