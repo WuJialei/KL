@@ -1060,3 +1060,62 @@
           return true;
       }
   }
+  
+2.29 leetcode 662. 二叉树最大宽度
+代码：
+  class Solution {
+
+      private int totalHeight;
+      private int[][] nums;
+      private int curLeft;
+      private int curRight;
+
+      public int getHeight(TreeNode node) {
+          if (node == null) {
+              return 0;
+          }
+          return 1 + Math.max(getHeight(node.left), getHeight(node.right));
+      }
+
+      public void dfsLeft(TreeNode node, int cnt, int height) {
+          if (node == null || height >= totalHeight) {
+              return;
+          }
+          if (height > curLeft) {
+              nums[height][0] = cnt;
+              ++curLeft;
+          }
+          dfsLeft(node.left, 2 * cnt + 1, height+1);
+          dfsLeft(node.right, 2 * cnt + 2, height+1);
+      }
+
+      public void dfsRight(TreeNode node, int cnt, int height) {
+          if (node == null || height >= totalHeight) {
+              return;
+          }
+          if (height > curRight) {
+              nums[height][1] = cnt;
+              ++curRight;
+          }
+          dfsRight(node.right, 2 * cnt + 2, height+1);
+          dfsRight(node.left, 2 * cnt + 1, height+1);
+      }
+
+      public int widthOfBinaryTree(TreeNode root) {
+          if (root == null) {
+              return 0;
+          }
+          // 每层找最左最右
+          totalHeight = getHeight(root);
+          nums = new int[totalHeight][2];
+          curLeft = 0;
+          curRight = 0;
+          dfsLeft(root, 0, 0);
+          dfsRight(root, 0, 0);
+          int ans = 0;
+          for (int[] num : nums) {
+              ans = Math.max(ans, num[1] - num[0] + 1);
+          }
+          return ans;
+      }
+  }
