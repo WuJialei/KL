@@ -70,6 +70,7 @@ root     12988  0.0  0.0  12944   980 pts/0    S+   00:59   0:00 grep --color=au
 
 
 5.2.top命令(Linux下常用的性能分析工具，能够实时显示系统中各个进程的资源占用状况，类似于Windows的任务管理器)
+top命令原理：Linux CPU利用率计算原理及内核实现：https://ilinuxkernel.com/?p=333
 命令：top -p 28894（-p<进程号> 指定进程）
 执行结果：
 top - 14:06:23 up 70 days, 16:44,  2 users,  load average: 1.25, 1.32, 1.35
