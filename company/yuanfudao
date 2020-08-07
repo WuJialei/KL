@@ -1065,6 +1065,40 @@
 2.29 leetcode 662. 二叉树最大宽度
 代码：
   class Solution {
+      public int widthOfBinaryTree(TreeNode root) {
+          if (root == null) {
+              return 0;
+          }
+          Queue<TreeNode> queue = new LinkedList<>();
+          root.val = 1;
+          queue.offer(root);
+          int ans = 0;
+          while (!queue.isEmpty()) {
+              int cnt = queue.size();
+              int l = -1;
+              int r = -1;
+              while (cnt > 0) {
+                  TreeNode cur = queue.poll();
+                  if (l == -1) {
+                      l = cur.val;
+                  }
+                  r = cur.val;
+                  if (cur.left != null) {
+                      cur.left.val = 2 * cur.val;
+                      queue.offer(cur.left);
+                  }
+                  if (cur.right != null) {
+                      cur.right.val = 2 * cur.val + 1;
+                      queue.offer(cur.right);
+                  }
+                  --cnt;
+              }
+              ans = Math.max(ans, r - l + 1);
+          }
+          return ans;
+      }
+  }
+  class Solution {
 
       private int totalHeight;
       private int[][] nums;
