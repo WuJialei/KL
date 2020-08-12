@@ -201,6 +201,38 @@
 代码：
   /*
   class Solution {
+
+      TreeNode pre;
+
+      public boolean inOrder (TreeNode node) {
+          if (node == null) {
+              return true;
+          }
+          if (!inOrder(node.left)) {
+              return false;
+          }
+          if (pre == null) {
+              pre = node;
+          } else {
+              if (pre.val >= node.val) {
+                  return false;
+              }
+          }
+          pre = node;
+          return inOrder(node.right);
+      }
+
+      public boolean isValidBST(TreeNode root) {
+          if (root == null) {
+              return true;
+          }
+          boolean ans = inOrder(root);
+          return ans;
+      }
+  }
+  */
+  /*
+  class Solution {
     
       TreeNode pre;
 
