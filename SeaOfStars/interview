@@ -1,0 +1,41 @@
+1.equals和==，equals和hashcode
+
+2.java static关键字使用场景？静态方法可以被重写吗，为什么
+
+3.final关键字使用场景
+
+4.java内存模型（引申synchronized原理，volatile）
+
+5.jvm的内存结构，gc过程。是否有过调优经验？（可以引申内存泄漏话题）
+
+6.乐观锁/悲观锁/分布式锁，CAS原理。
+
+7.jdk线程池参数，ThreadLocal工作原理
+
+8.redis的热key、大key场景及处理
+
+9。数据库和缓存一致性如何保证？延时双删？
+
+10.数据库索引最左匹配规则？慢查询分析？隔离级别和对应的含义？innoDB的实现？（MVCC）
+
+11.数组链表区别，
+
+12.平衡搜索二叉树定义，左右旋；红黑树定义；B树/B+树概念，平衡化（节点拆分合并），区别，为什么mysql使用b+
+
+13.操作系统的内核态用户态概念？IO过程有几次拷贝？零拷贝是什么？
+
+14.数据库索引结构
+
+15.spring aop
+代理模式：https://www.runoob.com/design-pattern/proxy-pattern.html
+spring aop：https://developer.aliyun.com/article/1068363
+demo：https://blog.csdn.net/qq_45193304/article/details/104821626
+静态代理和动态代理：代理类是否是动态生成
+spring aop动态代理两种实现方式：基于接口——JDK动态代理，基于类——cglib(引入外部依赖)
+spring实现aop：spring api接口、自定义实现、aspect注解
+
+常问：
+jvm的内存结构，gc过程。
+jdk线程池参数，ThreadLocal工作原理
+redis的热key、大key场景及处理
+数据库和缓存一致性如何保证？延时双删？  
