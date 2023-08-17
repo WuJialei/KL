@@ -1,5 +1,14 @@
 1.equals和==，equals和hashcode
 https://cloud.tencent.com/developer/article/1672684
+https://www.cnblogs.com/bsjl/p/8626553.html
+== ： 该操作符生成的是一个boolean结果，它计算的是操作数的值(基本数据类型变量-直接存储的值，引用类型变量-内存中的地址)之间的关系
+equals  ： Object 的 实例方法，比较两个对象的内容是否相同
+hashCode ： Object 的 native方法 , 获取对象的哈希值，用于确定该对象在哈希表中的索引位置，它实际上是一个int型整数
+  原则 1 ： 如果 x.equals(y) 返回 “true”，那么 x 和 y 的 hashCode() 必须相等 ；
+  原则 2 ： 如果 x.equals(y) 返回 “false”，那么 x 和 y 的 hashCode() 有可能相等，也有可能不等 ；
+  原则 3 ： 如果 x 和 y 的 hashCode() 不相等，那么 x.equals(y) 一定返回 “false” ；
+  如果一个类重写了equals方法，但没有重写hashCode方法，将会直接违法了第2条规定
+  Object类中equals方法实际上是判断两个对象是否具有相同的引用，如果有，它们就一定相等
 
 2.java static关键字使用场景？静态方法可以被重写吗，为什么
 
