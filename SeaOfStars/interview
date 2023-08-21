@@ -13,8 +13,12 @@ hashCode ： Object 的 native方法 , 获取对象的哈希值，用于确定�
 2.java static关键字使用场景？静态方法可以被重写吗，为什么
 https://blog.csdn.net/qq_44543508/article/details/102736466
 https://www.jianshu.com/p/15e21428d884
+https://blog.csdn.net/gao_zhennan/article/details/72892946
 
-不能，重写的目的在于根据创造对象的所属类型不同而表现出多态
+不能，
+1.重写指的是根据运行时对象的类型来决定调用哪个方法，而不是根据编译时的类型。
+静态变量和静态方法在编译的时候就将其与类绑定在一起。既然它们在编译的时候就决定了调用的方法、变量，那就和重写没有关系了
+2.重写的目的在于根据创造对象的所属类型不同而表现出多态
 
 
 3.final关键字使用场景
