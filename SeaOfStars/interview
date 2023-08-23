@@ -35,6 +35,7 @@ synchronize：https://mp.weixin.qq.com/s?__biz=MzI3NzM2OTQ5Mg==&mid=2247484280&i
 
 
 5.jvm的内存结构，gc过程。是否有过调优经验？（可以引申内存泄漏话题）
+https://github.com/WuJialei/KL/blob/master/%E9%9D%A2%E8%AF%95/JVM
 
 6.乐观锁/悲观锁/分布式锁，CAS原理。
 乐观锁+悲观锁+cas：https://juejin.cn/post/6844903796129136647
