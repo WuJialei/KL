@@ -1,6 +1,7 @@
 一、相关知识
 -- 1.内存泄漏原因、举例、排查、内存溢出(OOM)
   链接1：https://blog.csdn.net/anxpp/article/details/51325838
+      -：gc和finalize：https://blog.csdn.net/Zp_akl/article/details/95504893
   链接2：https://www.jianshu.com/p/2fdee831ed03
   SKK/JVM
 -- jvm面试题
