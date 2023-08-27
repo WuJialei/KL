@@ -22,7 +22,9 @@
 
 二、基础
 1.第二章 Java内存区域与内存溢出异常：https://juejin.im/post/5d7a6de9e51d4562165535a5
-2.第三章 垃圾收集器与内存分配策略：https://juejin.im/post/5d7ba549e51d453b5e465bd4#heading-28
+2.第三章 垃圾收集器与内存分配策略：
+https://juejin.im/post/5d7ba549e51d453b5e465bd4#heading-28
+https://www.zhihu.com/question/564531163/answer/2902963726
 https://zhuanlan.zhihu.com/p/378620101
 3.第八章 JVM字节码执行引擎：https://www.cnblogs.com/deman/p/5489895.html
 4.第九章 类加载及执行实例
