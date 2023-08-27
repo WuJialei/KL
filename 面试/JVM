@@ -23,6 +23,7 @@
 二、基础
 1.第二章 Java内存区域与内存溢出异常：https://juejin.im/post/5d7a6de9e51d4562165535a5
 2.第三章 垃圾收集器与内存分配策略：https://juejin.im/post/5d7ba549e51d453b5e465bd4#heading-28
+https://zhuanlan.zhihu.com/p/378620101
 3.第八章 JVM字节码执行引擎：https://www.cnblogs.com/deman/p/5489895.html
 4.第九章 类加载及执行实例
     -Tomcat：https://www.cnblogs.com/aspirant/p/8991830.html
@@ -52,5 +53,5 @@ full gc排查实战及原理：https://mp.weixin.qq.com/s/510vljVjp2aSMI2D8sUbbA
      思路：找利用率最高的java进程、通过进程找到进程里面cpu耗费最高的线程，展示线程里面的堆栈信息
      参考1：https://www.cnblogs.com/doit8791/p/11895507.html
      参考2：https://mp.weixin.qq.com/s/uajRpzDayZSwTEPhFUoVbQ
-----------7.jvm调优就是jvm参数设置问题：https://blog.csdn.net/qq_26465035/article/details/103454023
+----------7.jvm调优就是jvm参数设置问题：https://help.aliyun.com/document_detail/148851.html
 
