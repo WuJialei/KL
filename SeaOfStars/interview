@@ -54,22 +54,27 @@ https://blog.csdn.net/zzg1229059735/article/details/82715741
 https://github.com/ZhongFuCheng3y/athena
 https://zhuanlan.zhihu.com/p/404095378
 
-9。数据库和缓存一致性如何保证？延时双删？
+9.数据库和缓存一致性如何保证？延时双删？
 
-10.数据库索引最左匹配规则？慢查询分析？隔离级别和对应的含义？innoDB的实现？（MVCC）
 
 11.数组链表区别
 https://juejin.cn/post/6935049364616249381
 数组：查询效率高O(1)，新增和修改需要移动元素效率低O(n)，内存分配是连续的内存，扩容需要重新分配内存。
 链表：新增和修改效率高O(1)，只需要修改指针指向就好。链表查询效率低O(n)，需要从链表头依次查找。内存分配不需要连续的内存，占用连续内存少。
 
+10.数据库索引最左匹配规则？慢查询分析？隔离级别和对应的含义？innoDB的实现？（MVCC）
 12.平衡搜索二叉树定义，左右旋；红黑树定义；B树/B+树概念，平衡化（节点拆分合并），区别，为什么mysql使用b+
+14.数据库索引结构
+B树和B+树的区别:https://www.cnblogs.com/ivictor/p/5849061.html
+MySQL存储引擎中的MyISAM和InnoDB区别详解:https://developer.aliyun.com/article/531090
+索引与锁：https://juejin.cn/post/6844903645125820424#heading-14
+https://github.com/WuJialei/KL/blob/master/sql/%E6%95%B0%E6%8D%AE%E5%BA%93
 
 13.操作系统的内核态用户态概念？IO过程有几次拷贝？零拷贝是什么？
 https://zhuanlan.zhihu.com/p/388057431
 https://zhuanlan.zhihu.com/p/473639031
 
-14.数据库索引结构
+
 
 15.spring aop
 代理模式：https://www.runoob.com/design-pattern/proxy-pattern.html
